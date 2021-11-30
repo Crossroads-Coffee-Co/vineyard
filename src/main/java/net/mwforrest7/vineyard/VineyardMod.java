@@ -1,6 +1,10 @@
 package net.mwforrest7.vineyard;
 
 import net.fabricmc.api.ModInitializer;
+import net.mwforrest7.vineyard.block.ModBlocks;
+import net.mwforrest7.vineyard.item.ModItems;
+import net.mwforrest7.vineyard.registries.ModRegistries;
+import net.mwforrest7.vineyard.util.ModRenderHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -9,12 +13,18 @@ public class VineyardMod implements ModInitializer {
 	// It is considered best practice to use your mod id as the logger's name.
 	// That way, it's clear which mod wrote info, warnings, and errors.
 	public static final Logger LOGGER = LogManager.getLogger("vineyard");
+	public static final String MOD_ID = "vineyard";
 
 	@Override
 	public void onInitialize() {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
+
+		ModItems.registerModItems();
+		ModBlocks.registerModBlocks();
+		ModRegistries.registerModFuels();
+		ModRenderHelper.setRenderLayers();
 
 		LOGGER.info("Hello from Vineyard mod!");
 	}
