@@ -1,29 +1,29 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "vineyard",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Vineyard Mod",
+  "description": "A mod about building a beautiful vineyard and making fine wine.",
   "authors": [
-    "Me!"
+    "mwforrest7"
   ],
   "contact": {
     "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "sources": "https://github.com/mwforrest7/vineyard"
   },
 
-  "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "license": "GNU GPLv3",
+  "icon": "assets/vineyard/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "net.mwforrest7.vineyard.VineyardMod"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "vineyard.mixins.json"
   ],
 
   "depends": {
