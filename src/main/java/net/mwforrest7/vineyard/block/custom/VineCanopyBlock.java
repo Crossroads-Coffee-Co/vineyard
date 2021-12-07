@@ -6,4 +6,8 @@ public abstract class VineCanopyBlock extends Block {
     public VineCanopyBlock(Settings settings) {
         super(settings);
     }
+
+    public abstract VineHeadBlock getHeadBlock();
+
+    public abstract AttachedVineHeadBlock getAttachedHeadBlock();
 }
