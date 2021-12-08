@@ -1,50 +1,105 @@
 package net.mwforrest7.vineyard.block.custom;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.CarvedPumpkinBlock;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.ItemEntity;
+import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.stat.Stats;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.IntProperty;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.minecraft.world.event.GameEvent;
 import net.mwforrest7.vineyard.block.ModBlocks;
+import net.mwforrest7.vineyard.item.ModItems;
+
+import java.util.Random;
 
 public class RedGrapeBlock extends VineCanopyBlock{
-    public RedGrapeBlock(Settings settings) {
+    private static final float field_31260 = 0.003f;
+    public static final int MAX_AGE = 3;
+    public static final IntProperty AGE = Properties.AGE_3;
+    private static final VoxelShape SMALL_SHAPE = Block.createCuboidShape(3.0, 0.0, 3.0, 13.0, 8.0, 13.0);
+    private static final VoxelShape LARGE_SHAPE = Block.createCuboidShape(1.0, 0.0, 1.0, 15.0, 16.0, 15.0);
+
+    public RedGrapeBlock(AbstractBlock.Settings settings) {
         super(settings);
+        this.setDefaultState(this.stateManager.getDefaultState().with(AGE, 0));
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player2, Hand hand, BlockHitResult hit) {
-        ItemStack itemStack = player2.getStackInHand(hand);
-        if (itemStack.isOf(Items.SHEARS)) {
-            if (!world.isClient) {
-                Direction direction = hit.getSide();
-                Direction direction2 = direction.getAxis() == Direction.Axis.Y ? player2.getHorizontalFacing().getOpposite() : direction;
-                world.playSound(null, pos, SoundEvents.BLOCK_PUMPKIN_CARVE, SoundCategory.BLOCKS, 1.0f, 1.0f);
-                world.setBlockState(pos, (BlockState) Blocks.CARVED_PUMPKIN.getDefaultState().with(CarvedPumpkinBlock.FACING, direction2), Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD);
-                ItemEntity itemEntity = new ItemEntity(world, (double) pos.getX() + 0.5 + (double) direction2.getOffsetX() * 0.65, (double) pos.getY() + 0.1, (double) pos.getZ() + 0.5 + (double) direction2.getOffsetZ() * 0.65, new ItemStack(Items.PUMPKIN_SEEDS, 4));
-                itemEntity.setVelocity(0.05 * (double) direction2.getOffsetX() + world.random.nextDouble() * 0.02, 0.05, 0.05 * (double) direction2.getOffsetZ() + world.random.nextDouble() * 0.02);
-                world.spawnEntity(itemEntity);
-                itemStack.damage(1, player2, player -> player.sendToolBreakStatus(hand));
-                world.emitGameEvent((Entity) player2, GameEvent.SHEAR, pos);
-                player2.incrementStat(Stats.USED.getOrCreateStat(Items.SHEARS));
-            }
+    public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
+        return new ItemStack(ModItems.RED_GRAPE);
+    }
+
+    @Override
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        if (state.get(AGE) == 0) {
+            return SMALL_SHAPE;
+        }
+        if (state.get(AGE) < 3) {
+            return LARGE_SHAPE;
+        }
+        return super.getOutlineShape(state, world, pos, context);
+    }
+
+    @Override
+    public boolean hasRandomTicks(BlockState state) {
+        return state.get(AGE) < 3;
+    }
+
+    @Override
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        int currAge = state.get(AGE);
+        if (currAge < 3 && random.nextInt(5) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
+            world.setBlockState(pos, state.with(AGE, currAge + 1), Block.NOTIFY_LISTENERS);
+        }
+    }
+
+    @Override
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        boolean bl;
+        int currAge = state.get(AGE);
+        boolean bl2 = bl = currAge == 3;
+        if (!bl && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
+            return ActionResult.PASS;
+        }
+        if (currAge > 1) {
+            int j = 1 + world.random.nextInt(2);
+            SweetBerryBushBlock.dropStack(world, pos, new ItemStack(ModItems.RED_GRAPE, j + (bl ? 1 : 0)));
+            world.playSound(null, pos, SoundEvents.BLOCK_SWEET_BERRY_BUSH_PICK_BERRIES, SoundCategory.BLOCKS, 1.0f, 0.8f + world.random.nextFloat() * 0.4f);
+            world.setBlockState(pos, state.with(AGE, 1), Block.NOTIFY_LISTENERS);
             return ActionResult.success(world.isClient);
         }
-        return super.onUse(state, world, pos, player2, hand, hit);
+        return super.onUse(state, world, pos, player, hand, hit);
+    }
+
+    @Override
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+        builder.add(AGE);
+    }
+
+    @Override
+    public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
+        return state.get(AGE) < 3;
+    }
+
+    @Override
+    public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
+        return true;
+    }
+
+    @Override
+    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
+        int i = Math.min(3, state.get(AGE) + 1);
+        world.setBlockState(pos, state.with(AGE, i), Block.NOTIFY_LISTENERS);
     }
 
     @Override
