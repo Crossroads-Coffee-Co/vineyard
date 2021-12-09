@@ -10,10 +10,12 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.tag.BlockTags;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
@@ -23,8 +25,9 @@ import net.mwforrest7.vineyard.item.ModItems;
 
 import java.util.Random;
 
+import static net.mwforrest7.vineyard.util.VineUtil.isAlongFence;
+
 public class RedGrapeBlock extends VineCanopyBlock{
-    private static final float field_31260 = 0.003f;
     public static final int MAX_AGE = 3;
     public static final IntProperty AGE = Properties.AGE_3;
     private static final VoxelShape SMALL_SHAPE = Block.createCuboidShape(3.0, 0.0, 3.0, 13.0, 8.0, 13.0);
@@ -36,16 +39,11 @@ public class RedGrapeBlock extends VineCanopyBlock{
     }
 
     @Override
-    public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
-        return new ItemStack(ModItems.RED_GRAPE);
-    }
-
-    @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         if (state.get(AGE) == 0) {
             return SMALL_SHAPE;
         }
-        if (state.get(AGE) < 3) {
+        if (state.get(AGE) < MAX_AGE) {
             return LARGE_SHAPE;
         }
         return super.getOutlineShape(state, world, pos, context);
@@ -59,7 +57,7 @@ public class RedGrapeBlock extends VineCanopyBlock{
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         int currAge = state.get(AGE);
-        if (currAge < 3 && random.nextInt(5) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
+        if (currAge < MAX_AGE && random.nextInt(5) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
             world.setBlockState(pos, state.with(AGE, currAge + 1), Block.NOTIFY_LISTENERS);
         }
     }
@@ -68,13 +66,13 @@ public class RedGrapeBlock extends VineCanopyBlock{
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         boolean bl;
         int currAge = state.get(AGE);
-        boolean bl2 = bl = currAge == 3;
+        boolean bl2 = bl = currAge == MAX_AGE;
         if (!bl && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
             return ActionResult.PASS;
         }
         if (currAge > 1) {
             int j = 1 + world.random.nextInt(2);
-            SweetBerryBushBlock.dropStack(world, pos, new ItemStack(ModItems.RED_GRAPE, j + (bl ? 1 : 0)));
+            dropStack(world, pos, new ItemStack(ModItems.RED_GRAPE, j + (bl ? 1 : 0)));
             world.playSound(null, pos, SoundEvents.BLOCK_SWEET_BERRY_BUSH_PICK_BERRIES, SoundCategory.BLOCKS, 1.0f, 0.8f + world.random.nextFloat() * 0.4f);
             world.setBlockState(pos, state.with(AGE, 1), Block.NOTIFY_LISTENERS);
             return ActionResult.success(world.isClient);
@@ -83,14 +81,18 @@ public class RedGrapeBlock extends VineCanopyBlock{
     }
 
     @Override
-    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-        return true;
+    protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
+        return floor.isAir();
     }
 
     @Override
-    protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
-        return true;
+    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
+        BlockPos blockPos = pos.down();
+        return (isAlongFence(world, pos)
+                && isAlongVineHead(world, pos)
+                && canPlantOnTop(world.getBlockState(blockPos), world, blockPos));
     }
+
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
@@ -99,7 +101,7 @@ public class RedGrapeBlock extends VineCanopyBlock{
 
     @Override
     public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
-        return state.get(AGE) < 3;
+        return state.get(AGE) < MAX_AGE;
     }
 
     @Override
@@ -109,7 +111,7 @@ public class RedGrapeBlock extends VineCanopyBlock{
 
     @Override
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-        int i = Math.min(3, state.get(AGE) + 1);
+        int i = Math.min(MAX_AGE, state.get(AGE) + 1);
         world.setBlockState(pos, state.with(AGE, i), Block.NOTIFY_LISTENERS);
     }
 
@@ -121,5 +123,15 @@ public class RedGrapeBlock extends VineCanopyBlock{
     @Override
     public AttachedVineHeadBlock getAttachedHeadBlock() {
         return (AttachedVineHeadBlock) ModBlocks.ATTACHED_RED_GRAPE_HEAD;
+    }
+
+    private boolean isAlongVineHead(WorldView world, BlockPos pos){
+        for (Direction direction : Direction.Type.HORIZONTAL) {
+            BlockState adjacentBlock = world.getBlockState(pos.offset(direction));
+            if (adjacentBlock.isOf(ModBlocks.ATTACHED_RED_GRAPE_HEAD) || adjacentBlock.isOf(ModBlocks.RED_GRAPE_HEAD)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

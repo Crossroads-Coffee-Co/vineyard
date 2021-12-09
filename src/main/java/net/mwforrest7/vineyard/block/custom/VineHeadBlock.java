@@ -10,20 +10,21 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
+import net.mwforrest7.vineyard.block.ModBlocks;
 
 import java.util.Random;
 import java.util.function.Supplier;
 
+import static net.mwforrest7.vineyard.util.VineUtil.isAlongFence;
+
 public class VineHeadBlock extends CropBlock {
     private final VineCanopyBlock vineCanopyBlock;
     private final AttachedVineTrunkBlock attachedVineTrunkBlock;
-    private final Supplier<Item> pickBlockItem;
 
-    public VineHeadBlock(VineCanopyBlock vineCanopyBlock, AttachedVineTrunkBlock attachedVineTrunkBlock, Supplier<Item> pickBlockItem, AbstractBlock.Settings settings) {
+    public VineHeadBlock(VineCanopyBlock vineCanopyBlock, AttachedVineTrunkBlock attachedVineTrunkBlock, AbstractBlock.Settings settings) {
         super(settings);
         this.vineCanopyBlock = vineCanopyBlock;
         this.attachedVineTrunkBlock = attachedVineTrunkBlock;
-        this.pickBlockItem = pickBlockItem;
         this.setDefaultState(this.stateManager.getDefaultState().with(AGE, 0));
     }
 
@@ -43,10 +44,10 @@ public class VineHeadBlock extends CropBlock {
                 state = state.with(AGE, state.get(AGE) + 1);
                 world.setBlockState(pos, state, Block.NOTIFY_LISTENERS);
             } else {
-                // Else if mature, grow vine canopies in all horizontal directions where there is open space
+                // Else if mature, grow vine canopies in all horizontal directions where there is open space & a fence
                 for (Direction direction : Direction.Type.HORIZONTAL) {
                     BlockPos adjacentBlock = pos.offset(direction);
-                    if (world.getBlockState(adjacentBlock).isAir()) {
+                    if (world.getBlockState(adjacentBlock).isAir() && isAlongFence(world, adjacentBlock)) {
                         world.setBlockState(adjacentBlock, this.vineCanopyBlock.getDefaultState());
                     }
                 }
@@ -57,33 +58,21 @@ public class VineHeadBlock extends CropBlock {
     }
 
     @Override
-    public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
-        return new ItemStack(this.pickBlockItem.get());
-    }
-
-    @Override
     protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
-        return true;
+        return floor.isOf(this.attachedVineTrunkBlock);
     }
 
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-        return true;
+        BlockPos blockPos = pos.down();
+        return (world.getBaseLightLevel(pos, 0) >= 8 || world.isSkyVisible(pos))
+                && isAlongFence(world, pos)
+                && canPlantOnTop(world.getBlockState(blockPos), world, blockPos);
     }
 
     @Override
     public boolean hasRandomTicks(BlockState state) {
         return true;
-    }
-
-    @Override
-    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-        int i = Math.min(7, state.get(AGE) + MathHelper.nextInt(world.random, 2, 5));
-        BlockState blockState = state.with(AGE, i);
-        world.setBlockState(pos, blockState, Block.NOTIFY_LISTENERS);
-        if (i == 7) {
-            blockState.randomTick(world, pos, world.random);
-        }
     }
 
     @Override

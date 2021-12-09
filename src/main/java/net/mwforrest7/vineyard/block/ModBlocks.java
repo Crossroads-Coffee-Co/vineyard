@@ -22,11 +22,8 @@ public class ModBlocks {
     // TODO: review details, add restrictions, add loot table
     public static final Block RED_GRAPE_CANOPY = registerBlockWithoutBlockItem("red_grape_canopy", new RedGrapeBlock(FabricBlockSettings.of(Material.PLANT).strength(1.0f).nonOpaque().sounds(BlockSoundGroup.SWEET_BERRY_BUSH)));
 
-    // TODO: review details, add restrictions, add loot table
-    public static final Block ATTACHED_RED_GRAPE_HEAD = registerBlockWithoutBlockItem("attached_red_grape_head", new AttachedVineHeadBlock((VineCanopyBlock)RED_GRAPE_CANOPY, () -> ModItems.RED_GRAPE_SEEDS, FabricBlockSettings.of(Material.PLANT).noCollision().breakInstantly().nonOpaque().sounds(BlockSoundGroup.WOOD)));
-
-    // TODO: review details, add restrictions, add loot table
-    public static final Block RED_GRAPE_HEAD = registerBlockWithoutBlockItem("red_grape_head", new VineHeadBlock((VineCanopyBlock)RED_GRAPE_CANOPY, (AttachedVineTrunkBlock) ATTACHED_RED_GRAPEVINE_TRUNK, () -> ModItems.RED_GRAPE_SEEDS, FabricBlockSettings.of(Material.PLANT).noCollision().nonOpaque().ticksRandomly().breakByHand(true).sounds(BlockSoundGroup.STEM)));
+    public static final Block ATTACHED_RED_GRAPE_HEAD = registerBlockWithoutBlockItem("attached_red_grape_head", new AttachedVineHeadBlock((VineCanopyBlock)RED_GRAPE_CANOPY, FabricBlockSettings.of(Material.PLANT).strength(1.0f).nonOpaque().sounds(BlockSoundGroup.SWEET_BERRY_BUSH)));
+    public static final Block RED_GRAPE_HEAD = registerBlockWithoutBlockItem("red_grape_head", new VineHeadBlock((VineCanopyBlock)RED_GRAPE_CANOPY, (AttachedVineTrunkBlock) ATTACHED_RED_GRAPEVINE_TRUNK, FabricBlockSettings.of(Material.PLANT).strength(1.0f).nonOpaque().sounds(BlockSoundGroup.SWEET_BERRY_BUSH)));
 
     private static Block registerBlockWithoutBlockItem(String name, Block block){
         return Registry.register(Registry.BLOCK, new Identifier(VineyardMod.MOD_ID, name), block);

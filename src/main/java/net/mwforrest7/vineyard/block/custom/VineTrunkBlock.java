@@ -40,10 +40,10 @@ public class VineTrunkBlock extends CropBlock {
                 state = state.with(AGE, state.get(AGE) + 1);
                 world.setBlockState(pos, state, Block.NOTIFY_LISTENERS);
             } else {
-                // Else if mature and has space, create vine head block above
+                // Else if mature, has space, and has fence support above, create vine head block above
                 Direction direction = Direction.UP;
                 BlockPos blockAbovePos = pos.offset(direction);
-                if (world.getBlockState(blockAbovePos).isAir()) {
+                if (world.getBlockState(blockAbovePos).isAir() && isAlongFence(world, blockAbovePos)) {
                     if (this.vineType.equals(VineType.RED_GRAPE.toString())) {
                         world.setBlockState(blockAbovePos, ModBlocks.RED_GRAPE_HEAD.getDefaultState());
                         world.setBlockState(pos, ModBlocks.ATTACHED_RED_GRAPEVINE_TRUNK.getDefaultState().with(Properties.FACING, direction));
