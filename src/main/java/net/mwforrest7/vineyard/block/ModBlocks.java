@@ -16,10 +16,18 @@ import net.mwforrest7.vineyard.item.ModItems;
 
 public class ModBlocks {
 
-    public static final Block ATTACHED_RED_GRAPEVINE_TRUNK = registerBlockWithoutBlockItem("attached_red_grapevine_trunk", new AttachedVineTrunkBlock(VineType.RED_GRAPE.toString(), () -> ModItems.RED_GRAPE_SEEDS, FabricBlockSettings.of(Material.PLANT).noCollision().breakInstantly().nonOpaque().sounds(BlockSoundGroup.WOOD)));
-    public static final Block RED_GRAPEVINE_TRUNK = registerBlockWithoutBlockItem("red_grapevine_trunk", new VineTrunkBlock(VineType.RED_GRAPE.toString(), () -> ModItems.RED_GRAPE_SEEDS, FabricBlockSettings.of(Material.PLANT).noCollision().ticksRandomly().breakInstantly().nonOpaque().sounds(BlockSoundGroup.STEM)));
+    // TODO: review details, add restrictions, add loot table
+    public static final Block ATTACHED_RED_GRAPEVINE_TRUNK = registerBlockWithoutBlockItem("attached_red_grapevine_trunk", new AttachedVineTrunkBlock(VineType.RED_GRAPE.toString(), () -> ModItems.RED_GRAPE_SEEDS, FabricBlockSettings.of(Material.PLANT).noCollision().strength(1.0f).nonOpaque().sounds(BlockSoundGroup.WOOD)));
+
+    public static final Block RED_GRAPEVINE_TRUNK = registerBlockWithoutBlockItem("red_grapevine_trunk", new VineTrunkBlock(VineType.RED_GRAPE.toString(), FabricBlockSettings.of(Material.PLANT).strength(1.0f).nonOpaque().sounds(BlockSoundGroup.WOOD)));
+
+    // TODO: review details, add restrictions, add loot table
     public static final Block RED_GRAPE_CANOPY = registerBlockWithoutBlockItem("red_grape_canopy", new RedGrapeBlock(FabricBlockSettings.of(Material.PLANT).strength(1.0f).nonOpaque().sounds(BlockSoundGroup.SWEET_BERRY_BUSH)));
+
+    // TODO: review details, add restrictions, add loot table
     public static final Block ATTACHED_RED_GRAPE_HEAD = registerBlockWithoutBlockItem("attached_red_grape_head", new AttachedVineHeadBlock((VineCanopyBlock)RED_GRAPE_CANOPY, () -> ModItems.RED_GRAPE_SEEDS, FabricBlockSettings.of(Material.PLANT).noCollision().breakInstantly().nonOpaque().sounds(BlockSoundGroup.WOOD)));
+
+    // TODO: review details, add restrictions, add loot table
     public static final Block RED_GRAPE_HEAD = registerBlockWithoutBlockItem("red_grape_head", new VineHeadBlock((VineCanopyBlock)RED_GRAPE_CANOPY, (AttachedVineTrunkBlock) ATTACHED_RED_GRAPEVINE_TRUNK, () -> ModItems.RED_GRAPE_SEEDS, FabricBlockSettings.of(Material.PLANT).noCollision().nonOpaque().ticksRandomly().breakByHand(true).sounds(BlockSoundGroup.STEM)));
 
     private static Block registerBlockWithoutBlockItem(String name, Block block){

@@ -36,7 +36,6 @@ public class AttachedVineTrunkBlock extends PlantBlock {
                 return ModBlocks.RED_GRAPEVINE_TRUNK.getDefaultState().with(VineTrunkBlock.AGE, 7);
             }
         }
-
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
