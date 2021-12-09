@@ -1,19 +1,14 @@
 package net.mwforrest7.vineyard.block.custom;
 
 import net.minecraft.block.*;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
-import net.mwforrest7.vineyard.block.ModBlocks;
 
 import java.util.Random;
-import java.util.function.Supplier;
 
 import static net.mwforrest7.vineyard.util.VineUtil.isAlongFence;
 
