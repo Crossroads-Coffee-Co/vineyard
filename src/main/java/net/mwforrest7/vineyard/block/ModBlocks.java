@@ -16,9 +16,7 @@ import net.mwforrest7.vineyard.item.ModItems;
 
 public class ModBlocks {
 
-    // TODO: review details, add restrictions, add loot table
-    public static final Block ATTACHED_RED_GRAPEVINE_TRUNK = registerBlockWithoutBlockItem("attached_red_grapevine_trunk", new AttachedVineTrunkBlock(VineType.RED_GRAPE.toString(), () -> ModItems.RED_GRAPE_SEEDS, FabricBlockSettings.of(Material.PLANT).noCollision().strength(1.0f).nonOpaque().sounds(BlockSoundGroup.WOOD)));
-
+    public static final Block ATTACHED_RED_GRAPEVINE_TRUNK = registerBlockWithoutBlockItem("attached_red_grapevine_trunk", new AttachedVineTrunkBlock(VineType.RED_GRAPE.toString(), FabricBlockSettings.of(Material.PLANT).strength(1.0f).nonOpaque().sounds(BlockSoundGroup.WOOD)));
     public static final Block RED_GRAPEVINE_TRUNK = registerBlockWithoutBlockItem("red_grapevine_trunk", new VineTrunkBlock(VineType.RED_GRAPE.toString(), FabricBlockSettings.of(Material.PLANT).strength(1.0f).nonOpaque().sounds(BlockSoundGroup.WOOD)));
 
     // TODO: review details, add restrictions, add loot table

@@ -1,8 +1,6 @@
 package net.mwforrest7.vineyard.block.custom;
 
 import net.minecraft.block.*;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
@@ -10,22 +8,20 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
 import net.mwforrest7.vineyard.block.ModBlocks;
 import net.mwforrest7.vineyard.enums.VineType;
 
-import java.util.function.Supplier;
+import static net.mwforrest7.vineyard.util.VineUtil.isAlongFence;
 
 public class AttachedVineTrunkBlock extends PlantBlock {
     public static final DirectionProperty FACING = Properties.FACING;
-    protected static final float field_30995 = 2.0f;
     private final String vineType;
-    private final Supplier<Item> pickBlockItem;
 
-    public AttachedVineTrunkBlock(String vineType, Supplier<Item> pickBlockItem, AbstractBlock.Settings settings) {
+    public AttachedVineTrunkBlock(String vineType, AbstractBlock.Settings settings) {
         super(settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.UP));
         this.vineType = vineType;
-        this.pickBlockItem = pickBlockItem;
     }
 
     @Override
@@ -45,8 +41,16 @@ public class AttachedVineTrunkBlock extends PlantBlock {
     }
 
     @Override
-    public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
-        return new ItemStack(this.pickBlockItem.get());
+    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
+        BlockPos blockPos = pos.down();
+        return (world.getBaseLightLevel(pos, 0) >= 8 || world.isSkyVisible(pos))
+                && isAlongFence(world, pos)
+                && canPlantOnTop(world.getBlockState(blockPos), world, blockPos);
+    }
+
+    @Override
+    public boolean hasRandomTicks(BlockState state) {
+        return false;
     }
 
     @Override

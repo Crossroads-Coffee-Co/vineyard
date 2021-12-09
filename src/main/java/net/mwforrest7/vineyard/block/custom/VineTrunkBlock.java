@@ -1,23 +1,19 @@
 package net.mwforrest7.vineyard.block.custom;
 
 import net.minecraft.block.*;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.item.ItemStack;
+
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
-import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
 import net.mwforrest7.vineyard.block.ModBlocks;
 import net.mwforrest7.vineyard.enums.VineType;
 
 import java.util.Random;
-import java.util.function.Supplier;
+
+import static net.mwforrest7.vineyard.util.VineUtil.isAlongFence;
 
 public class VineTrunkBlock extends CropBlock {
     private final String vineType;
@@ -73,15 +69,5 @@ public class VineTrunkBlock extends CropBlock {
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(AGE);
-    }
-
-    private boolean isAlongFence(WorldView world, BlockPos pos){
-        for (Direction direction : Direction.Type.HORIZONTAL) {
-            BlockState adjacentBlock = world.getBlockState(pos.offset(direction));
-            if (adjacentBlock.isIn(BlockTags.FENCES)) {
-                return true;
-            }
-        }
-        return false;
     }
 }
