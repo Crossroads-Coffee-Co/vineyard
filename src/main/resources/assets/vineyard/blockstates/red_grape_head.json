@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "vineyard:block/red_grape_head_stage0"
+    },
+    "age=1": {
+      "model": "vineyard:block/red_grape_head_stage1"
+    },
+    "age=2": {
+      "model": "vineyard:block/red_grape_head_stage2"
+    },
+    "age=3": {
+      "model": "vineyard:block/red_grape_head_stage3"
+    },
+    "age=4": {
+      "model": "vineyard:block/red_grape_head_stage4"
+    },
+    "age=5": {
+      "model": "vineyard:block/red_grape_head_stage5"
+    },
+    "age=6": {
+      "model": "vineyard:block/red_grape_head_stage6"
+    },
+    "age=7": {
+      "model": "vineyard:block/red_grape_head_stage7"
+    }
+  }
+}

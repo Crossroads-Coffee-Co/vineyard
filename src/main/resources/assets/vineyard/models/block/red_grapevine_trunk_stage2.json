@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/crop",
+  "textures": {
+    "crop": "vineyard:block/red_grapevine_trunk_stage2"
+  }
+}
