@@ -1,5 +1,5 @@
 {
-  "parent": "vineyard:block/cube_column",
+  "parent": "minecraft:block/cube_column",
   "textures": {
     "end": "vineyard:block/attached_red_grape_head_top",
     "side": "vineyard:block/attached_red_grape_head"

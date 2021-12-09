@@ -9,6 +9,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.WorldView;
 
 import java.util.Random;
 import java.util.function.Supplier;
@@ -61,6 +62,21 @@ public class VineHeadBlock extends CropBlock {
     }
 
     @Override
+    protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
+        return true;
+    }
+
+    @Override
+    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
+        return true;
+    }
+
+    @Override
+    public boolean hasRandomTicks(BlockState state) {
+        return true;
+    }
+
+    @Override
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
         int i = Math.min(7, state.get(AGE) + MathHelper.nextInt(world.random, 2, 5));
         BlockState blockState = state.with(AGE, i);
@@ -73,14 +89,5 @@ public class VineHeadBlock extends CropBlock {
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(AGE);
-    }
-
-
-    public VineCanopyBlock getVineCanopyBlock() {
-        return this.vineCanopyBlock;
-    }
-
-    public AttachedVineTrunkBlock getAttachedVineTrunkBlock(){
-        return attachedVineTrunkBlock;
     }
 }

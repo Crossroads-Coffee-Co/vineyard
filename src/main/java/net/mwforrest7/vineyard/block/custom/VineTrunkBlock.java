@@ -40,20 +40,29 @@ public class VineTrunkBlock extends CropBlock {
 
             if (!isMature(state)) {
                 // If immature - age up
+                System.out.println("Aging up!");
                 state = state.with(AGE, state.get(AGE) + 1);
                 world.setBlockState(pos, state, Block.NOTIFY_LISTENERS);
             } else {
                 // Else if mature and has space, create vine head block above
+                System.out.println("Is mature");
                 Direction direction = Direction.UP;
                 BlockPos blockAbovePos = pos.offset(direction);
                 if (world.getBlockState(blockAbovePos).isAir()) {
+                    System.out.println("Block above is air");
                     if (this.vineType.equals(VineType.RED_GRAPE.toString())) {
+                        System.out.println("Vine is type red grape");
                         world.setBlockState(blockAbovePos, ModBlocks.RED_GRAPE_HEAD.getDefaultState());
                         world.setBlockState(pos, ModBlocks.ATTACHED_RED_GRAPEVINE_TRUNK.getDefaultState().with(Properties.FACING, direction));
                     }
                 }
             }
         }
+    }
+
+    @Override
+    public boolean hasRandomTicks(BlockState state) {
+        return true;
     }
 
     @Override

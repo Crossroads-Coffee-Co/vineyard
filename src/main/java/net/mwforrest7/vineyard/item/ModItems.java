@@ -14,7 +14,7 @@ public class ModItems {
             new Item(new FabricItemSettings()
                     .food(new FoodComponent.Builder().hunger(2).saturationModifier(0.2f).build())
                     .group(ModItemGroup.VINEYARD)));
-    public static final Item RED_GRAPE_SEEDS = registerItem("red_grape_seeds", new AliasedBlockItem(ModBlocks.RED_GRAPE_HEAD, new Item.Settings().group(ItemGroup.MATERIALS)));
+    public static final Item RED_GRAPE_SEEDS = registerItem("red_grape_seeds", new AliasedBlockItem(ModBlocks.RED_GRAPEVINE_TRUNK, new Item.Settings().group(ModItemGroup.VINEYARD)));
 
 
     private static Item registerItem(String name, Item item){

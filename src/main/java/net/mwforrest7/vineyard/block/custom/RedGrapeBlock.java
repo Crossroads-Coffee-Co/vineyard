@@ -17,6 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
 import net.mwforrest7.vineyard.block.ModBlocks;
 import net.mwforrest7.vineyard.item.ModItems;
 
@@ -79,6 +80,16 @@ public class RedGrapeBlock extends VineCanopyBlock{
             return ActionResult.success(world.isClient);
         }
         return super.onUse(state, world, pos, player, hand, hit);
+    }
+
+    @Override
+    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
+        return true;
+    }
+
+    @Override
+    protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
+        return true;
     }
 
     @Override
