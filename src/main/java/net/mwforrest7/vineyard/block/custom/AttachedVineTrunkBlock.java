@@ -22,7 +22,7 @@ public class AttachedVineTrunkBlock extends PlantBlock {
 
     public AttachedVineTrunkBlock(String vineType, Supplier<Item> pickBlockItem, AbstractBlock.Settings settings) {
         super(settings);
-        this.setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.UP));
+        this.setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.NORTH));
         this.vineType = vineType;
         this.pickBlockItem = pickBlockItem;
     }

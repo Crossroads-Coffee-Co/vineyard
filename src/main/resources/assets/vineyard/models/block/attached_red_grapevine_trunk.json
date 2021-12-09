@@ -1,0 +1,7 @@
+{
+  "parent": "vineyard:block/cube_column",
+  "textures": {
+    "end": "vineyard:block/attached_red_grapevine_trunk_top",
+    "side": "vineyard:block/attached_red_grapevine_trunk"
+  }
+}

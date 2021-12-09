@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "vineyard:block/red_grape_canopy_stage3"
+  }
+}
