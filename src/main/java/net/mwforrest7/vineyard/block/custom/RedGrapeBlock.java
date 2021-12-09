@@ -115,6 +115,11 @@ public class RedGrapeBlock extends VineCanopyBlock{
     }
 
     @Override
+    public boolean isTranslucent(BlockState state, BlockView world, BlockPos pos) {
+        return false;
+    }
+
+    @Override
     public VineHeadBlock getHeadBlock() {
         return (VineHeadBlock)ModBlocks.RED_GRAPE_HEAD;
     }

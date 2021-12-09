@@ -54,6 +54,11 @@ public class AttachedVineTrunkBlock extends PlantBlock {
     }
 
     @Override
+    public boolean isTranslucent(BlockState state, BlockView world, BlockPos pos) {
+        return false;
+    }
+
+    @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(FACING);
     }

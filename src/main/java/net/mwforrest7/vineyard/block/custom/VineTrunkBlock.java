@@ -7,6 +7,7 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
 import net.mwforrest7.vineyard.block.ModBlocks;
 import net.mwforrest7.vineyard.enums.VineType;
@@ -64,6 +65,11 @@ public class VineTrunkBlock extends CropBlock {
     @Override
     public boolean hasRandomTicks(BlockState state) {
         return true;
+    }
+
+    @Override
+    public boolean isTranslucent(BlockState state, BlockView world, BlockPos pos) {
+        return false;
     }
 
     @Override

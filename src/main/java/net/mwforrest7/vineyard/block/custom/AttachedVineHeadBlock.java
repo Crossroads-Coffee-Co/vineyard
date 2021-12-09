@@ -48,4 +48,9 @@ public class AttachedVineHeadBlock extends PlantBlock {
     public boolean hasRandomTicks(BlockState state) {
         return false;
     }
+
+    @Override
+    public boolean isTranslucent(BlockState state, BlockView world, BlockPos pos) {
+        return false;
+    }
 }
