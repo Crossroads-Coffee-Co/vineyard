@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"parent": "minecraft:block/crop",
 	"textures": {
-		"0": "red_grapevine_trunk_stage3",
-		"particle": "red_grapevine_trunk_stage3"
+		"0": "vineyard:block/red_grapevine_trunk_stage3",
+		"particle": "vineyard:block/red_grapevine_trunk_stage3"
 	},
 	"elements": [
 		{
