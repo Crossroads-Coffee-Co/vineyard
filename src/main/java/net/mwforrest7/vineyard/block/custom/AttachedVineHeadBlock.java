@@ -17,7 +17,6 @@ public class AttachedVineHeadBlock extends PlantBlock {
 
     public AttachedVineHeadBlock(VineCanopyBlock vineCanopyBlock, AbstractBlock.Settings settings) {
         super(settings);
-        System.out.println("attached head block created");
         this.vineCanopyBlock = vineCanopyBlock;
     }
 
