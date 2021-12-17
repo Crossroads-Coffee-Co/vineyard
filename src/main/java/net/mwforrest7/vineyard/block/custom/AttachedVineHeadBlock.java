@@ -25,7 +25,7 @@ public class AttachedVineHeadBlock extends PlantBlock {
         // If the block above is no longer a red_grape_head then the attached trunk should revert to a non-attached trunk form
         if ((neighborState.isAir() && (direction == Direction.EAST || direction == Direction.WEST || direction == Direction.NORTH || direction == Direction.SOUTH))
                 || neighborState.isIn(BlockTags.FENCES)) {
-            return this.vineCanopyBlock.getHeadBlock().getDefaultState().with(VineHeadBlock.AGE, 0);
+            return this.vineCanopyBlock.getHeadBlock().getDefaultState().with(VineHeadBlock.AGE, VineHeadBlock.MAX_AGE);
         }
 
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
