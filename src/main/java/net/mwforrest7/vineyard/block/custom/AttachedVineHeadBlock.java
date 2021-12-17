@@ -23,7 +23,6 @@ public class AttachedVineHeadBlock extends PlantBlock {
 
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-        System.out.println("attached head block detected update");
         // If the block above is no longer a red_grape_head then the attached trunk should revert to a non-attached trunk form
         if ((neighborState.isAir() && (direction == Direction.EAST || direction == Direction.WEST || direction == Direction.NORTH || direction == Direction.SOUTH))
                 || neighborState.isIn(BlockTags.FENCES)) {
