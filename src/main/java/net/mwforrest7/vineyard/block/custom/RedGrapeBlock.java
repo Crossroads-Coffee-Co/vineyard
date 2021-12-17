@@ -8,6 +8,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
+import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
@@ -27,6 +28,7 @@ import java.util.Random;
 import static net.mwforrest7.vineyard.util.VineUtil.isAlongFence;
 
 public class RedGrapeBlock extends VineCanopyBlock{
+    public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
     public static final int MAX_AGE = 3;
     public static final IntProperty AGE = Properties.AGE_3;
     private static final VoxelShape SMALL_SHAPE = Block.createCuboidShape(3.0, 0.0, 3.0, 13.0, 8.0, 13.0);
@@ -34,7 +36,7 @@ public class RedGrapeBlock extends VineCanopyBlock{
 
     public RedGrapeBlock(AbstractBlock.Settings settings) {
         super(settings);
-        this.setDefaultState(this.stateManager.getDefaultState().with(AGE, 0));
+        this.setDefaultState(this.stateManager.getDefaultState().with(AGE, 0).with(FACING, Direction.NORTH));
     }
 
     @Override
@@ -96,6 +98,7 @@ public class RedGrapeBlock extends VineCanopyBlock{
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(AGE);
+        builder.add(FACING);
     }
 
     @Override
