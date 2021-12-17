@@ -3,8 +3,8 @@
 	"parent": "minecraft:block/crop",
 	"texture_size": [48, 48],
 	"textures": {
-		"0": "vineyard:block/attached_red_grape_head_stem",
-		"1": "vineyard:block/attached_red_grape_head_foliage",
+		"0": "vineyard:block/red_grape_head_stem",
+		"1": "vineyard:block/red_grape_head_foliage",
 		"particle": "vineyard:block/red_grape_head_stem"
 	},
 	"elements": [
