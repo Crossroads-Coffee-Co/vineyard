@@ -3,8 +3,11 @@ package net.mwforrest7.vineyard.block.custom;
 import net.minecraft.block.*;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
+import net.minecraft.state.property.IntProperty;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
 
@@ -15,6 +18,9 @@ import static net.mwforrest7.vineyard.util.VineUtil.isAlongFence;
 public class VineHeadBlock extends CropBlock {
     private final VineCanopyBlock vineCanopyBlock;
     private final AttachedVineTrunkBlock attachedVineTrunkBlock;
+    public static final int MAX_AGE = Properties.AGE_1_MAX;
+    public static final IntProperty AGE = Properties.AGE_1;
+    private static final VoxelShape[] AGE_TO_SHAPE = new VoxelShape[]{Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 4.0, 16.0), Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 16.0, 16.0)};
 
     public VineHeadBlock(VineCanopyBlock vineCanopyBlock, AttachedVineTrunkBlock attachedVineTrunkBlock, AbstractBlock.Settings settings) {
         super(settings);
@@ -38,18 +44,33 @@ public class VineHeadBlock extends CropBlock {
                 // If immature - age up
                 state = state.with(AGE, state.get(AGE) + 1);
                 world.setBlockState(pos, state, Block.NOTIFY_LISTENERS);
-            } else {
+            }else {
                 // Else if mature, grow vine canopies in all horizontal directions where there is open space & a fence
                 for (Direction direction : Direction.Type.HORIZONTAL) {
                     BlockPos adjacentBlock = pos.offset(direction);
                     if (world.getBlockState(adjacentBlock).isAir() && isAlongFence(world, adjacentBlock)) {
-                        world.setBlockState(adjacentBlock, this.vineCanopyBlock.getDefaultState());
+                        world.setBlockState(adjacentBlock, this.vineCanopyBlock.getDefaultState().with(Properties.HORIZONTAL_FACING, direction));
                     }
                 }
                 // After canopies are grown, turn into an attached head block
                 world.setBlockState(pos, this.vineCanopyBlock.getAttachedHeadBlock().getDefaultState());
             }
         }
+    }
+
+    @Override
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        return AGE_TO_SHAPE[state.get(this.getAgeProperty())];
+    }
+
+    @Override
+    public IntProperty getAgeProperty() {
+        return AGE;
+    }
+
+    @Override
+    public int getMaxAge() {
+        return MAX_AGE;
     }
 
     @Override
