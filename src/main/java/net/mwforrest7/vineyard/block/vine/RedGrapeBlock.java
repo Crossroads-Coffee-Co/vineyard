@@ -1,4 +1,4 @@
-package net.mwforrest7.vineyard.block.custom;
+package net.mwforrest7.vineyard.block.vine;
 
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
