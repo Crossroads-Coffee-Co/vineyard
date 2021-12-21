@@ -5,6 +5,8 @@ import net.mwforrest7.vineyard.block.ModBlocks;
 import net.mwforrest7.vineyard.item.ModItems;
 import net.mwforrest7.vineyard.registries.ModRegistries;
 import net.mwforrest7.vineyard.util.ModRenderHelper;
+import net.mwforrest7.vineyard.world.gen.ModWorldGen;
+import net.mwforrest7.vineyard.world.gen.feature.ModVegetationPlacedFeatures;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,11 +22,11 @@ public class VineyardMod implements ModInitializer {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
-
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
 		ModRegistries.registerModFuels();
 		ModRenderHelper.setRenderLayers();
+		ModWorldGen.generateModWorldGen();
 
 		LOGGER.info("Hello from Vineyard mod!");
 	}

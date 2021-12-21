@@ -1,4 +1,4 @@
-package net.mwforrest7.vineyard.block.custom;
+package net.mwforrest7.vineyard.block.vine;
 
 import net.minecraft.block.Fertilizable;
 import net.minecraft.block.PlantBlock;
