@@ -1,7 +1,6 @@
 package net.mwforrest7.vineyard.item;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.minecraft.block.Blocks;
 import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -13,8 +12,8 @@ public class ModItems {
     public static final Item RED_GRAPE = registerItem("red_grape",
             new Item(new FabricItemSettings()
                     .food(new FoodComponent.Builder().hunger(2).saturationModifier(0.2f).build())
-                    .group(ModItemGroup.VINEYARD)));
-    public static final Item RED_GRAPE_SEEDS = registerItem("red_grape_seeds", new AliasedBlockItem(ModBlocks.RED_GRAPEVINE_TRUNK, new Item.Settings().group(ModItemGroup.VINEYARD)));
+                    .group(ModItemGroups.VINEYARD)));
+    public static final Item RED_GRAPE_SEEDS = registerItem("red_grape_seeds", new AliasedBlockItem(ModBlocks.RED_GRAPEVINE_TRUNK, new Item.Settings().group(ModItemGroups.VINEYARD)));
 
 
     private static Item registerItem(String name, Item item){

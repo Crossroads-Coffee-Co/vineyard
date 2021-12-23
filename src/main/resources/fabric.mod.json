@@ -20,6 +20,9 @@
   "entrypoints": {
     "main": [
       "net.mwforrest7.vineyard.VineyardMod"
+    ],
+    "client": [
+      "net.mwforrest7.vineyard.VineyardClient"
     ]
   },
   "mixins": [

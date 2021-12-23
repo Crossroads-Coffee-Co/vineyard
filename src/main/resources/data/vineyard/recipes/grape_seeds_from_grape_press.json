@@ -1,0 +1,14 @@
+{
+  "type": "vineyard:grape_press",
+  "ingredients": [
+    {
+      "item": "minecraft:wooden_hoe"
+    },
+    {
+      "item": "vineyard:red_grape"
+    }
+  ],
+  "output": {
+    "item": "vineyard:red_grape_seeds"
+  }
+}
