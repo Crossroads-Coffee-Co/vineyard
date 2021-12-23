@@ -11,9 +11,9 @@ import net.mwforrest7.vineyard.block.ModBlocks;
  * Registers BlockEntity objects which also associates a BlockEntity to a corresponding Block
  */
 public class ModBlockEntities {
-    public static BlockEntityType<GrapePressEntity> GRAPE_PRESS;
+    public static BlockEntityType<FruitPressEntity> FRUIT_PRESS;
 
     public static void registerAllEntities() {
-        GRAPE_PRESS = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(VineyardMod.MOD_ID, "grape_press"), FabricBlockEntityTypeBuilder.create(GrapePressEntity::new, ModBlocks.GRAPE_PRESS).build(null));
+        FRUIT_PRESS = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(VineyardMod.MOD_ID, "fruit_press"), FabricBlockEntityTypeBuilder.create(FruitPressEntity::new, ModBlocks.FRUIT_PRESS).build(null));
     }
 }

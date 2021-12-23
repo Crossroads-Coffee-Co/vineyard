@@ -12,11 +12,11 @@ import net.mwforrest7.vineyard.VineyardMod;
 /**
  * This class draws the GrapePress GUI
  */
-public class GrapePressScreen extends HandledScreen<GrapePressScreenHandler> {
+public class FruitPressScreen extends HandledScreen<FruitPressScreenHandler> {
     // The image to use for the GUI
-    private static final Identifier TEXTURE = new Identifier(VineyardMod.MOD_ID, "textures/gui/grape_press_gui.png");
+    private static final Identifier TEXTURE = new Identifier(VineyardMod.MOD_ID, "textures/gui/fruit_press_gui.png");
 
-    public GrapePressScreen(GrapePressScreenHandler handler, PlayerInventory inventory, Text title) {
+    public FruitPressScreen(FruitPressScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
     }
 

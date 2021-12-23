@@ -10,14 +10,14 @@ import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.world.World;
-import net.mwforrest7.vineyard.block.entity.GrapePressProperties;
+import net.mwforrest7.vineyard.block.entity.FruitPressProperties;
 import net.mwforrest7.vineyard.screen.slot.ModFuelSlot;
 import net.mwforrest7.vineyard.screen.slot.ModResultSlot;
 
 /**
  * This class facilitates screen interaction and updates
  */
-public class GrapePressScreenHandler extends ScreenHandler {
+public class FruitPressScreenHandler extends ScreenHandler {
     // Player inventory
     private final Inventory inventory;
 
@@ -27,23 +27,23 @@ public class GrapePressScreenHandler extends ScreenHandler {
     // Data from GrapePressEntity so that we can update the screen appropriately
     private final PropertyDelegate propertyDelegate;
 
-    public GrapePressScreenHandler(int syncId, PlayerInventory playerInventory) {
-        this(syncId, playerInventory, new SimpleInventory(GrapePressProperties.INVENTORY_SIZE), new ArrayPropertyDelegate(GrapePressProperties.INVENTORY_SIZE));
+    public FruitPressScreenHandler(int syncId, PlayerInventory playerInventory) {
+        this(syncId, playerInventory, new SimpleInventory(FruitPressProperties.INVENTORY_SIZE), new ArrayPropertyDelegate(FruitPressProperties.INVENTORY_SIZE));
     }
 
-    public GrapePressScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate delegate) {
-        super(ModScreenHandlers.GRAPE_PRESS_SCREEN_HANDLER, syncId);
-        checkSize(inventory, GrapePressProperties.INVENTORY_SIZE);
+    public FruitPressScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate delegate) {
+        super(ModScreenHandlers.FRUIT_PRESS_SCREEN_HANDLER, syncId);
+        checkSize(inventory, FruitPressProperties.INVENTORY_SIZE);
         this.inventory = inventory;
         this.world = playerInventory.player.world;
         inventory.onOpen(playerInventory.player);
         propertyDelegate = delegate;
 
         // Add the Block's inventory slots, (x, y) is where on the screen the slot should be added
-        this.addSlot(new ModFuelSlot(inventory, GrapePressProperties.InventorySlots.FUEL_SLOT.toInt(), 18, 50));
-        this.addSlot(new Slot(inventory, GrapePressProperties.InventorySlots.INGREDIENT_SLOT_1.toInt(), 66, 16));
-        this.addSlot(new Slot(inventory, GrapePressProperties.InventorySlots.INGREDIENT_SLOT_2.toInt(), 66, 50));
-        this.addSlot(new ModResultSlot(inventory, GrapePressProperties.InventorySlots.OUTPUT_SLOT.toInt(), 114, 33));
+        this.addSlot(new ModFuelSlot(inventory, FruitPressProperties.InventorySlots.FUEL_SLOT.toInt(), 18, 50));
+        this.addSlot(new Slot(inventory, FruitPressProperties.InventorySlots.INGREDIENT_SLOT_1.toInt(), 66, 16));
+        this.addSlot(new Slot(inventory, FruitPressProperties.InventorySlots.INGREDIENT_SLOT_2.toInt(), 66, 50));
+        this.addSlot(new ModResultSlot(inventory, FruitPressProperties.InventorySlots.OUTPUT_SLOT.toInt(), 114, 33));
 
         addPlayerInventory(playerInventory);
         addPlayerHotbar(playerInventory);
@@ -56,7 +56,7 @@ public class GrapePressScreenHandler extends ScreenHandler {
      * @return
      */
     public boolean isCrafting() {
-        return propertyDelegate.get(GrapePressProperties.DelegateProperties.PROGRESS.toInt()) > 0;
+        return propertyDelegate.get(FruitPressProperties.DelegateProperties.PROGRESS.toInt()) > 0;
     }
 
     /**
@@ -65,7 +65,7 @@ public class GrapePressScreenHandler extends ScreenHandler {
      * @return
      */
     public boolean hasFuel() {
-        return propertyDelegate.get(GrapePressProperties.DelegateProperties.FUEL_TIME.toInt()) > 0;
+        return propertyDelegate.get(FruitPressProperties.DelegateProperties.FUEL_TIME.toInt()) > 0;
     }
 
     /**
@@ -74,8 +74,8 @@ public class GrapePressScreenHandler extends ScreenHandler {
      * @return true or false
      */
     public int getScaledProgress() {
-        int progress = this.propertyDelegate.get(GrapePressProperties.DelegateProperties.PROGRESS.toInt());
-        int maxProgress = this.propertyDelegate.get(GrapePressProperties.DelegateProperties.MAX_PROGRESS.toInt());
+        int progress = this.propertyDelegate.get(FruitPressProperties.DelegateProperties.PROGRESS.toInt());
+        int maxProgress = this.propertyDelegate.get(FruitPressProperties.DelegateProperties.MAX_PROGRESS.toInt());
         int progressArrowSize = 26; // This is the width in pixels of the arrow
 
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
@@ -87,8 +87,8 @@ public class GrapePressScreenHandler extends ScreenHandler {
      * @return true or false
      */
     public int getScaledFuelProgress() {
-        int fuelProgress = this.propertyDelegate.get(GrapePressProperties.DelegateProperties.FUEL_TIME.toInt());
-        int maxFuelProgress = this.propertyDelegate.get(GrapePressProperties.DelegateProperties.MAX_FUEL_TIME.toInt());
+        int fuelProgress = this.propertyDelegate.get(FruitPressProperties.DelegateProperties.FUEL_TIME.toInt());
+        int maxFuelProgress = this.propertyDelegate.get(FruitPressProperties.DelegateProperties.MAX_FUEL_TIME.toInt());
         int fuelProgressSize = 14;
 
         return maxFuelProgress != 0 ? (int)(((float)fuelProgress / (float)maxFuelProgress) * fuelProgressSize) : 0;

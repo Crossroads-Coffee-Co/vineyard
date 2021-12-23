@@ -1,10 +1,10 @@
 package net.mwforrest7.vineyard.block.entity;
 
-public final class GrapePressProperties {
-    public static final String DISPLAY_NAME = "Grape Press";
-    public static final String NBT_KEY_PROGRESS = "grape_press.progress";
-    public static final String NBT_KEY_FUEL_TIME = "grape_press.fuelTime";
-    public static final String NBT_KEY_MAX_FUEL_TIME = "grape_press.maxFuelTime";
+public final class FruitPressProperties {
+    public static final String DISPLAY_NAME = "Fruit Press";
+    public static final String NBT_KEY_PROGRESS = "fruit_press.progress";
+    public static final String NBT_KEY_FUEL_TIME = "fruit_press.fuelTime";
+    public static final String NBT_KEY_MAX_FUEL_TIME = "fruit_press.maxFuelTime";
     public static final int INVENTORY_SIZE = 4;
     public static final int MAX_CRAFTING_PROGRESS = 72;
     public static final int DEFAULT_CRAFTING_PROGRESS = 0;
@@ -36,7 +36,7 @@ public final class GrapePressProperties {
 
         private final int value;
 
-        private DelegateProperties(int value) {
+        DelegateProperties(int value) {
             this.value = value;
         }
 

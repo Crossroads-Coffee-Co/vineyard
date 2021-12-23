@@ -9,7 +9,7 @@ import net.mwforrest7.vineyard.VineyardMod;
  */
 public class ModRecipes {
     public static void register() {
-        Registry.register(Registry.RECIPE_SERIALIZER, new Identifier(VineyardMod.MOD_ID, GrapePressRecipe.Serializer.ID), GrapePressRecipe.Serializer.INSTANCE);
-        Registry.register(Registry.RECIPE_TYPE, new Identifier(VineyardMod.MOD_ID, GrapePressRecipe.Type.ID), GrapePressRecipe.Type.INSTANCE);
+        Registry.register(Registry.RECIPE_SERIALIZER, new Identifier(VineyardMod.MOD_ID, FruitPressRecipe.Serializer.ID), FruitPressRecipe.Serializer.INSTANCE);
+        Registry.register(Registry.RECIPE_TYPE, new Identifier(VineyardMod.MOD_ID, FruitPressRecipe.Type.ID), FruitPressRecipe.Type.INSTANCE);
     }
 }

@@ -11,12 +11,12 @@ import net.minecraft.util.JsonHelper;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
 
-public class GrapePressRecipe implements Recipe<SimpleInventory> {
+public class FruitPressRecipe implements Recipe<SimpleInventory> {
     private final Identifier id;
     private final ItemStack output;
     private final DefaultedList<Ingredient> recipeItems;
 
-    public GrapePressRecipe(Identifier id, ItemStack output, DefaultedList<Ingredient> recipeItems) {
+    public FruitPressRecipe(Identifier id, ItemStack output, DefaultedList<Ingredient> recipeItems) {
         this.id = id;
         this.output = output;
         this.recipeItems = recipeItems;
@@ -69,18 +69,18 @@ public class GrapePressRecipe implements Recipe<SimpleInventory> {
         return Type.INSTANCE;
     }
 
-    public static class Type implements RecipeType<GrapePressRecipe> {
+    public static class Type implements RecipeType<FruitPressRecipe> {
         private Type() { }
         public static final Type INSTANCE = new Type();
-        public static final String ID = "grape_press";
+        public static final String ID = "fruit_press";
     }
 
     /**
      * Deserializes the JSON recipes
      */
-    public static class Serializer implements RecipeSerializer<GrapePressRecipe> {
+    public static class Serializer implements RecipeSerializer<FruitPressRecipe> {
         public static final Serializer INSTANCE = new Serializer();
-        public static final String ID = "grape_press";
+        public static final String ID = "fruit_press";
 
         /**
          * Reads the JSON and converts to a GrapePressRecipe
@@ -90,7 +90,7 @@ public class GrapePressRecipe implements Recipe<SimpleInventory> {
          * @return
          */
         @Override
-        public GrapePressRecipe read(Identifier id, JsonObject json) {
+        public FruitPressRecipe read(Identifier id, JsonObject json) {
             // Get the output item from the JSON recipe
             ItemStack output = ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "output"));
 
@@ -104,7 +104,7 @@ public class GrapePressRecipe implements Recipe<SimpleInventory> {
             }
 
             // Return the deserialized recipe
-            return new GrapePressRecipe(id, output, inputs);
+            return new FruitPressRecipe(id, output, inputs);
         }
 
         /**
@@ -118,7 +118,7 @@ public class GrapePressRecipe implements Recipe<SimpleInventory> {
          * @return
          */
         @Override
-        public GrapePressRecipe read(Identifier id, PacketByteBuf buf) {
+        public FruitPressRecipe read(Identifier id, PacketByteBuf buf) {
             // Get the ingredients/inputs for the recipe from the buffer
             DefaultedList<Ingredient> inputs = DefaultedList.ofSize(buf.readInt(), Ingredient.EMPTY);
             for (int i = 0; i < inputs.size(); i++) {
@@ -129,7 +129,7 @@ public class GrapePressRecipe implements Recipe<SimpleInventory> {
             ItemStack output = buf.readItemStack();
 
             // Return recipe
-            return new GrapePressRecipe(id, output, inputs);
+            return new FruitPressRecipe(id, output, inputs);
         }
 
         /**
@@ -141,7 +141,7 @@ public class GrapePressRecipe implements Recipe<SimpleInventory> {
          * @param recipe
          */
         @Override
-        public void write(PacketByteBuf buf, GrapePressRecipe recipe) {
+        public void write(PacketByteBuf buf, FruitPressRecipe recipe) {
             // Sets the buffer size
             buf.writeInt(recipe.getIngredients().size());
 

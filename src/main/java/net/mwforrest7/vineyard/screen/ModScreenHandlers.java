@@ -9,6 +9,6 @@ import net.mwforrest7.vineyard.VineyardMod;
  * Registers screen handlers
  */
 public class ModScreenHandlers {
-    public static ScreenHandlerType<GrapePressScreenHandler> GRAPE_PRESS_SCREEN_HANDLER =
-            ScreenHandlerRegistry.registerSimple(new Identifier(VineyardMod.MOD_ID, "grape_press"), GrapePressScreenHandler::new);
+    public static ScreenHandlerType<FruitPressScreenHandler> FRUIT_PRESS_SCREEN_HANDLER =
+            ScreenHandlerRegistry.registerSimple(new Identifier(VineyardMod.MOD_ID, "fruit_press"), FruitPressScreenHandler::new);
 }
