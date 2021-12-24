@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#C#",
+    "#B#",
+    "#W#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:deepslate"
+    },
+    "C": {
+      "item": "minecraft:copper_block"
+    },
+    "B": {
+      "item": "minecraft:bucket"
+    },
+    "W": {
+      "item": "minecraft:oak_log"
+    }
+  },
+  "result": {
+    "item": "vineyard:fruit_press"
+  }
+}
