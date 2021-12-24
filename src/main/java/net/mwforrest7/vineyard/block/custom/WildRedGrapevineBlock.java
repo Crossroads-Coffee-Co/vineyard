@@ -69,7 +69,7 @@ public class WildRedGrapevineBlock extends PlantBlock implements Fertilizable {
             return ActionResult.PASS;
         }
         if (isMaxAge) {
-            int j = 1 + world.random.nextInt(2);
+            int j = world.random.nextInt(2);
             WildRedGrapevineBlock.dropStack(world, pos, new ItemStack(ModItems.RED_GRAPE, j + 1));
             world.playSound(null, pos, SoundEvents.BLOCK_SWEET_BERRY_BUSH_PICK_BERRIES, SoundCategory.BLOCKS, 1.0f, 0.8f + world.random.nextFloat() * 0.4f);
             world.setBlockState(pos, state.with(AGE, 0), Block.NOTIFY_LISTENERS);

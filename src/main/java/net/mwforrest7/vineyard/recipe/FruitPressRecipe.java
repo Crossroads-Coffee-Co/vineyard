@@ -10,6 +10,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
+import net.mwforrest7.vineyard.block.entity.FruitPressProperties;
 
 public class FruitPressRecipe implements Recipe<SimpleInventory> {
     private final Identifier id;
@@ -32,8 +33,9 @@ public class FruitPressRecipe implements Recipe<SimpleInventory> {
      */
     @Override
     public boolean matches(SimpleInventory inventory, World world) {
-        if(recipeItems.get(0).test(inventory.getStack(1))) {
-            return recipeItems.get(1).test(inventory.getStack(2));
+        if(recipeItems.get(0).test(inventory.getStack(FruitPressProperties.InventorySlots.INGREDIENT_SLOT_1.toInt()))) {
+            //return recipeItems.get(1).test(inventory.getStack(FruitPressProperties.InventorySlots.INGREDIENT_SLOT_2.toInt()));
+            return true;
         }
 
         return false;
@@ -91,6 +93,7 @@ public class FruitPressRecipe implements Recipe<SimpleInventory> {
          */
         @Override
         public FruitPressRecipe read(Identifier id, JsonObject json) {
+            System.out.println("In read");
             // Get the output item from the JSON recipe
             ItemStack output = ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "output"));
 
@@ -98,10 +101,11 @@ public class FruitPressRecipe implements Recipe<SimpleInventory> {
             JsonArray ingredients = JsonHelper.getArray(json, "ingredients");
 
             // Build a list of ingredients, populated from the JsonArray of ingredients
-            DefaultedList<Ingredient> inputs = DefaultedList.ofSize(2, Ingredient.EMPTY);
+            DefaultedList<Ingredient> inputs = DefaultedList.ofSize(FruitPressProperties.NUM_OF_INGREDIENT_SLOTS, Ingredient.EMPTY);
             for (int i = 0; i < inputs.size(); i++) {
                 inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
             }
+            System.out.println("Leaving read");
 
             // Return the deserialized recipe
             return new FruitPressRecipe(id, output, inputs);

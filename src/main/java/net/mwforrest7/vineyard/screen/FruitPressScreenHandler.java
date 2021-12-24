@@ -28,11 +28,12 @@ public class FruitPressScreenHandler extends ScreenHandler {
     private final PropertyDelegate propertyDelegate;
 
     public FruitPressScreenHandler(int syncId, PlayerInventory playerInventory) {
-        this(syncId, playerInventory, new SimpleInventory(FruitPressProperties.INVENTORY_SIZE), new ArrayPropertyDelegate(FruitPressProperties.INVENTORY_SIZE));
+        this(syncId, playerInventory, new SimpleInventory(FruitPressProperties.INVENTORY_SIZE), new ArrayPropertyDelegate(FruitPressProperties.DELEGATE_PROPERTY_SIZE));
     }
 
     public FruitPressScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate delegate) {
         super(ModScreenHandlers.FRUIT_PRESS_SCREEN_HANDLER, syncId);
+        System.out.println("In handler construct");
         checkSize(inventory, FruitPressProperties.INVENTORY_SIZE);
         this.inventory = inventory;
         this.world = playerInventory.player.world;
@@ -40,14 +41,15 @@ public class FruitPressScreenHandler extends ScreenHandler {
         propertyDelegate = delegate;
 
         // Add the Block's inventory slots, (x, y) is where on the screen the slot should be added
-        this.addSlot(new ModFuelSlot(inventory, FruitPressProperties.InventorySlots.FUEL_SLOT.toInt(), 18, 50));
-        this.addSlot(new Slot(inventory, FruitPressProperties.InventorySlots.INGREDIENT_SLOT_1.toInt(), 66, 16));
-        this.addSlot(new Slot(inventory, FruitPressProperties.InventorySlots.INGREDIENT_SLOT_2.toInt(), 66, 50));
-        this.addSlot(new ModResultSlot(inventory, FruitPressProperties.InventorySlots.OUTPUT_SLOT.toInt(), 114, 33));
+        this.addSlot(new ModFuelSlot(inventory, FruitPressProperties.InventorySlots.FUEL_SLOT.toInt(), 56, 53));
+        this.addSlot(new Slot(inventory, FruitPressProperties.InventorySlots.INGREDIENT_SLOT_1.toInt(), 56, 17));
+        //this.addSlot(new Slot(inventory, FruitPressProperties.InventorySlots.INGREDIENT_SLOT_2.toInt(), 66, 50));
+        this.addSlot(new ModResultSlot(inventory, FruitPressProperties.InventorySlots.OUTPUT_SLOT.toInt(), 116, 35));
 
         addPlayerInventory(playerInventory);
         addPlayerHotbar(playerInventory);
         addProperties(delegate);
+        System.out.println("Leaving handler construct");
     }
 
     /**
@@ -87,6 +89,9 @@ public class FruitPressScreenHandler extends ScreenHandler {
      * @return true or false
      */
     public int getScaledFuelProgress() {
+        for(int i = 0; i < propertyDelegate.size(); i++){
+            System.out.println(i + ": " + propertyDelegate.get(i));
+        }
         int fuelProgress = this.propertyDelegate.get(FruitPressProperties.DelegateProperties.FUEL_TIME.toInt());
         int maxFuelProgress = this.propertyDelegate.get(FruitPressProperties.DelegateProperties.MAX_FUEL_TIME.toInt());
         int fuelProgressSize = 14;
@@ -138,7 +143,7 @@ public class FruitPressScreenHandler extends ScreenHandler {
     private void addPlayerInventory(PlayerInventory playerInventory) {
         for (int i = 0; i < 3; ++i) {
             for (int l = 0; l < 9; ++l) {
-                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 86 + i * 18));
+                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 7 + l * 18, 83 + i * 18));
             }
         }
     }
@@ -149,7 +154,7 @@ public class FruitPressScreenHandler extends ScreenHandler {
      */
     private void addPlayerHotbar(PlayerInventory playerInventory) {
         for (int i = 0; i < 9; ++i) {
-            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 144));
+            this.addSlot(new Slot(playerInventory, i, 7 + i * 18, 141));
         }
     }
 }

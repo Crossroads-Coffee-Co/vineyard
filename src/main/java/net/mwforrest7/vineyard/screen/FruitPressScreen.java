@@ -54,14 +54,14 @@ public class FruitPressScreen extends HandledScreen<FruitPressScreenHandler> {
         if(handler.isCrafting()) {
             // x & y correspond to the background location to which the progress texture should be drawn
             // u & v correspond to the progress texture location
-            drawTexture(matrices, x + 84, y + 22, 176, 14, handler.getScaledProgress(), 36);
+            drawTexture(matrices, x + 80, y + 35, 176, 14, handler.getScaledProgress(), 36);
         }
 
         // If there is fuel time, draw the fuel burn-down texture with incremental progress
         if(handler.hasFuel()) {
             // x & y correspond to the background location to which the progress texture should be drawn
             // u & v correspond to the progress texture location
-            drawTexture(matrices, x + 18, y + 33 + 14 - handler.getScaledFuelProgress(), 176,
+            drawTexture(matrices, x + 57, y + 37 + 14 - handler.getScaledFuelProgress(), 176,
                     14 - handler.getScaledFuelProgress(), 14, handler.getScaledFuelProgress());
         }
     }

@@ -1,0 +1,11 @@
+{
+  "type": "vineyard:fruit_press",
+  "ingredients": [
+    {
+      "item": "vineyard:red_grape_bunch"
+    }
+  ],
+  "output": {
+    "item": "vineyard:red_grape_seeds"
+  }
+}

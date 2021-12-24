@@ -1,6 +1,8 @@
 {
   "item.vineyard.red_grape_seeds": "Red Grape Seeds",
   "item.vineyard.red_grape": "Red Grape",
+  "item.vineyard.red_grape_bunch": "Red Grape Bunch",
+  "item.vineyard.copper_coil": "Copper Coil",
 
   "block.vineyard.red_grapevine_trunk": "Red Grapevine Trunk",
   "block.vineyard.attached_red_grapevine_trunk": "Attached Red Grapevine Trunk",
@@ -8,6 +10,7 @@
   "block.vineyard.attached_red_grape_head": "Attached Red Grapevine Head",
   "block.vineyard.red_grape_canopy": "Red Grape Canopy",
   "block.vineyard.wild_red_grapevine": "Wild Red Grapevine",
+  "block.vineyard.fruit_press": "Fruit Press",
 
   "itemGroup.vineyard.vineyard": "Vineyard Mod"
 }

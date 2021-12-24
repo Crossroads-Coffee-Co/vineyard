@@ -72,7 +72,7 @@ public class FruitPressEntity extends BlockEntity implements NamedScreenHandlerF
             }
 
             public int size() {
-                return 4;
+                return DELEGATE_PROPERTY_SIZE;
             }
         };
     }
@@ -160,8 +160,8 @@ public class FruitPressEntity extends BlockEntity implements NamedScreenHandlerF
      */
     private void consumeFuel() {
         if(!getStack(InventorySlots.FUEL_SLOT.toInt()).isEmpty()) {
-            this.fuelTime = FuelRegistry.INSTANCE.get(this.removeStack(InventorySlots.FUEL_SLOT.toInt(), 1).getItem());
-            this.maxFuelTime = this.fuelTime;
+            this.removeStack(InventorySlots.FUEL_SLOT.toInt(), 1);
+            this.fuelTime = MAX_FUEL_TIME;
         }
     }
 
@@ -196,7 +196,7 @@ public class FruitPressEntity extends BlockEntity implements NamedScreenHandlerF
         if(match.isPresent()) {
             // Removes 1 from each ingredient slot
             entity.removeStack(InventorySlots.INGREDIENT_SLOT_1.toInt(),1);
-            entity.removeStack(InventorySlots.INGREDIENT_SLOT_2.toInt(),1);
+            //entity.removeStack(InventorySlots.INGREDIENT_SLOT_2.toInt(),1);
 
             // Adds or increments the output item
             entity.setStack(InventorySlots.OUTPUT_SLOT.toInt(), new ItemStack(match.get().getOutput().getItem(),

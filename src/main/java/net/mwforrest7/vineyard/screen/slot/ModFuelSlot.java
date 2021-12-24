@@ -5,6 +5,7 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.screen.slot.Slot;
+import net.mwforrest7.vineyard.item.ModItems;
 
 /**
  * Enforces this inventory slot to be used only by fuels
@@ -16,15 +17,15 @@ public class ModFuelSlot extends Slot {
 
     @Override
     public boolean canInsert(ItemStack stack) {
-        return AbstractFurnaceBlockEntity.canUseAsFuel(stack) || ModFuelSlot.isBucket(stack);
+        return isCopperSpring(stack);
     }
 
     @Override
     public int getMaxItemCount(ItemStack stack) {
-        return ModFuelSlot.isBucket(stack) ? 1 : super.getMaxItemCount(stack);
+        return super.getMaxItemCount(stack);
     }
 
-    public static boolean isBucket(ItemStack stack) {
-        return stack.isOf(Items.BUCKET);
+    public static boolean isCopperSpring(ItemStack stack) {
+        return stack.isOf(ModItems.COPPER_SPRING);
     }
 }
