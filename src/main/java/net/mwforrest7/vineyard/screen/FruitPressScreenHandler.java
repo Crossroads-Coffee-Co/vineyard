@@ -120,15 +120,15 @@ public class FruitPressScreenHandler extends ScreenHandler {
     /**
      * Handles the shift + click functionality that swaps items between inventories
      *
-     * @param player
-     * @param invSlot
+     * @param player the player instance
+     * @param invSlot the inventory slot
      * @return
      */
     @Override
     public ItemStack transferSlot(PlayerEntity player, int invSlot) {
         ItemStack newStack = ItemStack.EMPTY;
         Slot slot = this.slots.get(invSlot);
-        if (slot != null && slot.hasStack()) {
+        if (slot.hasStack()) {
             ItemStack originalStack = slot.getStack();
             newStack = originalStack.copy();
             if (invSlot < this.inventory.size()) {
@@ -151,7 +151,7 @@ public class FruitPressScreenHandler extends ScreenHandler {
 
     /**
      * Adds the player inventory slots to the screen GUI
-     * @param playerInventory
+     * @param playerInventory the player inventory
      */
     private void addPlayerInventory(PlayerInventory playerInventory) {
         for (int i = 0; i < 3; ++i) {
@@ -163,7 +163,7 @@ public class FruitPressScreenHandler extends ScreenHandler {
 
     /**
      * Adds the player hot bar slots to the screen GUI
-     * @param playerInventory
+     * @param playerInventory the player inventory
      */
     private void addPlayerHotbar(PlayerInventory playerInventory) {
         for (int i = 0; i < 9; ++i) {

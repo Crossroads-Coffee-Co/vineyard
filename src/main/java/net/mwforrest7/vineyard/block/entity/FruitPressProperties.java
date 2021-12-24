@@ -16,7 +16,6 @@ public final class FruitPressProperties {
     public enum InventorySlots {
         FUEL_SLOT(0),
         INGREDIENT_SLOT_1(1),
-        //INGREDIENT_SLOT_2(2),
         OUTPUT_SLOT(2);
 
         private final int value;

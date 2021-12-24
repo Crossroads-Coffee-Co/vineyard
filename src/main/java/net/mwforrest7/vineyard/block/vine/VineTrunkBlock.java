@@ -16,6 +16,9 @@ import java.util.Random;
 
 import static net.mwforrest7.vineyard.util.VineUtil.isAlongFence;
 
+/**
+ * Trunk of the grapevine
+ */
 public class VineTrunkBlock extends CropBlock {
     private final String vineType;
 

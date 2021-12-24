@@ -7,6 +7,9 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.VegetationPlacedFeatures;
 import net.mwforrest7.vineyard.world.gen.feature.ModVegetationPlacedFeatures;
 
+/**
+ * Generally, this class defines where things generate
+ */
 public class ModWorldGen {
     public static void generateModWorldGen() {
         System.out.println("Generating mod world features");

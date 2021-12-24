@@ -30,11 +30,6 @@ public class FruitPressScreen extends HandledScreen<FruitPressScreenHandler> {
 
     /**
      * Draws the background
-     *
-     * @param matrices
-     * @param delta
-     * @param mouseX
-     * @param mouseY
      */
     @Override
     protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
@@ -68,11 +63,6 @@ public class FruitPressScreen extends HandledScreen<FruitPressScreenHandler> {
 
     /**
      * Magic render stuff. No idea how this works.
-     *
-     * @param matrices
-     * @param mouseX
-     * @param mouseY
-     * @param delta
      */
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {

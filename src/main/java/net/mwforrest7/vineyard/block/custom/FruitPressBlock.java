@@ -29,6 +29,13 @@ public class FruitPressBlock extends BlockWithEntity implements BlockEntityProvi
         super(settings);
     }
 
+    /**
+     * Gets the direction that is opposite of the direction which the player is
+     * facing. That way, the block's facing direction is toward the player.
+     *
+     * @param ctx the context under which the item is placed
+     * @return the block instance
+     */
     @Nullable
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
@@ -53,8 +60,8 @@ public class FruitPressBlock extends BlockWithEntity implements BlockEntityProvi
     /**
      * Invisible by default, must be overridden to make the block visible
      *
-     * @param state
-     * @return
+     * @param state the block instance
+     * @return BlockRenderType
      */
     @Override
     public BlockRenderType getRenderType(BlockState state) {
@@ -64,11 +71,11 @@ public class FruitPressBlock extends BlockWithEntity implements BlockEntityProvi
     /**
      * Drops the BlockEntity's inventory on the ground when the block is destroyed
      *
-     * @param state
-     * @param world
-     * @param pos
-     * @param newState
-     * @param moved
+     * @param state the previous block instance
+     * @param world the world
+     * @param pos the block position
+     * @param newState the new block instance which is replacing the previous block
+     * @param moved true if moved, false if not
      */
     @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
@@ -85,13 +92,13 @@ public class FruitPressBlock extends BlockWithEntity implements BlockEntityProvi
     /**
      * Opens the screen handler when right-clicking on the block
      *
-     * @param state
-     * @param world
-     * @param pos
-     * @param player
-     * @param hand
-     * @param hit
-     * @return
+     * @param state the block instance
+     * @param world the world
+     * @param pos the block position
+     * @param player the player instance
+     * @param hand the player's hand
+     * @param hit BlockHitResult
+     * @return ActionResult
      */
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {

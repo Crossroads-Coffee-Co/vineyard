@@ -8,6 +8,7 @@ import net.minecraft.world.WorldView;
 
 public class VineUtil {
 
+    // Checks if the block is adjacent to a fence
     public static boolean isAlongFence(WorldView world, BlockPos pos){
         for (Direction direction : Direction.Type.HORIZONTAL) {
             BlockState adjacentBlock = world.getBlockState(pos.offset(direction));

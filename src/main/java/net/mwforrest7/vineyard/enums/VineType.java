@@ -4,12 +4,13 @@ import net.minecraft.util.StringIdentifiable;
 
 public enum VineType implements StringIdentifiable
 {
+    // Different grape types - used to make different types of vine trunk blocks
     RED_GRAPE("red_grape"),
     WHITE_GRAPE("white_grape");
 
     private final String name;
 
-    private VineType(String name) {
+    VineType(String name) {
         this.name = name;
     }
 
