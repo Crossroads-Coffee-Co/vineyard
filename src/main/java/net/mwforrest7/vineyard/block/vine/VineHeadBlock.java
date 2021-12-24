@@ -15,6 +15,10 @@ import java.util.Random;
 
 import static net.mwforrest7.vineyard.util.VineUtil.isAlongFence;
 
+/**
+ * Top-most middle block of the grapevine. From this block spawns the grape canopies where
+ * grapes will grow.
+ */
 public class VineHeadBlock extends CropBlock {
     private final VineCanopyBlock vineCanopyBlock;
     private final AttachedVineTrunkBlock attachedVineTrunkBlock;
@@ -73,6 +77,7 @@ public class VineHeadBlock extends CropBlock {
         return MAX_AGE;
     }
 
+    // Must be on an attached trunk block
     @Override
     protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
         return floor.isOf(this.attachedVineTrunkBlock);

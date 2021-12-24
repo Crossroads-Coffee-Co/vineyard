@@ -14,6 +14,13 @@ import net.mwforrest7.vineyard.enums.VineType;
 
 import static net.mwforrest7.vineyard.util.VineUtil.isAlongFence;
 
+/**
+ * The main benefit of this attached block is to pause ticking
+ * once the regular trunk block finishing growing a head block. Else,
+ * the original block would have to tick indefinitely. This is because
+ * the regular block needs to constantly try to spawn a head block once it is max
+ * age and has no good sense of when to turn its ticking off.
+ */
 public class AttachedVineTrunkBlock extends PlantBlock {
     public static final DirectionProperty FACING = Properties.FACING;
     private final String vineType;
@@ -24,6 +31,17 @@ public class AttachedVineTrunkBlock extends PlantBlock {
         this.vineType = vineType;
     }
 
+    /**
+     * When neighboring blocks cause an update, this function is called.
+     *
+     * @param state this block instance
+     * @param direction the direction of the block that caused the update
+     * @param neighborState the neighboring block instance
+     * @param world the world
+     * @param pos the position of this block instance
+     * @param neighborPos the position of the neighboring block instance
+     * @return this block instance
+     */
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         if(this.vineType.equals(VineType.RED_GRAPE.toString())){

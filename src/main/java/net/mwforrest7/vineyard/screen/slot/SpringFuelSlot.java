@@ -6,7 +6,7 @@ import net.minecraft.screen.slot.Slot;
 import net.mwforrest7.vineyard.item.ModItems;
 
 /**
- * Enforces this inventory slot to be used only by fuels
+ * Enforces this inventory slot to be used only by Copper Springs
  */
 public class SpringFuelSlot extends Slot {
     public SpringFuelSlot(Inventory inventory, int index, int x, int y) {

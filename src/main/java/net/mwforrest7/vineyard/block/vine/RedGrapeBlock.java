@@ -27,6 +27,9 @@ import java.util.Random;
 
 import static net.mwforrest7.vineyard.util.VineUtil.isAlongFence;
 
+/**
+ * Grows red grapes
+ */
 public class RedGrapeBlock extends VineCanopyBlock{
     public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
     public static final int MAX_AGE = 3;
@@ -50,30 +53,40 @@ public class RedGrapeBlock extends VineCanopyBlock{
         return super.getOutlineShape(state, world, pos, context);
     }
 
+    // Has tick updates so long as age is less than max
     @Override
     public boolean hasRandomTicks(BlockState state) {
-        return state.get(AGE) < 3;
+        return state.get(AGE) < MAX_AGE;
     }
 
+    // Executed every server tick
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         int currAge = state.get(AGE);
+
+        // If age is less than max age & conditions are right, random chance of aging up
         if (currAge < MAX_AGE && random.nextInt(5) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
             world.setBlockState(pos, state.with(AGE, currAge + 1), Block.NOTIFY_LISTENERS);
         }
     }
 
+    // This is executed when right-clicking on the block
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        boolean bl;
+        // Get age
         int currAge = state.get(AGE);
-        boolean bl2 = bl = currAge == MAX_AGE;
-        if (!bl && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
+
+        // If age = max age, then bl is set to true
+        boolean isMaxAge = currAge == MAX_AGE;
+
+        // If not max age, allow use of bone meal when right-clicking
+        if (!isMaxAge && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
             return ActionResult.PASS;
         }
+        // If max age, drop 1-3 grape bunches when right-clicking, then reset age to 1
         if (currAge == MAX_AGE) {
-            int j = 1 + world.random.nextInt(2);
-            dropStack(world, pos, new ItemStack(ModItems.RED_GRAPE_BUNCH, j + (bl ? 1 : 0)));
+            int j = world.random.nextInt(2);
+            dropStack(world, pos, new ItemStack(ModItems.RED_GRAPE_BUNCH, j + 1));
             world.playSound(null, pos, SoundEvents.BLOCK_SWEET_BERRY_BUSH_PICK_BERRIES, SoundCategory.BLOCKS, 1.0f, 0.8f + world.random.nextFloat() * 0.4f);
             world.setBlockState(pos, state.with(AGE, 1), Block.NOTIFY_LISTENERS);
             return ActionResult.success(world.isClient);
@@ -81,11 +94,13 @@ public class RedGrapeBlock extends VineCanopyBlock{
         return super.onUse(state, world, pos, player, hand, hit);
     }
 
+    // Grape canopies should be above an air block
     @Override
     protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
         return floor.isAir();
     }
 
+    // Grape canopies should be along a fence, along a vine head, and over air
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         BlockPos blockPos = pos.down();
@@ -111,6 +126,7 @@ public class RedGrapeBlock extends VineCanopyBlock{
         return true;
     }
 
+    // TODO: Is this needed in addition to the randomTick function?
     @Override
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
         int i = Math.min(MAX_AGE, state.get(AGE) + 1);
@@ -122,16 +138,19 @@ public class RedGrapeBlock extends VineCanopyBlock{
         return false;
     }
 
+    // This maintains an association between this block and a vine head block that is of the red grape type
     @Override
     public VineHeadBlock getHeadBlock() {
         return (VineHeadBlock)ModBlocks.RED_GRAPE_HEAD;
     }
 
+    // This maintains an association between this block and an attached vine head block that is of the red grape type
     @Override
     public AttachedVineHeadBlock getAttachedHeadBlock() {
         return (AttachedVineHeadBlock) ModBlocks.ATTACHED_RED_GRAPE_HEAD;
     }
 
+    // Helper function to check that this block is adjacent to a vine head block of red grape type
     private boolean isAlongVineHead(WorldView world, BlockPos pos){
         for (Direction direction : Direction.Type.HORIZONTAL) {
             BlockState adjacentBlock = world.getBlockState(pos.offset(direction));

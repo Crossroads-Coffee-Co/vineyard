@@ -6,6 +6,7 @@ import net.mwforrest7.vineyard.block.ModBlocks;
 
 public class ModRenderHelper {
     public static void setRenderLayers(){
+        // These render cutouts allow for transparent portions of textures to be see-through
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.RED_GRAPE_HEAD, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.ATTACHED_RED_GRAPEVINE_TRUNK, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.RED_GRAPEVINE_TRUNK, RenderLayer.getCutout());

@@ -11,6 +11,13 @@ import net.mwforrest7.vineyard.block.ModBlocks;
 
 import static net.mwforrest7.vineyard.util.VineUtil.isAlongFence;
 
+/**
+ * The main benefit of this attached block is to pause ticking
+ * once the regular head block finishing growing canopies. Else,
+ * the original block would have to tick indefinitely. This is because
+ * the regular block needs to constantly try to spawn canopies once it is max
+ * age and has no good sense of when to turn its ticking off.
+ */
 public class AttachedVineHeadBlock extends PlantBlock {
 
     private final VineCanopyBlock vineCanopyBlock;
@@ -20,6 +27,17 @@ public class AttachedVineHeadBlock extends PlantBlock {
         this.vineCanopyBlock = vineCanopyBlock;
     }
 
+    /**
+     * When neighboring blocks cause an update, this function is called.
+     *
+     * @param state this block instance
+     * @param direction the direction of the block that caused the update
+     * @param neighborState the neighboring block instance
+     * @param world the world
+     * @param pos the position of this block instance
+     * @param neighborPos the position of the neighboring block instance
+     * @return this block instance
+     */
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         // If the block above is no longer a red_grape_head then the attached trunk should revert to a non-attached trunk form
@@ -31,11 +49,14 @@ public class AttachedVineHeadBlock extends PlantBlock {
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
+    // The block below this block must be an attached grapevine trunk
     @Override
     protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
         return floor.isOf(ModBlocks.ATTACHED_RED_GRAPEVINE_TRUNK);
     }
 
+    // This block must have proper lighting, must be along a fence, and must be on top
+    // of an attached grapevine trunk in order to be placed (and to stay placed)
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         BlockPos blockPos = pos.down();
@@ -44,6 +65,7 @@ public class AttachedVineHeadBlock extends PlantBlock {
                 && canPlantOnTop(world.getBlockState(blockPos), world, blockPos);
     }
 
+    // Since this is an 'attached' variant of the head block, it should not have ticks
     @Override
     public boolean hasRandomTicks(BlockState state) {
         return false;

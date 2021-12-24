@@ -87,9 +87,9 @@ public class FruitPressRecipe implements Recipe<SimpleInventory> {
         /**
          * Reads the JSON and converts to a GrapePressRecipe
          *
-         * @param id
-         * @param json
-         * @return
+         * @param id id
+         * @param json the recipe data from the recipe json file
+         * @return the FruitPressRecipe java object representation of the json
          */
         @Override
         public FruitPressRecipe read(Identifier id, JsonObject json) {
@@ -115,9 +115,9 @@ public class FruitPressRecipe implements Recipe<SimpleInventory> {
          * Reads recipe data off a PacketByteBuf (sounds networking related)
          * and builds a GrapePressRecipe object from it
          *
-         * @param id
-         * @param buf
-         * @return
+         * @param id id
+         * @param buf buffered byte recipe data
+         * @return the FruitPressRecipe representation of the recipe
          */
         @Override
         public FruitPressRecipe read(Identifier id, PacketByteBuf buf) {
@@ -139,8 +139,8 @@ public class FruitPressRecipe implements Recipe<SimpleInventory> {
          *
          * Serializes a GrapePressRecipe object into buffered packet data
          *
-         * @param buf
-         * @param recipe
+         * @param buf a data buffer
+         * @param recipe the FruitPressRecipe representation of the recipe
          */
         @Override
         public void write(PacketByteBuf buf, FruitPressRecipe recipe) {

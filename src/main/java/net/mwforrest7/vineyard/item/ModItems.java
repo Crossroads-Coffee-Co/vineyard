@@ -9,6 +9,7 @@ import net.mwforrest7.vineyard.block.ModBlocks;
 
 public class ModItems {
 
+    // Initialization of items
     public static final Item RED_GRAPE = registerItem("red_grape",
             new Item(new FabricItemSettings()
                     .food(new FoodComponent.Builder().hunger(1).saturationModifier(0.1f).build())
@@ -27,6 +28,7 @@ public class ModItems {
             new Item(new FabricItemSettings()
                     .group(ModItemGroups.VINEYARD)));
 
+    // Registers items
     private static Item registerItem(String name, Item item){
         System.out.println("Registering " + VineyardMod.MOD_ID + ":" + name);
         return Registry.register(Registry.ITEM, new Identifier(VineyardMod.MOD_ID, name), item);

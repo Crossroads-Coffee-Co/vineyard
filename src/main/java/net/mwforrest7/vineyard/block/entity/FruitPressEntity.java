@@ -80,7 +80,7 @@ public class FruitPressEntity extends BlockEntity implements NamedScreenHandlerF
     /**
      * Title to be displayed at top of the Block's inventory screen
      *
-     * @return
+     * @return the title as Text
      */
     @Override
     public Text getDisplayName() {
@@ -90,10 +90,10 @@ public class FruitPressEntity extends BlockEntity implements NamedScreenHandlerF
     /**
      * Creates the ScreenHandler
      *
-     * @param syncId
-     * @param inv
-     * @param player
-     * @return
+     * @param syncId id - presumably used to sync between screen and entity
+     * @param inv player inventory
+     * @param player the player instance
+     * @return a new screen handler instance
      */
     @Nullable
     @Override
@@ -104,7 +104,7 @@ public class FruitPressEntity extends BlockEntity implements NamedScreenHandlerF
     /**
      * Returns the inventory of this Block
      *
-     * @return
+     * @return list of item stacks
      */
     @Override
     public DefaultedList<ItemStack> getItems() {
@@ -115,10 +115,10 @@ public class FruitPressEntity extends BlockEntity implements NamedScreenHandlerF
      * The tick handler function which performs actions every server tick
      * (1/20th of a second)
      *
-     * @param world
-     * @param pos
-     * @param state
-     * @param entity
+     * @param world the world
+     * @param pos the block position
+     * @param state the block instance
+     * @param entity the block entity instance
      */
     public static void tick(World world, BlockPos pos, BlockState state, FruitPressEntity entity) {
         // If there is fuel time, subtract from it
@@ -178,7 +178,7 @@ public class FruitPressEntity extends BlockEntity implements NamedScreenHandlerF
      * subtracts ingredients from the Block's inventory and produces
      * the resulting craft.
      *
-     * @param entity
+     * @param entity the block entity instance
      */
     private static void craftItem(FruitPressEntity entity) {
         World world = entity.world;
@@ -196,6 +196,7 @@ public class FruitPressEntity extends BlockEntity implements NamedScreenHandlerF
         if(match.isPresent()) {
             // Removes 1 from each ingredient slot
             entity.removeStack(InventorySlots.INGREDIENT_SLOT_1.toInt(),1);
+            // TODO: remove this - left this as a ref for now
             //entity.removeStack(InventorySlots.INGREDIENT_SLOT_2.toInt(),1);
 
             // Adds or increments the output item
@@ -211,8 +212,8 @@ public class FruitPressEntity extends BlockEntity implements NamedScreenHandlerF
      * Checks if there is a matching recipe and also performs
      * a couple of other safety checks.
      *
-     * @param entity
-     * @return
+     * @param entity the block entity instance
+     * @return true or false
      */
     private static boolean hasRecipe(FruitPressEntity entity) {
         World world = entity.world;
@@ -236,7 +237,7 @@ public class FruitPressEntity extends BlockEntity implements NamedScreenHandlerF
     /**
      * Saves the block's inventory and properties when world is shut down
      *
-     * @param nbt
+     * @param nbt the data file
      */
     @Override
     protected void writeNbt(NbtCompound nbt) {
@@ -250,7 +251,7 @@ public class FruitPressEntity extends BlockEntity implements NamedScreenHandlerF
     /**
      * Loads the saved block inventory and properties when world is started
      *
-     * @param nbt
+     * @param nbt the data file
      */
     @Override
     public void readNbt(NbtCompound nbt) {
@@ -265,9 +266,9 @@ public class FruitPressEntity extends BlockEntity implements NamedScreenHandlerF
      * Checks if the Block's output inventory slot is empty or contains an item that matches
      * the recipe's output item.
      *
-     * @param inventory
-     * @param output
-     * @return
+     * @param inventory the block's inventory
+     * @param output the item which the recipe will output
+     * @return true or false
      */
     private static boolean canInsertItemIntoOutputSlot(SimpleInventory inventory, ItemStack output) {
         return inventory.getStack(InventorySlots.OUTPUT_SLOT.toInt()).getItem() == output.getItem() || inventory.getStack(InventorySlots.OUTPUT_SLOT.toInt()).isEmpty();
@@ -277,8 +278,8 @@ public class FruitPressEntity extends BlockEntity implements NamedScreenHandlerF
      * Checks if the Block's output inventory slot has enough space for another item to be added
      * to the stack
      *
-     * @param inventory
-     * @return
+     * @param inventory the block's inventory
+     * @return true or false
      */
     private static boolean canInsertAmountIntoOutputSlot(SimpleInventory inventory) {
         return inventory.getStack(InventorySlots.OUTPUT_SLOT.toInt()).getMaxCount() > inventory.getStack(InventorySlots.OUTPUT_SLOT.toInt()).getCount();

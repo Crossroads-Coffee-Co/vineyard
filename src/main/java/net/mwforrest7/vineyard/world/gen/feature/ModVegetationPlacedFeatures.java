@@ -9,6 +9,9 @@ import net.minecraft.world.gen.feature.PlacedFeature;
 import net.minecraft.world.gen.feature.PlacedFeatures;
 import net.mwforrest7.vineyard.VineyardMod;
 
+/**
+ * Generally, this class defines how the configured features generate
+ */
 public class ModVegetationPlacedFeatures {
     public static final RegistryKey<PlacedFeature> PATCH_WILD_RED_GRAPEVINE_COMMON_KEY = registerKey("patch_wild_red_grapevine_common");
     public static final RegistryKey<PlacedFeature> PATCH_WILD_RED_GRAPEVINE_RARE_KEY = registerKey("patch_wild_red_grapevine_rare");
