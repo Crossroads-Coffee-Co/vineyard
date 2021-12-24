@@ -18,6 +18,24 @@ import net.mwforrest7.vineyard.screen.slot.ModResultSlot;
  * This class facilitates screen interaction and updates
  */
 public class FruitPressScreenHandler extends ScreenHandler {
+    // Fuel Slot Coordinates
+    private static final int X_FUEL = 56;
+    private static final int Y_FUEL = 53;
+
+    // Ingredient Slot Coordinates
+    private static final int X_INPUT = 56;
+    private static final int Y_INPUT = 17;
+
+    // Output Slot Coordinates
+    private static final int X_OUTPUT = 116;
+    private static final int Y_OUTPUT = 35;
+
+    // Player Inventory & Hot Bar Coordinates
+    private static final int X_INVENTORY = 7;
+    private static final int Y_INVENTORY = 83;
+    private static final int X_HOTBAR = 7;
+    private static final int Y_HOTBAR = 141;
+
     // Player inventory
     private final Inventory inventory;
 
@@ -41,10 +59,10 @@ public class FruitPressScreenHandler extends ScreenHandler {
         propertyDelegate = delegate;
 
         // Add the Block's inventory slots, (x, y) is where on the screen the slot should be added
-        this.addSlot(new ModFuelSlot(inventory, FruitPressProperties.InventorySlots.FUEL_SLOT.toInt(), 56, 53));
-        this.addSlot(new Slot(inventory, FruitPressProperties.InventorySlots.INGREDIENT_SLOT_1.toInt(), 56, 17));
+        this.addSlot(new ModFuelSlot(inventory, FruitPressProperties.InventorySlots.FUEL_SLOT.toInt(), X_FUEL, Y_FUEL));
+        this.addSlot(new Slot(inventory, FruitPressProperties.InventorySlots.INGREDIENT_SLOT_1.toInt(), X_INPUT, Y_INPUT));
         //this.addSlot(new Slot(inventory, FruitPressProperties.InventorySlots.INGREDIENT_SLOT_2.toInt(), 66, 50));
-        this.addSlot(new ModResultSlot(inventory, FruitPressProperties.InventorySlots.OUTPUT_SLOT.toInt(), 116, 35));
+        this.addSlot(new ModResultSlot(inventory, FruitPressProperties.InventorySlots.OUTPUT_SLOT.toInt(), X_OUTPUT, Y_OUTPUT));
 
         addPlayerInventory(playerInventory);
         addPlayerHotbar(playerInventory);
@@ -55,7 +73,7 @@ public class FruitPressScreenHandler extends ScreenHandler {
     /**
      * Checks if there is crafting in progress
      *
-     * @return
+     * @return true or false
      */
     public boolean isCrafting() {
         return propertyDelegate.get(FruitPressProperties.DelegateProperties.PROGRESS.toInt()) > 0;
@@ -64,7 +82,7 @@ public class FruitPressScreenHandler extends ScreenHandler {
     /**
      * Checks if there is fuel time available
      *
-     * @return
+     * @return true or false
      */
     public boolean hasFuel() {
         return propertyDelegate.get(FruitPressProperties.DelegateProperties.FUEL_TIME.toInt()) > 0;
@@ -143,7 +161,7 @@ public class FruitPressScreenHandler extends ScreenHandler {
     private void addPlayerInventory(PlayerInventory playerInventory) {
         for (int i = 0; i < 3; ++i) {
             for (int l = 0; l < 9; ++l) {
-                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 7 + l * 18, 83 + i * 18));
+                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, X_INVENTORY + l * 18, Y_INVENTORY + i * 18));
             }
         }
     }
@@ -154,7 +172,7 @@ public class FruitPressScreenHandler extends ScreenHandler {
      */
     private void addPlayerHotbar(PlayerInventory playerInventory) {
         for (int i = 0; i < 9; ++i) {
-            this.addSlot(new Slot(playerInventory, i, 7 + i * 18, 141));
+            this.addSlot(new Slot(playerInventory, i, X_HOTBAR + i * 18, Y_HOTBAR));
         }
     }
 }
