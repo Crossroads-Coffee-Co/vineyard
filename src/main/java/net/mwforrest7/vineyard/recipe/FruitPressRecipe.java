@@ -93,7 +93,6 @@ public class FruitPressRecipe implements Recipe<SimpleInventory> {
          */
         @Override
         public FruitPressRecipe read(Identifier id, JsonObject json) {
-            System.out.println("In read");
             // Get the output item from the JSON recipe
             ItemStack output = ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "output"));
 
@@ -105,7 +104,6 @@ public class FruitPressRecipe implements Recipe<SimpleInventory> {
             for (int i = 0; i < inputs.size(); i++) {
                 inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
             }
-            System.out.println("Leaving read");
 
             // Return the deserialized recipe
             return new FruitPressRecipe(id, output, inputs);

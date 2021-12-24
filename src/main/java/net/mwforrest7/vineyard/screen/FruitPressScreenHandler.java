@@ -11,7 +11,7 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.world.World;
 import net.mwforrest7.vineyard.block.entity.FruitPressProperties;
-import net.mwforrest7.vineyard.screen.slot.ModFuelSlot;
+import net.mwforrest7.vineyard.screen.slot.SpringFuelSlot;
 import net.mwforrest7.vineyard.screen.slot.ModResultSlot;
 
 /**
@@ -51,7 +51,6 @@ public class FruitPressScreenHandler extends ScreenHandler {
 
     public FruitPressScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate delegate) {
         super(ModScreenHandlers.FRUIT_PRESS_SCREEN_HANDLER, syncId);
-        System.out.println("In handler construct");
         checkSize(inventory, FruitPressProperties.INVENTORY_SIZE);
         this.inventory = inventory;
         this.world = playerInventory.player.world;
@@ -59,7 +58,7 @@ public class FruitPressScreenHandler extends ScreenHandler {
         propertyDelegate = delegate;
 
         // Add the Block's inventory slots, (x, y) is where on the screen the slot should be added
-        this.addSlot(new ModFuelSlot(inventory, FruitPressProperties.InventorySlots.FUEL_SLOT.toInt(), X_FUEL, Y_FUEL));
+        this.addSlot(new SpringFuelSlot(inventory, FruitPressProperties.InventorySlots.FUEL_SLOT.toInt(), X_FUEL, Y_FUEL));
         this.addSlot(new Slot(inventory, FruitPressProperties.InventorySlots.INGREDIENT_SLOT_1.toInt(), X_INPUT, Y_INPUT));
         //this.addSlot(new Slot(inventory, FruitPressProperties.InventorySlots.INGREDIENT_SLOT_2.toInt(), 66, 50));
         this.addSlot(new ModResultSlot(inventory, FruitPressProperties.InventorySlots.OUTPUT_SLOT.toInt(), X_OUTPUT, Y_OUTPUT));
@@ -67,7 +66,6 @@ public class FruitPressScreenHandler extends ScreenHandler {
         addPlayerInventory(playerInventory);
         addPlayerHotbar(playerInventory);
         addProperties(delegate);
-        System.out.println("Leaving handler construct");
     }
 
     /**
@@ -107,9 +105,6 @@ public class FruitPressScreenHandler extends ScreenHandler {
      * @return true or false
      */
     public int getScaledFuelProgress() {
-        for(int i = 0; i < propertyDelegate.size(); i++){
-            System.out.println(i + ": " + propertyDelegate.get(i));
-        }
         int fuelProgress = this.propertyDelegate.get(FruitPressProperties.DelegateProperties.FUEL_TIME.toInt());
         int maxFuelProgress = this.propertyDelegate.get(FruitPressProperties.DelegateProperties.MAX_FUEL_TIME.toInt());
         int fuelProgressSize = 14;
