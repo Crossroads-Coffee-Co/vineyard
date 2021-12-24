@@ -2,11 +2,12 @@ package net.mwforrest7.vineyard;
 
 import net.fabricmc.api.ModInitializer;
 import net.mwforrest7.vineyard.block.ModBlocks;
+import net.mwforrest7.vineyard.block.entity.ModBlockEntities;
 import net.mwforrest7.vineyard.item.ModItems;
+import net.mwforrest7.vineyard.recipe.ModRecipes;
 import net.mwforrest7.vineyard.registries.ModRegistries;
 import net.mwforrest7.vineyard.util.ModRenderHelper;
 import net.mwforrest7.vineyard.world.gen.ModWorldGen;
-import net.mwforrest7.vineyard.world.gen.feature.ModVegetationPlacedFeatures;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -24,7 +25,9 @@ public class VineyardMod implements ModInitializer {
 		// Proceed with mild caution.
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
+		ModBlockEntities.registerAllEntities();
 		ModRegistries.registerModFuels();
+		ModRecipes.register();
 		ModRenderHelper.setRenderLayers();
 		ModWorldGen.generateModWorldGen();
 
