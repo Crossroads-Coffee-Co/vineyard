@@ -5,13 +5,16 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
 
 import java.util.Random;
+import java.util.stream.Stream;
 
 import static net.mwforrest7.vineyard.util.VineUtil.isAlongFence;
 
@@ -24,7 +27,6 @@ public class VineHeadBlock extends CropBlock {
     private final AttachedVineTrunkBlock attachedVineTrunkBlock;
     public static final int MAX_AGE = Properties.AGE_1_MAX;
     public static final IntProperty AGE = Properties.AGE_1;
-    private static final VoxelShape[] AGE_TO_SHAPE = new VoxelShape[]{Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 4.0, 16.0), Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 16.0, 16.0)};
 
     public VineHeadBlock(VineCanopyBlock vineCanopyBlock, AttachedVineTrunkBlock attachedVineTrunkBlock, AbstractBlock.Settings settings) {
         super(settings);
@@ -62,9 +64,38 @@ public class VineHeadBlock extends CropBlock {
         }
     }
 
+    /**
+     * Determines size of the outline shape when hovering mouse over the block
+     */
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return AGE_TO_SHAPE[state.get(this.getAgeProperty())];
+        return Stream.of(
+                Block.createCuboidShape(4.5, 4.5, 7.5, 7.5, 5.5, 8.5),
+                Block.createCuboidShape(8.5, 4.5, 7.5, 11.5, 5.5, 8.5),
+                Block.createCuboidShape(7.5, 4.5, 8.5, 8.5, 5.5, 11.5),
+                Block.createCuboidShape(7.5, 4.5, 4.5, 8.5, 5.5, 7.5),
+                Block.createCuboidShape(0.25, 6.5, 7.5, 2.5, 7.5, 8.5),
+                Block.createCuboidShape(13.5, 6.5, 7.5, 15.75, 7.5, 8.5),
+                Block.createCuboidShape(7.5, 6.5, 13.5, 8.5, 7.5, 15.75),
+                Block.createCuboidShape(7.5, 6.5, 0.25, 8.5, 7.5, 2.5),
+                Block.createCuboidShape(7.5, 4, 7.5, 8.5, 13.75, 8.5),
+                Block.createCuboidShape(7, 0, 7, 9, 4, 9),
+                Block.createCuboidShape(2, 5.5, 7.5, 5, 6.5, 8.5),
+                Block.createCuboidShape(11, 5.5, 7.5, 14, 6.5, 8.5),
+                Block.createCuboidShape(7.5, 5.5, 11, 8.5, 6.5, 14),
+                Block.createCuboidShape(7.5, 5.5, 2, 8.5, 6.5, 5),
+                Block.createCuboidShape(6.5, 4, 6.5, 9.5, 7, 9.5),
+                Block.createCuboidShape(6.5, 8, 6.5, 9.5, 11.5, 9.5),
+                Block.createCuboidShape(7, 11.5, 7, 9, 14, 9),
+                Block.createCuboidShape(9.5, 5, 6.5, 12.5, 8, 9.5),
+                Block.createCuboidShape(12.5, 6, 6.5, 16, 9, 9.5),
+                Block.createCuboidShape(3.5, 5, 6.5, 6.5, 8, 9.5),
+                Block.createCuboidShape(0, 6, 6.5, 3.5, 9, 9.5),
+                Block.createCuboidShape(6.5, 5, 9.5, 9.5, 8, 12.5),
+                Block.createCuboidShape(6.5, 5, 3.5, 9.5, 8, 6.5),
+                Block.createCuboidShape(6.5, 6, 0, 9.5, 9, 3.5),
+                Block.createCuboidShape(6.5, 6, 12.5, 9.5, 9, 16)
+        ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
     }
 
     @Override

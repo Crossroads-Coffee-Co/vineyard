@@ -4,9 +4,11 @@ import net.minecraft.block.*;
 
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
+import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
 import net.mwforrest7.vineyard.block.ModBlocks;
@@ -21,6 +23,15 @@ import static net.mwforrest7.vineyard.util.VineUtil.isAlongFence;
  */
 public class VineTrunkBlock extends CropBlock {
     private final String vineType;
+    private static final VoxelShape[] AGE_TO_SHAPE = new VoxelShape[]{
+            Block.createCuboidShape(5.0, 0.0, 6.0, 10.0, 4.0, 9.0),
+            Block.createCuboidShape(5.0, 0.0, 5.0, 10.0, 6.0, 10.0),
+            Block.createCuboidShape(5.0, 0.0, 5.0, 11.0, 10.0, 11.0),
+            Block.createCuboidShape(3.0, 0.0, 3.0, 13.0, 12.0, 13.0),
+            Block.createCuboidShape(4.0, 0.0, 5.0, 11.0, 16.0, 11.0),
+            Block.createCuboidShape(4.0, 0.0, 5.0, 11.0, 16.0, 11.0),
+            Block.createCuboidShape(4.0, 0.0, 5.0, 11.0, 16.0, 11.0),
+            Block.createCuboidShape(4.0, 0.0, 5.0, 11.0, 16.0, 11.0)};
 
     public VineTrunkBlock(String vineType, AbstractBlock.Settings settings) {
         super(settings);
@@ -55,6 +66,19 @@ public class VineTrunkBlock extends CropBlock {
                 }
             }
         }
+    }
+
+    /**
+     * Determines size of the outline shape when hovering mouse over the block
+     */
+    @Override
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        return AGE_TO_SHAPE[state.get(this.getAgeProperty())];
+    }
+
+    @Override
+    public IntProperty getAgeProperty() {
+        return AGE;
     }
 
     @Override
