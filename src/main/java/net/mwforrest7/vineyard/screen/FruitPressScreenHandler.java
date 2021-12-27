@@ -11,6 +11,7 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.world.World;
 import net.mwforrest7.vineyard.block.entity.FruitPressProperties;
+import net.mwforrest7.vineyard.screen.slot.BottleSlot;
 import net.mwforrest7.vineyard.screen.slot.SpringFuelSlot;
 import net.mwforrest7.vineyard.screen.slot.ModResultSlot;
 
@@ -20,7 +21,11 @@ import net.mwforrest7.vineyard.screen.slot.ModResultSlot;
 public class FruitPressScreenHandler extends ScreenHandler {
     // Fuel Slot Coordinates
     private static final int X_FUEL = 56;
-    private static final int Y_FUEL = 53;
+    private static final int Y_FUEL = 54;
+
+    // Glass Bottle Slot Coordinates
+    private static final int X_BOTTLE_INPUT = 7;
+    private static final int Y_BOTTLE_INPUT = 17;
 
     // Ingredient Slot Coordinates
     private static final int X_INPUT = 56;
@@ -31,10 +36,10 @@ public class FruitPressScreenHandler extends ScreenHandler {
     private static final int Y_OUTPUT = 35;
 
     // Player Inventory & Hot Bar Coordinates
-    private static final int X_INVENTORY = 7;
-    private static final int Y_INVENTORY = 83;
-    private static final int X_HOTBAR = 7;
-    private static final int Y_HOTBAR = 141;
+    private static final int X_INVENTORY = 8;
+    private static final int Y_INVENTORY = 84;
+    private static final int X_HOTBAR = 8;
+    private static final int Y_HOTBAR = 142;
 
     // Player inventory
     private final Inventory inventory;
@@ -59,8 +64,8 @@ public class FruitPressScreenHandler extends ScreenHandler {
 
         // Add the Block's inventory slots, (x, y) is where on the screen the slot should be added
         this.addSlot(new SpringFuelSlot(inventory, FruitPressProperties.InventorySlots.FUEL_SLOT.toInt(), X_FUEL, Y_FUEL));
-        this.addSlot(new Slot(inventory, FruitPressProperties.InventorySlots.INGREDIENT_SLOT_1.toInt(), X_INPUT, Y_INPUT));
-        //this.addSlot(new Slot(inventory, FruitPressProperties.InventorySlots.INGREDIENT_SLOT_2.toInt(), 66, 50));
+        this.addSlot(new Slot(inventory, FruitPressProperties.InventorySlots.FRUIT_INGREDIENT_SLOT.toInt(), X_INPUT, Y_INPUT));
+        this.addSlot(new BottleSlot(inventory, FruitPressProperties.InventorySlots.GLASS_BOTTLE_INGREDIENT_SLOT.toInt(), X_BOTTLE_INPUT, Y_BOTTLE_INPUT));
         this.addSlot(new ModResultSlot(inventory, FruitPressProperties.InventorySlots.OUTPUT_SLOT.toInt(), X_OUTPUT, Y_OUTPUT));
 
         addPlayerInventory(playerInventory);

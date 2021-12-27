@@ -33,11 +33,9 @@ public class FruitPressRecipe implements Recipe<SimpleInventory> {
      */
     @Override
     public boolean matches(SimpleInventory inventory, World world) {
-        if(recipeItems.get(0).test(inventory.getStack(FruitPressProperties.InventorySlots.INGREDIENT_SLOT_1.toInt()))) {
-            //return recipeItems.get(1).test(inventory.getStack(FruitPressProperties.InventorySlots.INGREDIENT_SLOT_2.toInt()));
-            return true;
+        if(recipeItems.get(0).test(inventory.getStack(FruitPressProperties.InventorySlots.GLASS_BOTTLE_INGREDIENT_SLOT.toInt()))) {
+            return recipeItems.get(1).test(inventory.getStack(FruitPressProperties.InventorySlots.FRUIT_INGREDIENT_SLOT.toInt()));
         }
-
         return false;
     }
 

@@ -2,6 +2,9 @@
   "type": "vineyard:fruit_press",
   "ingredients": [
     {
+      "item": "minecraft:glass_bottle"
+    },
+    {
       "item": "vineyard:red_grape_bunch"
     }
   ],
