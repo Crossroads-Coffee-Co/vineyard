@@ -1,3 +1,6 @@
 {
-  "parent": "vineyard:block/fruit_press"
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "vineyard:item/fruit_press"
+  }
 }

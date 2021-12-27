@@ -1,6 +1,5 @@
 package net.mwforrest7.vineyard.block.entity;
 
-import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -195,9 +194,8 @@ public class FruitPressEntity extends BlockEntity implements NamedScreenHandlerF
         // If there is a match, updates the inventory as appropriate
         if(match.isPresent()) {
             // Removes 1 from each ingredient slot
-            entity.removeStack(InventorySlots.INGREDIENT_SLOT_1.toInt(),1);
-            // TODO: remove this - left this as a ref for now
-            //entity.removeStack(InventorySlots.INGREDIENT_SLOT_2.toInt(),1);
+            entity.removeStack(InventorySlots.FRUIT_INGREDIENT_SLOT.toInt(),1);
+            entity.removeStack(InventorySlots.GLASS_BOTTLE_INGREDIENT_SLOT.toInt(),1);
 
             // Adds or increments the output item
             entity.setStack(InventorySlots.OUTPUT_SLOT.toInt(), new ItemStack(match.get().getOutput().getItem(),
