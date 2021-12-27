@@ -4,13 +4,18 @@ import net.minecraft.block.*;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import net.mwforrest7.vineyard.block.ModBlocks;
 import net.mwforrest7.vineyard.enums.VineType;
+
+import java.util.stream.Stream;
 
 import static net.mwforrest7.vineyard.util.VineUtil.isAlongFence;
 
@@ -51,6 +56,29 @@ public class AttachedVineTrunkBlock extends PlantBlock {
             }
         }
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+    }
+
+    /**
+     * Determines size of the outline shape when hovering mouse over the block
+     */
+    @Override
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        return Stream.of(
+                Block.createCuboidShape(5.75, 3, 6.5, 8.75, 6.5, 9.5),
+                Block.createCuboidShape(5.5, 0, 5.5, 10.5, 3, 10.5),
+                Block.createCuboidShape(6.5, 0, 3.5, 9.5, 2, 5.5),
+                Block.createCuboidShape(10.5, 0, 6.5, 12.5, 2, 9.5),
+                Block.createCuboidShape(2.5, 0, 6.5, 5.5, 2, 9.5),
+                Block.createCuboidShape(6.5, 0, 10.5, 9.5, 2, 12.5),
+                Block.createCuboidShape(0, 0, 7.5, 2.5, 1, 8.5),
+                Block.createCuboidShape(7.5, 0, 1.5, 8.5, 1, 3.5),
+                Block.createCuboidShape(12.5, 0, 7.5, 14.5, 1, 8.5),
+                Block.createCuboidShape(7.5, 0, 12.5, 8.5, 1, 14.5),
+                Block.createCuboidShape(5.75, 9.5, 7.5, 7.75, 12, 9.5),
+                Block.createCuboidShape(6, 6.5, 7.25, 8, 9.5, 9.25),
+                Block.createCuboidShape(6, 12, 7.75, 8, 14, 9.75),
+                Block.createCuboidShape(6.5, 14, 7.5, 8.5, 16, 9.5)
+        ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
     }
 
     @Override

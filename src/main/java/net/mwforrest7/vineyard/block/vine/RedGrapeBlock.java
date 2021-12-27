@@ -13,10 +13,12 @@ import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
@@ -24,6 +26,7 @@ import net.mwforrest7.vineyard.block.ModBlocks;
 import net.mwforrest7.vineyard.item.ModItems;
 
 import java.util.Random;
+import java.util.stream.Stream;
 
 import static net.mwforrest7.vineyard.util.VineUtil.isAlongFence;
 
@@ -34,23 +37,51 @@ public class RedGrapeBlock extends VineCanopyBlock{
     public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
     public static final int MAX_AGE = 3;
     public static final IntProperty AGE = Properties.AGE_3;
-    private static final VoxelShape SMALL_SHAPE = Block.createCuboidShape(3.0, 0.0, 3.0, 13.0, 8.0, 13.0);
-    private static final VoxelShape LARGE_SHAPE = Block.createCuboidShape(1.0, 0.0, 1.0, 15.0, 16.0, 15.0);
+
+    private static final VoxelShape SHAPE_N_S_0 = Stream.of(
+            Block.createCuboidShape(0, 7, 5.5, 3.5, 11, 10.5),
+            Block.createCuboidShape(4.5, 5.5, 7.5, 8, 6.5, 8.5),
+            Block.createCuboidShape(8, 5.5, 7.5, 11.5, 6.5, 8.5),
+            Block.createCuboidShape(0.25, 7.5, 7.5, 2.5, 8.5, 8.5),
+            Block.createCuboidShape(13.5, 7.5, 7.5, 15.75, 8.5, 8.5),
+            Block.createCuboidShape(2, 6.5, 7.5, 5, 7.5, 8.5),
+            Block.createCuboidShape(11, 6.5, 7.5, 14, 7.5, 8.5),
+            Block.createCuboidShape(6.5, 5, 5.5, 9.5, 9, 10.5),
+            Block.createCuboidShape(9.5, 6, 5.5, 12.5, 10, 10.5),
+            Block.createCuboidShape(12.5, 7, 5.5, 16, 11, 10.5),
+            Block.createCuboidShape(3.5, 6, 5.5, 6.5, 10, 10.5)
+    ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
+
+    private static final VoxelShape SHAPE_W_E_0 = Stream.of(
+            Block.createCuboidShape(5.5, 7, 12.5, 10.5, 11, 16),
+            Block.createCuboidShape(7.5, 5.5, 8, 8.5, 6.5, 11.5),
+            Block.createCuboidShape(7.5, 5.5, 4.5, 8.5, 6.5, 8),
+            Block.createCuboidShape(7.5, 7.5, 13.5, 8.5, 8.5, 15.75),
+            Block.createCuboidShape(7.5, 7.5, 0.25, 8.5, 8.5, 2.5),
+            Block.createCuboidShape(7.5, 6.5, 11, 8.5, 7.5, 14),
+            Block.createCuboidShape(7.5, 6.5, 2, 8.5, 7.5, 5),
+            Block.createCuboidShape(5.5, 5, 6.5, 10.5, 9, 9.5),
+            Block.createCuboidShape(5.5, 6, 3.5, 10.5, 10, 6.5),
+            Block.createCuboidShape(5.5, 7, 0, 10.5, 11, 3.5),
+            Block.createCuboidShape(5.5, 6, 9.5, 10.5, 10, 12.5)
+    ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
 
     public RedGrapeBlock(AbstractBlock.Settings settings) {
         super(settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(AGE, 0).with(FACING, Direction.NORTH));
     }
 
+    /**
+     * Determines size of the outline shape when hovering mouse over the block
+     */
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        if (state.get(AGE) == 0) {
-            return SMALL_SHAPE;
+        if(state.get(FACING) == Direction.NORTH || state.get(FACING) == Direction.SOUTH){
+            return SHAPE_W_E_0;
+
+        }else{
+            return SHAPE_N_S_0;
         }
-        if (state.get(AGE) < MAX_AGE) {
-            return LARGE_SHAPE;
-        }
-        return super.getOutlineShape(state, world, pos, context);
     }
 
     // Has tick updates so long as age is less than max
