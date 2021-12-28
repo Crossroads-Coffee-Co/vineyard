@@ -66,7 +66,6 @@ public class AttachedVineTrunkBlock extends PlantBlock {
         return Stream.of(
                 Block.createCuboidShape(0.0, 0.0, 1.0, 15.0, 3.0, 15.0),
                 Block.createCuboidShape(5.0, 3.0, 6.0, 9.0, 16.0, 10.0)
-               // Block.createCuboidShape(6.0, 6.0, 7.0, 9.0, 16.0, 10.0)
         ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
     }
 
