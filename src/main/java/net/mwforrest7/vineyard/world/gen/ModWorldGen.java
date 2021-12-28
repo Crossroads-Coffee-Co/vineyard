@@ -34,7 +34,6 @@ public class ModWorldGen {
     private static Biome.Category[] parseAndDeserializeBiomeCategoriesFromConfig(String categories){
         ArrayList<Biome.Category> biome_categories = new ArrayList<>();
         for(String category : categories.split(ModConfigs.BIOME_CATEGORY_DELIMITER)){
-            System.out.println("Category: " + category);
             biome_categories.add(Biome.Category.byName(category.toLowerCase()));
         }
         return biome_categories.toArray(Biome.Category[]::new);
