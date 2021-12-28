@@ -6,6 +6,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.mwforrest7.vineyard.VineyardMod;
 import net.mwforrest7.vineyard.block.ModBlocks;
+import net.mwforrest7.vineyard.config.ModConfigs;
 
 import static net.minecraft.item.Items.GLASS_BOTTLE;
 
@@ -14,15 +15,21 @@ public class ModItems {
     // Initialization of items
     public static final Item RED_GRAPE = registerItem("red_grape",
             new Item(new FabricItemSettings()
-                    .food(new FoodComponent.Builder().hunger(1).saturationModifier(0.1f).build())
+                    .food(new FoodComponent.Builder().hunger(ModConfigs.RED_GRAPE_HUNGER).saturationModifier(ModConfigs.RED_GRAPE_SATURATION).build())
                     .group(ModItemGroups.VINEYARD)));
 
     public static final Item RED_GRAPE_BUNCH = registerItem("red_grape_bunch",
             new Item(new FabricItemSettings()
-                    .food(new FoodComponent.Builder().hunger(2).saturationModifier(0.2f).build())
+                    .food(new FoodComponent.Builder().hunger(ModConfigs.RED_GRAPE_BUNCH_HUNGER).saturationModifier(ModConfigs.RED_GRAPE_BUNCH_SATURATION).build())
                     .group(ModItemGroups.VINEYARD)));
 
-    public static final Item RED_GRAPE_JUICE_BOTTLE = registerItem("red_grape_juice_bottle", new GrapeJuiceBottleItem((new FabricItemSettings()).food(new FoodComponent.Builder().hunger(3).saturationModifier(0.3f).build()).group(ModItemGroups.VINEYARD)));
+    public static final Item RED_GRAPE_JUICE_BOTTLE = registerItem("red_grape_juice_bottle",
+            new GrapeJuiceBottleItem((new FabricItemSettings())
+                    .food(new FoodComponent.Builder()
+                            .hunger(ModConfigs.RED_GRAPE_JUICE_BOTTLE_HUNGER)
+                            .saturationModifier(ModConfigs.RED_GRAPE_JUICE_BOTTLE_SATURATION)
+                            .build())
+                    .group(ModItemGroups.VINEYARD)));
 
     public static final Item RED_GRAPE_SEEDS = registerItem("red_grape_seeds",
             new AliasedBlockItem(ModBlocks.RED_GRAPEVINE_TRUNK,
