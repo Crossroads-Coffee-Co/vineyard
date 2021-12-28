@@ -131,7 +131,7 @@ public class RedGrapeBlock extends VineCanopyBlock{
         return true;
     }
 
-    // TODO: Is this needed in addition to the randomTick function?
+    // Bone meal function
     @Override
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
         int i = Math.min(MAX_AGE, state.get(AGE) + 1);
