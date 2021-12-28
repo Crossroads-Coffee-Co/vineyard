@@ -2,6 +2,7 @@ package net.mwforrest7.vineyard.block.vine;
 
 import net.minecraft.block.*;
 import net.minecraft.tag.BlockTags;
+import net.minecraft.tag.TagGroup;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -11,6 +12,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import net.mwforrest7.vineyard.block.ModBlocks;
+import net.mwforrest7.vineyard.util.VineUtil;
 
 import java.util.stream.Stream;
 
@@ -45,10 +47,15 @@ public class AttachedVineHeadBlock extends PlantBlock {
      */
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-        // If the block above is no longer a red_grape_head then the attached trunk should revert to a non-attached trunk form
-        if ((neighborState.isAir() && (direction == Direction.EAST || direction == Direction.WEST || direction == Direction.NORTH || direction == Direction.SOUTH))
-                || neighborState.isIn(BlockTags.FENCES)) {
-            return this.vineCanopyBlock.getHeadBlock().getDefaultState().with(VineHeadBlock.AGE, VineHeadBlock.MAX_AGE);
+        // If the adjacent block is no longer a red_grape_head then the attached trunk should revert to a non-attached trunk form
+        if (((neighborState.isOf(Blocks.AIR) || neighborState.isIn(BlockTags.FENCES))
+                && (direction == Direction.EAST || direction == Direction.WEST || direction == Direction.NORTH || direction == Direction.SOUTH))) {
+            if(VineUtil.isAlongFence(world, pos)){
+                return this.vineCanopyBlock.getHeadBlock().getDefaultState().with(VineHeadBlock.AGE, VineHeadBlock.MAX_AGE);
+            }
+            else{
+                return Blocks.AIR.getDefaultState();
+            }
         }
 
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
@@ -60,27 +67,10 @@ public class AttachedVineHeadBlock extends PlantBlock {
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return Stream.of(
-                Block.createCuboidShape(4.5, 7, 11.5, 11.5, 12, 16),
-                Block.createCuboidShape(4.5, 5.5, 7.5, 7.5, 6.5, 8.5),
-                Block.createCuboidShape(8.5, 5.5, 7.5, 11.5, 6.5, 8.5),
-                Block.createCuboidShape(7.5, 5.5, 8.5, 8.5, 6.5, 11.5),
-                Block.createCuboidShape(7.5, 5.5, 4.5, 8.5, 6.5, 7.5),
-                Block.createCuboidShape(0.25, 7.5, 7.5, 2.5, 8.5, 8.5),
-                Block.createCuboidShape(13.5, 7.5, 7.5, 15.75, 8.5, 8.5),
-                Block.createCuboidShape(7.5, 7.5, 13.5, 8.5, 8.5, 15.75),
-                Block.createCuboidShape(7.5, 7.5, 0.25, 8.5, 8.5, 2.5),
-                Block.createCuboidShape(7.5, 4, 7.5, 8.5, 14, 8.5),
-                Block.createCuboidShape(7, 0, 7, 9, 4, 9),
-                Block.createCuboidShape(2, 6.5, 7.5, 5, 7.5, 8.5),
-                Block.createCuboidShape(11, 6.5, 7.5, 14, 7.5, 8.5),
-                Block.createCuboidShape(7.5, 6.5, 11, 8.5, 7.5, 14),
-                Block.createCuboidShape(7.5, 6.5, 2, 8.5, 7.5, 5),
-                Block.createCuboidShape(5, 3, 5, 11, 7, 11),
-                Block.createCuboidShape(4.5, 7, 4.5, 11.5, 14.5, 11.5),
-                Block.createCuboidShape(6, 14.5, 6, 10, 16, 10),
-                Block.createCuboidShape(11.5, 7, 4.5, 16, 12, 11.5),
-                Block.createCuboidShape(0, 7, 4.5, 4.5, 12, 11.5),
-                Block.createCuboidShape(4.5, 7, 0, 11.5, 12, 4.5)
+                Block.createCuboidShape(4.0, 3.0, 4.0, 12.0, 16.0, 12.0),
+                Block.createCuboidShape(0.0, 7.0, 4.0, 16.0, 12.0, 12.0),
+                Block.createCuboidShape(4.0, 7.0, 0.0, 12.0, 12.0, 16.0),
+                Block.createCuboidShape(7.0, 0.0, 7.0, 9.0, 3.0, 9.0)
         ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
     }
 

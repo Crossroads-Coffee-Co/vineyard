@@ -70,31 +70,10 @@ public class VineHeadBlock extends CropBlock {
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return Stream.of(
-                Block.createCuboidShape(4.5, 4.5, 7.5, 7.5, 5.5, 8.5),
-                Block.createCuboidShape(8.5, 4.5, 7.5, 11.5, 5.5, 8.5),
-                Block.createCuboidShape(7.5, 4.5, 8.5, 8.5, 5.5, 11.5),
-                Block.createCuboidShape(7.5, 4.5, 4.5, 8.5, 5.5, 7.5),
-                Block.createCuboidShape(0.25, 6.5, 7.5, 2.5, 7.5, 8.5),
-                Block.createCuboidShape(13.5, 6.5, 7.5, 15.75, 7.5, 8.5),
-                Block.createCuboidShape(7.5, 6.5, 13.5, 8.5, 7.5, 15.75),
-                Block.createCuboidShape(7.5, 6.5, 0.25, 8.5, 7.5, 2.5),
-                Block.createCuboidShape(7.5, 4, 7.5, 8.5, 13.75, 8.5),
-                Block.createCuboidShape(7, 0, 7, 9, 4, 9),
-                Block.createCuboidShape(2, 5.5, 7.5, 5, 6.5, 8.5),
-                Block.createCuboidShape(11, 5.5, 7.5, 14, 6.5, 8.5),
-                Block.createCuboidShape(7.5, 5.5, 11, 8.5, 6.5, 14),
-                Block.createCuboidShape(7.5, 5.5, 2, 8.5, 6.5, 5),
-                Block.createCuboidShape(6.5, 4, 6.5, 9.5, 7, 9.5),
-                Block.createCuboidShape(6.5, 8, 6.5, 9.5, 11.5, 9.5),
-                Block.createCuboidShape(7, 11.5, 7, 9, 14, 9),
-                Block.createCuboidShape(9.5, 5, 6.5, 12.5, 8, 9.5),
-                Block.createCuboidShape(12.5, 6, 6.5, 16, 9, 9.5),
-                Block.createCuboidShape(3.5, 5, 6.5, 6.5, 8, 9.5),
-                Block.createCuboidShape(0, 6, 6.5, 3.5, 9, 9.5),
-                Block.createCuboidShape(6.5, 5, 9.5, 9.5, 8, 12.5),
-                Block.createCuboidShape(6.5, 5, 3.5, 9.5, 8, 6.5),
-                Block.createCuboidShape(6.5, 6, 0, 9.5, 9, 3.5),
-                Block.createCuboidShape(6.5, 6, 12.5, 9.5, 9, 16)
+                Block.createCuboidShape(6.0, 4.0, 6.0, 10.0, 14.0, 10.0),
+                Block.createCuboidShape(0.0, 4.0, 6.0, 16.0, 9.0, 10.0),
+                Block.createCuboidShape(6.0, 4.0, 0.0, 10.0, 9.0, 16.0),
+                Block.createCuboidShape(7.0, 0.0, 7.0, 9.0, 4.0, 9.0)
         ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
     }
 
