@@ -3,7 +3,7 @@
 	"texture_size": [64, 64],
 	"textures": {
 		"0": "vineyard:block/fruit_press",
-		"particle": "vineyard:block/fruit_press"
+		"particle": "minecraft:block/oak_log"
 	},
 	"elements": [
 		{

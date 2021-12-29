@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "vineyard:block/fermenter"
+    },
+    "facing=east": {
+      "model": "vineyard:block/fermenter",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "vineyard:block/fermenter",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "vineyard:block/fermenter",
+      "y": 270
+    }
+  }
+}
