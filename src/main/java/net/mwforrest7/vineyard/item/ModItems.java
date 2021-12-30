@@ -39,6 +39,14 @@ public class ModItems {
             new Item(new FabricItemSettings()
                     .group(ModItemGroups.VINEYARD)));
 
+    public static final Item YOUNG_RED_WINE = registerItem("young_red_wine",
+            new GrapeJuiceBottleItem((new FabricItemSettings())
+                    .food(new FoodComponent.Builder()
+                            .hunger(ModConfigs.RED_GRAPE_JUICE_BOTTLE_HUNGER)
+                            .saturationModifier(ModConfigs.RED_GRAPE_JUICE_BOTTLE_SATURATION)
+                            .build())
+                    .group(ModItemGroups.VINEYARD)));
+
     // Registers items
     private static Item registerItem(String name, Item item){
         System.out.println("Registering " + VineyardMod.MOD_ID + ":" + name);

@@ -17,19 +17,19 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.mwforrest7.vineyard.item.inventory.ImplementedInventory;
-import net.mwforrest7.vineyard.recipe.FruitPressRecipe;
-import net.mwforrest7.vineyard.screen.FruitPressScreenHandler;
+import net.mwforrest7.vineyard.recipe.FermenterRecipe;
+import net.mwforrest7.vineyard.screen.FermenterScreenHandler;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-import static net.mwforrest7.vineyard.block.entity.FruitPressProperties.*;
+import static net.mwforrest7.vineyard.block.entity.FermenterProperties.*;
 
 /**
  * This is like a controller in MVC. The brains of the operation.
  * It reads and writes data, handles game logic, and updates the view (ScreenHandler)
  */
-public class FruitPressEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory {
+public class FermenterEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(INVENTORY_SIZE, ItemStack.EMPTY);
 
     // PropertyDelegate facilitates data updates to the ScreenHandler
@@ -41,32 +41,23 @@ public class FruitPressEntity extends BlockEntity implements NamedScreenHandlerF
     // Required Crafting progress to complete craft
     private int maxProgress = MAX_CRAFTING_PROGRESS;
 
-    // Normally fuel time is based on the fuel used, in this case it is static
-    private int fuelTime = DEFAULT_FUEL_TIME;
-    private int maxFuelTime = MAX_FUEL_TIME;
-
-
-    public FruitPressEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.FRUIT_PRESS, pos, state);
+    public FermenterEntity(BlockPos pos, BlockState state) {
+        super(ModBlockEntities.FERMENTER, pos, state);
 
         // Initialize the PropertyDelegate
         this.propertyDelegate = new PropertyDelegate() {
             public int get(int index) {
                 return switch (index) {
-                    case 0 -> FruitPressEntity.this.progress;
-                    case 1 -> FruitPressEntity.this.maxProgress;
-                    case 2 -> FruitPressEntity.this.fuelTime;
-                    case 3 -> FruitPressEntity.this.maxFuelTime;
+                    case 0 -> FermenterEntity.this.progress;
+                    case 1 -> FermenterEntity.this.maxProgress;
                     default -> 0;
                 };
             }
 
             public void set(int index, int value) {
                 switch (index) {
-                    case 0 -> FruitPressEntity.this.progress = value;
-                    case 1 -> FruitPressEntity.this.maxProgress = value;
-                    case 2 -> FruitPressEntity.this.fuelTime = value;
-                    case 3 -> FruitPressEntity.this.maxFuelTime = value;
+                    case 0 -> FermenterEntity.this.progress = value;
+                    case 1 -> FermenterEntity.this.maxProgress = value;
                 }
             }
 
@@ -97,7 +88,7 @@ public class FruitPressEntity extends BlockEntity implements NamedScreenHandlerF
     @Nullable
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
-        return new FruitPressScreenHandler(syncId, inv, this, this.propertyDelegate);
+        return new FermenterScreenHandler(syncId, inv, this, this.propertyDelegate);
     }
 
     /**
@@ -119,26 +110,15 @@ public class FruitPressEntity extends BlockEntity implements NamedScreenHandlerF
      * @param state the block instance
      * @param entity the block entity instance
      */
-    public static void tick(World world, BlockPos pos, BlockState state, FruitPressEntity entity) {
-        // If there is fuel time, subtract from it
-        if(isConsumingFuel(entity)) {
-            entity.fuelTime--;
-        }
-
+    public static void tick(World world, BlockPos pos, BlockState state, FermenterEntity entity) {
         // If there is a recipe that matches the Block's inventory...
         if(hasRecipe(entity)) {
-            // If there is fuel available and the fuel time is 0 then consume fuel
-            if(hasFuelInFuelSlot(entity) && !isConsumingFuel(entity)) {
-                entity.consumeFuel();
-            }
-            // If there is fuel time, increase crafting progress
-            if(isConsumingFuel(entity)) {
-                entity.progress++;
+            // Increase crafting progress
+            entity.progress++;
 
-                // If crafting progress reaches max, then complete the craft
-                if(entity.progress > entity.maxProgress) {
-                    craftItem(entity);
-                }
+            // If crafting progress reaches max, then complete the craft
+            if(entity.progress > entity.maxProgress) {
+                craftItem(entity);
             }
         } else {
             // If there is no match, reset the crafting progress
@@ -154,32 +134,13 @@ public class FruitPressEntity extends BlockEntity implements NamedScreenHandlerF
     }
 
     /**
-     * If there is fuel in the fuel slot, this will set fuel time properties
-     * based on the type of fuel consumed and also consume 1 fuel.
-     */
-    private void consumeFuel() {
-        if(!getStack(InventorySlots.FUEL_SLOT.toInt()).isEmpty()) {
-            this.removeStack(InventorySlots.FUEL_SLOT.toInt(), 1);
-            this.fuelTime = MAX_FUEL_TIME;
-        }
-    }
-
-    private static boolean hasFuelInFuelSlot(FruitPressEntity entity) {
-        return !entity.getStack(InventorySlots.FUEL_SLOT.toInt()).isEmpty();
-    }
-
-    private static boolean isConsumingFuel(FruitPressEntity entity) {
-        return entity.fuelTime > 0;
-    }
-
-    /**
      * Matches the Block's inventory to a recipe. If there is a match,
      * subtracts ingredients from the Block's inventory and produces
      * the resulting craft.
      *
      * @param entity the block entity instance
      */
-    private static void craftItem(FruitPressEntity entity) {
+    private static void craftItem(FermenterEntity entity) {
         World world = entity.world;
 
         // Copies the Block's inventory into a temp inventory var
@@ -189,13 +150,13 @@ public class FruitPressEntity extends BlockEntity implements NamedScreenHandlerF
         }
 
         // Attempts to match the inventory items to a recipe
-        Optional<FruitPressRecipe> match = world.getRecipeManager().getFirstMatch(FruitPressRecipe.Type.INSTANCE, inventory, world);
+        Optional<FermenterRecipe> match = world.getRecipeManager().getFirstMatch(FermenterRecipe.Type.INSTANCE, inventory, world);
 
         // If there is a match, updates the inventory as appropriate
         if(match.isPresent()) {
             // Removes 1 from each ingredient slot
-            entity.removeStack(InventorySlots.FRUIT_INGREDIENT_SLOT.toInt(),1);
-            entity.removeStack(InventorySlots.GLASS_BOTTLE_INGREDIENT_SLOT.toInt(),1);
+            entity.removeStack(InventorySlots.INGREDIENT_SLOT_1.toInt(),1);
+            entity.removeStack(InventorySlots.INGREDIENT_SLOT_2.toInt(),1);
 
             // Adds or increments the output item
             entity.setStack(InventorySlots.OUTPUT_SLOT.toInt(), new ItemStack(match.get().getOutput().getItem(),
@@ -213,7 +174,7 @@ public class FruitPressEntity extends BlockEntity implements NamedScreenHandlerF
      * @param entity the block entity instance
      * @return true or false
      */
-    private static boolean hasRecipe(FruitPressEntity entity) {
+    private static boolean hasRecipe(FermenterEntity entity) {
         World world = entity.world;
 
         // Copies the Block's inventory into a temp inventory var
@@ -223,7 +184,7 @@ public class FruitPressEntity extends BlockEntity implements NamedScreenHandlerF
         }
 
         // Attempts to match the inventory items to a recipe
-        Optional<FruitPressRecipe> match = world.getRecipeManager().getFirstMatch(FruitPressRecipe.Type.INSTANCE, inventory, world);
+        Optional<FermenterRecipe> match = world.getRecipeManager().getFirstMatch(FermenterRecipe.Type.INSTANCE, inventory, world);
 
         // Returns true if there is a match,
         // and if the output slot is empty or matches the recipe's output item,
@@ -242,8 +203,6 @@ public class FruitPressEntity extends BlockEntity implements NamedScreenHandlerF
         super.writeNbt(nbt);
         Inventories.writeNbt(nbt, inventory);
         nbt.putInt(NBT_KEY_PROGRESS, progress);
-        nbt.putInt(NBT_KEY_FUEL_TIME, fuelTime);
-        nbt.putInt(NBT_KEY_MAX_FUEL_TIME, maxFuelTime);
     }
 
     /**
@@ -256,8 +215,6 @@ public class FruitPressEntity extends BlockEntity implements NamedScreenHandlerF
         Inventories.readNbt(nbt, inventory);
         super.readNbt(nbt);
         progress = nbt.getInt(NBT_KEY_PROGRESS);
-        fuelTime = nbt.getInt(NBT_KEY_FUEL_TIME);
-        maxFuelTime = nbt.getInt(NBT_KEY_MAX_FUEL_TIME);
     }
 
     /**

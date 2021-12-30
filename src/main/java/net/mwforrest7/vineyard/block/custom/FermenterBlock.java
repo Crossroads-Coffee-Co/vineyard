@@ -14,7 +14,7 @@ import net.minecraft.util.*;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.mwforrest7.vineyard.block.entity.FruitPressEntity;
+import net.mwforrest7.vineyard.block.entity.FermenterEntity;
 import net.mwforrest7.vineyard.block.entity.ModBlockEntities;
 import org.jetbrains.annotations.Nullable;
 
@@ -77,13 +77,12 @@ public class FermenterBlock extends BlockWithEntity implements BlockEntityProvid
      * @param newState the new block instance which is replacing the previous block
      * @param moved true if moved, false if not
      */
-    // TODO: Update to use FermenterEntity
     @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof FruitPressEntity) {
-                ItemScatterer.spawn(world, pos, (FruitPressEntity)blockEntity);
+            if (blockEntity instanceof FermenterEntity) {
+                ItemScatterer.spawn(world, pos, (FermenterEntity)blockEntity);
                 world.updateComparators(pos,this);
             }
             super.onStateReplaced(state, world, pos, newState, moved);
@@ -118,17 +117,15 @@ public class FermenterBlock extends BlockWithEntity implements BlockEntityProvid
 
     @Nullable
     @Override
-    // TODO: Update to use FermenterEntity
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new FruitPressEntity(pos, state);
+        return new FermenterEntity(pos, state);
     }
 
     @Nullable
     @Override
-    // TODO: Update to use FermenterEntity
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        // Makes sure the given BlockEntityType matches the expected type (GrapePressEntity in this case)
+        // Makes sure the given BlockEntityType matches the expected type (FermenterEntity in this case)
         // then gets the corresponding ticker
-        return checkType(type, ModBlockEntities.FRUIT_PRESS, FruitPressEntity::tick);
+        return checkType(type, ModBlockEntities.FERMENTER, FermenterEntity::tick);
     }
 }
