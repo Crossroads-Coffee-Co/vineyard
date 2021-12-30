@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#I#",
+    "#B#",
+    "#C#"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_block"
+    },
+    "C": {
+      "item": "minecraft:copper_block"
+    },
+    "B": {
+      "item": "minecraft:bucket"
+    },
+    "#": {
+      "item": "minecraft:oak_log"
+    }
+  },
+  "result": {
+    "item": "vineyard:fermenter"
+  }
+}
