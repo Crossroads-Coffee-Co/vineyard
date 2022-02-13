@@ -30,7 +30,6 @@ public class VineyardMod implements ModInitializer {
 		ModBlockEntities.registerAllEntities();
 		ModRegistries.registerModFuels();
 		ModRecipes.register();
-		ModRenderHelper.setRenderLayers();
 		ModWorldGen.generateModWorldGen();
 
 		LOGGER.info("Hello from Vineyard mod!");
