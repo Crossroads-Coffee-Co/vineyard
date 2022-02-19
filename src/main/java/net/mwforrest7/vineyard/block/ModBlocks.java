@@ -11,6 +11,7 @@ import net.mwforrest7.vineyard.VineyardMod;
 import net.mwforrest7.vineyard.block.custom.FermenterBlock;
 import net.mwforrest7.vineyard.block.custom.FruitPressBlock;
 import net.mwforrest7.vineyard.block.custom.WildRedGrapevineBlock;
+import net.mwforrest7.vineyard.block.custom.WineCaskBlock;
 import net.mwforrest7.vineyard.block.vine.*;
 import net.mwforrest7.vineyard.enums.VineType;
 import net.mwforrest7.vineyard.item.ModItemGroups;
@@ -26,6 +27,7 @@ public class ModBlocks {
     public static final Block WILD_RED_GRAPEVINE = registerBlockWithoutBlockItem("wild_red_grapevine", new WildRedGrapevineBlock(FabricBlockSettings.of(Material.PLANT).ticksRandomly().sounds(BlockSoundGroup.SWEET_BERRY_BUSH).strength(1.0f).nonOpaque()));
     public static final Block FRUIT_PRESS = registerBlock("fruit_press", new FruitPressBlock(FabricBlockSettings.of(Material.METAL).nonOpaque().strength(2.0f)));
     public static final Block FERMENTER = registerBlock("fermenter", new FermenterBlock(FabricBlockSettings.of(Material.METAL).nonOpaque().strength(2.0f)));
+    public static final Block WINE_CASK = registerBlock("wine_cask", new WineCaskBlock(FabricBlockSettings.of(Material.WOOD).nonOpaque().strength(2.0f)));
 
     // Registers a block but not an item (useful for blocks that shouldn't be craftable but may spawn in the world)
     private static Block registerBlockWithoutBlockItem(String name, Block block){
