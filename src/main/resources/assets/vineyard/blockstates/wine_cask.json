@@ -1,0 +1,26 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "vineyard:block/wine_cask"
+    },
+    "facing=east": {
+      "model": "vineyard:block/wine_cask",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "vineyard:block/wine_cask",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "vineyard:block/wine_cask",
+      "y": 270
+    },
+    "facing=up": {
+      "model": "vineyard:block/wine_cask"
+    },
+    "facing=down": {
+      "model": "vineyard:block/wine_cask",
+      "x": 180
+    }
+  }
+}
