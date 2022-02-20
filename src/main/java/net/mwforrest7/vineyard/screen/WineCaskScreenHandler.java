@@ -33,6 +33,8 @@ public class WineCaskScreenHandler extends ScreenHandler {
     // Not being used, but have it just in-case
     private final World world;
 
+    private final PlayerInventory playerInventory;
+
     // Data from WineCaskEntity so that we can update the screen appropriately
     private final PropertyDelegate propertyDelegate;
 
@@ -44,6 +46,7 @@ public class WineCaskScreenHandler extends ScreenHandler {
         super(ModScreenHandlers.WINE_CASK_SCREEN_HANDLER, syncId);
         checkSize(inventory, WineCaskProperties.INVENTORY_SIZE);
         this.inventory = inventory;
+        this.playerInventory = playerInventory;
         this.world = playerInventory.player.world;
         inventory.onOpen(playerInventory.player);
         propertyDelegate = delegate;
