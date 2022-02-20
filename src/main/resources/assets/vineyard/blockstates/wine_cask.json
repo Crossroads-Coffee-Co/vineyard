@@ -1,26 +1,56 @@
 {
   "variants": {
-    "facing=north": {
+    "facing=down,open=false": {
+      "x": 180,
       "model": "vineyard:block/wine_cask"
     },
-    "facing=east": {
-      "model": "vineyard:block/wine_cask",
-      "y": 90
+    "facing=down,open=true": {
+      "x": 180,
+      "model": "vineyard:block/wine_cask_open"
     },
-    "facing=south": {
-      "model": "vineyard:block/wine_cask",
-      "y": 180
-    },
-    "facing=west": {
-      "model": "vineyard:block/wine_cask",
-      "y": 270
-    },
-    "facing=up": {
+    "facing=east,open=false": {
+      "x": 90,
+      "y": 90,
       "model": "vineyard:block/wine_cask"
     },
-    "facing=down": {
-      "model": "vineyard:block/wine_cask",
-      "x": 180
+    "facing=east,open=true": {
+      "x": 90,
+      "y": 90,
+      "model": "vineyard:block/wine_cask_open"
+    },
+    "facing=north,open=false": {
+      "x": 90,
+      "model": "vineyard:block/wine_cask"
+    },
+    "facing=north,open=true": {
+      "x": 90,
+      "model": "vineyard:block/wine_cask_open"
+    },
+    "facing=south,open=false": {
+      "x": 90,
+      "y": 180,
+      "model": "vineyard:block/wine_cask"
+    },
+    "facing=south,open=true": {
+      "x": 90,
+      "y": 180,
+      "model": "vineyard:block/wine_cask_open"
+    },
+    "facing=up,open=false": {
+      "model": "vineyard:block/wine_cask"
+    },
+    "facing=up,open=true": {
+      "model": "vineyard:block/wine_cask_open"
+    },
+    "facing=west,open=false": {
+      "x": 90,
+      "y": 270,
+      "model": "vineyard:block/wine_cask"
+    },
+    "facing=west,open=true": {
+      "x": 90,
+      "y": 270,
+      "model": "vineyard:block/wine_cask_open"
     }
   }
 }

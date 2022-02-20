@@ -1,7 +1,7 @@
 {
 	"parent": "minecraft:block/cube_bottom_top",
 	"textures": {
-		"top": "vineyard:block/wine_cask_top",
+		"top": "vineyard:block/wine_cask_top_open",
 		"bottom": "vineyard:block/wine_cask_bottom",
 		"side": "vineyard:block/wine_cask_side"
 	}
