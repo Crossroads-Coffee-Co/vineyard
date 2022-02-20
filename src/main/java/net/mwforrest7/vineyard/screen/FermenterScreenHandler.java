@@ -10,12 +10,8 @@ import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.world.World;
-import net.mwforrest7.vineyard.block.entity.FermenterEntity;
-import net.mwforrest7.vineyard.block.entity.FermenterProperties;
-import net.mwforrest7.vineyard.block.entity.FermenterProperties;
-import net.mwforrest7.vineyard.screen.slot.BottleSlot;
+import net.mwforrest7.vineyard.block.entity.properties.FermenterProperties;
 import net.mwforrest7.vineyard.screen.slot.ModResultSlot;
-import net.mwforrest7.vineyard.screen.slot.SpringFuelSlot;
 
 /**
  * This class facilitates screen interaction and updates

@@ -1,29 +1,25 @@
 package net.mwforrest7.vineyard.block.custom;
 
 import net.minecraft.block.*;
-import net.minecraft.block.entity.BarrelBlockEntity;
+
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.PiglinBrain;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
-import net.minecraft.stat.Stats;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.state.property.Property;
 import net.minecraft.util.*;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
-import net.mwforrest7.vineyard.block.entity.FermenterEntity;
+import net.mwforrest7.vineyard.block.entity.WineCaskEntity;
 import net.mwforrest7.vineyard.block.entity.ModBlockEntities;
 import org.jetbrains.annotations.Nullable;
 
@@ -92,8 +88,8 @@ public class WineCaskBlock extends BlockWithEntity implements BlockEntityProvide
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof FermenterEntity) {
-                ItemScatterer.spawn(world, pos, (FermenterEntity)blockEntity);
+            if (blockEntity instanceof WineCaskEntity) {
+                ItemScatterer.spawn(world, pos, (WineCaskEntity)blockEntity);
                 world.updateComparators(pos,this);
             }
             super.onStateReplaced(state, world, pos, newState, moved);
@@ -115,7 +111,7 @@ public class WineCaskBlock extends BlockWithEntity implements BlockEntityProvide
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         /*
         if (!world.isClient) {
-            // This is just the FermenterEntity (BlockEntity) which implements NamedScreenHandlerFactory.
+            // This is just the WineCaskEntity (BlockEntity) which implements NamedScreenHandlerFactory.
             // This entity is also where the relationship to the corresponding ScreenHandler is established.
             NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
 
@@ -125,18 +121,37 @@ public class WineCaskBlock extends BlockWithEntity implements BlockEntityProvide
         }
          */
 
+        System.out.println("In onUse of WineCaskBlock");
+
+        if (world.isClient) {
+            return ActionResult.SUCCESS;
+        } else {
+            NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
+            if (screenHandlerFactory != null) {
+                player.openHandledScreen(screenHandlerFactory);
+                PiglinBrain.onGuardedBlockInteracted(player, true);
+            }
+            System.out.println("Leaving onUse of WineCaskBlock");
+            return ActionResult.CONSUME;
+        }
+
+
+
+        /*
         if (world.isClient) {
             return ActionResult.SUCCESS;
         } else {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof FermenterEntity) {
-                player.openHandledScreen((FermenterEntity)blockEntity);
+            if (blockEntity instanceof WineCaskEntity) {
+                player.openHandledScreen((WineCaskEntity)blockEntity);
                 //player.incrementStat(Stats.OPEN_BARREL);
                 PiglinBrain.onGuardedBlockInteracted(player, true);
             }
 
             return ActionResult.CONSUME;
         }
+
+         */
     }
 
     public boolean hasComparatorOutput(BlockState state) {
@@ -150,14 +165,15 @@ public class WineCaskBlock extends BlockWithEntity implements BlockEntityProvide
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new FermenterEntity(pos, state);
+        System.out.println("Creating WineCaskEntity");
+        return new WineCaskEntity(pos, state);
     }
 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        // Makes sure the given BlockEntityType matches the expected type (FermenterEntity in this case)
+        // Makes sure the given BlockEntityType matches the expected type (WineCaskEntity in this case)
         // then gets the corresponding ticker
-        return checkType(type, ModBlockEntities.FERMENTER, FermenterEntity::tick);
+        return checkType(type, ModBlockEntities.WINE_CASK, WineCaskEntity::tick);
     }
 }

@@ -1,4 +1,4 @@
-package net.mwforrest7.vineyard.block.entity;
+package net.mwforrest7.vineyard.block.entity.properties;
 
 public final class FruitPressProperties {
     public static final String DISPLAY_NAME = "Fruit Press";

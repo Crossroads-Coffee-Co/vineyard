@@ -14,4 +14,7 @@ public class ModScreenHandlers {
 
     public static ScreenHandlerType<FermenterScreenHandler> FERMENTER_SCREEN_HANDLER =
             ScreenHandlerRegistry.registerSimple(new Identifier(VineyardMod.MOD_ID, "fermenter"), FermenterScreenHandler::new);
+
+    public static ScreenHandlerType<WineCaskScreenHandler> WINE_CASK_SCREEN_HANDLER =
+            ScreenHandlerRegistry.registerSimple(new Identifier(VineyardMod.MOD_ID, "wine_cask"), WineCaskScreenHandler::new);
 }

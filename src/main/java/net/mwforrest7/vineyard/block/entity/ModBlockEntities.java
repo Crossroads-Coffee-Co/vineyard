@@ -13,9 +13,11 @@ import net.mwforrest7.vineyard.block.ModBlocks;
 public class ModBlockEntities {
     public static BlockEntityType<FruitPressEntity> FRUIT_PRESS;
     public static BlockEntityType<FermenterEntity> FERMENTER;
+    public static BlockEntityType<WineCaskEntity> WINE_CASK;
 
     public static void registerAllEntities() {
         FRUIT_PRESS = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(VineyardMod.MOD_ID, "fruit_press"), FabricBlockEntityTypeBuilder.create(FruitPressEntity::new, ModBlocks.FRUIT_PRESS).build(null));
         FERMENTER = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(VineyardMod.MOD_ID, "fermenter"), FabricBlockEntityTypeBuilder.create(FermenterEntity::new, ModBlocks.FERMENTER).build(null));
+        WINE_CASK = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(VineyardMod.MOD_ID, "wine_cask"), FabricBlockEntityTypeBuilder.create(WineCaskEntity::new, ModBlocks.WINE_CASK).build(null));
     }
 }

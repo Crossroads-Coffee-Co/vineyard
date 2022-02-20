@@ -10,7 +10,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
-import net.mwforrest7.vineyard.block.entity.FermenterProperties;
+import net.mwforrest7.vineyard.block.entity.properties.FermenterProperties;
 
 public class FermenterRecipe implements Recipe<SimpleInventory> {
     private final Identifier id;

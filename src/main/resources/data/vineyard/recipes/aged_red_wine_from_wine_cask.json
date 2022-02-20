@@ -1,0 +1,11 @@
+{
+  "type": "vineyard:wine_cask",
+  "ingredients": [
+    {
+      "item": "vineyard:young_red_wine"
+    }
+  ],
+  "output": {
+    "item": "vineyard:red_grape"
+  }
+}

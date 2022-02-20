@@ -23,7 +23,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-import static net.mwforrest7.vineyard.block.entity.FruitPressProperties.*;
+import static net.mwforrest7.vineyard.block.entity.properties.FruitPressProperties.*;
 
 /**
  * This is like a controller in MVC. The brains of the operation.

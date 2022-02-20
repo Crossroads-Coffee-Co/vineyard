@@ -1,6 +1,7 @@
 package net.mwforrest7.vineyard.block.entity;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -11,25 +12,26 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.state.property.Properties;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.mwforrest7.vineyard.item.inventory.ImplementedInventory;
-import net.mwforrest7.vineyard.recipe.FermenterRecipe;
-import net.mwforrest7.vineyard.screen.FermenterScreenHandler;
+import net.mwforrest7.vineyard.recipe.WineCaskRecipe;
+import net.mwforrest7.vineyard.screen.WineCaskScreenHandler;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-import static net.mwforrest7.vineyard.block.entity.properties.FermenterProperties.*;
+import static net.mwforrest7.vineyard.block.entity.properties.WineCaskProperties.*;
 
 /**
  * This is like a controller in MVC. The brains of the operation.
  * It reads and writes data, handles game logic, and updates the view (ScreenHandler)
  */
-public class FermenterEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory {
+public class WineCaskEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(INVENTORY_SIZE, ItemStack.EMPTY);
 
     // PropertyDelegate facilitates data updates to the ScreenHandler
@@ -41,23 +43,25 @@ public class FermenterEntity extends BlockEntity implements NamedScreenHandlerFa
     // Required Crafting progress to complete craft
     private int maxProgress = MAX_CRAFTING_PROGRESS;
 
-    public FermenterEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.FERMENTER, pos, state);
+    public WineCaskEntity(BlockPos pos, BlockState state) {
+        super(ModBlockEntities.WINE_CASK, pos, state);
+
+        System.out.println("In WineCaskEntity constructor");
 
         // Initialize the PropertyDelegate
         this.propertyDelegate = new PropertyDelegate() {
             public int get(int index) {
                 return switch (index) {
-                    case 0 -> FermenterEntity.this.progress;
-                    case 1 -> FermenterEntity.this.maxProgress;
+                    case 0 -> WineCaskEntity.this.progress;
+                    case 1 -> WineCaskEntity.this.maxProgress;
                     default -> 0;
                 };
             }
 
             public void set(int index, int value) {
                 switch (index) {
-                    case 0 -> FermenterEntity.this.progress = value;
-                    case 1 -> FermenterEntity.this.maxProgress = value;
+                    case 0 -> WineCaskEntity.this.progress = value;
+                    case 1 -> WineCaskEntity.this.maxProgress = value;
                 }
             }
 
@@ -88,7 +92,7 @@ public class FermenterEntity extends BlockEntity implements NamedScreenHandlerFa
     @Nullable
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
-        return new FermenterScreenHandler(syncId, inv, this, this.propertyDelegate);
+        return new WineCaskScreenHandler(syncId, inv, this, this.propertyDelegate);
     }
 
     /**
@@ -110,7 +114,7 @@ public class FermenterEntity extends BlockEntity implements NamedScreenHandlerFa
      * @param state the block instance
      * @param entity the block entity instance
      */
-    public static void tick(World world, BlockPos pos, BlockState state, FermenterEntity entity) {
+    public static void tick(World world, BlockPos pos, BlockState state, WineCaskEntity entity) {
         // If there is a recipe that matches the Block's inventory...
         if(hasRecipe(entity)) {
             // Increase crafting progress
@@ -140,7 +144,7 @@ public class FermenterEntity extends BlockEntity implements NamedScreenHandlerFa
      *
      * @param entity the block entity instance
      */
-    private static void craftItem(FermenterEntity entity) {
+    private static void craftItem(WineCaskEntity entity) {
         World world = entity.world;
 
         // Copies the Block's inventory into a temp inventory var
@@ -150,20 +154,18 @@ public class FermenterEntity extends BlockEntity implements NamedScreenHandlerFa
         }
 
         // Attempts to match the inventory items to a recipe
-        Optional<FermenterRecipe> match = world.getRecipeManager().getFirstMatch(FermenterRecipe.Type.INSTANCE, inventory, world);
+        Optional<WineCaskRecipe> match = world.getRecipeManager().getFirstMatch(WineCaskRecipe.Type.INSTANCE, inventory, world);
 
         // If there is a match, updates the inventory as appropriate
         if(match.isPresent()) {
             // Removes 1 from each ingredient slot
             entity.removeStack(InventorySlots.INGREDIENT_SLOT_1.toInt(),1);
-            entity.removeStack(InventorySlots.INGREDIENT_SLOT_2.toInt(),1);
 
-            // Adds or increments the output item
-            entity.setStack(InventorySlots.OUTPUT_SLOT.toInt(), new ItemStack(match.get().getOutput().getItem(),
-                    entity.getStack(InventorySlots.OUTPUT_SLOT.toInt()).getCount() + 1));
-
-            // Reset crafting progress after completing the craft
-            entity.resetProgress();
+            // Replace block with aged cask
+            BlockPos pos = entity.getPos();
+            world.removeBlock(pos, false);
+            world.removeBlockEntity(pos);
+            world.setBlockState(pos, Blocks.BARREL.getDefaultState().with(Properties.FACING, entity.getCachedState().get(Properties.FACING)));
         }
     }
 
@@ -174,7 +176,7 @@ public class FermenterEntity extends BlockEntity implements NamedScreenHandlerFa
      * @param entity the block entity instance
      * @return true or false
      */
-    private static boolean hasRecipe(FermenterEntity entity) {
+    private static boolean hasRecipe(WineCaskEntity entity) {
         World world = entity.world;
 
         // Copies the Block's inventory into a temp inventory var
@@ -184,13 +186,10 @@ public class FermenterEntity extends BlockEntity implements NamedScreenHandlerFa
         }
 
         // Attempts to match the inventory items to a recipe
-        Optional<FermenterRecipe> match = world.getRecipeManager().getFirstMatch(FermenterRecipe.Type.INSTANCE, inventory, world);
+        Optional<WineCaskRecipe> match = world.getRecipeManager().getFirstMatch(WineCaskRecipe.Type.INSTANCE, inventory, world);
 
-        // Returns true if there is a match,
-        // and if the output slot is empty or matches the recipe's output item,
-        // and if there is enough space left in the output stack
-        return match.isPresent() && canInsertAmountIntoOutputSlot(inventory)
-                && canInsertItemIntoOutputSlot(inventory, match.get().getOutput());
+        // Returns true if there is a match
+        return match.isPresent();
     }
 
     /**
@@ -215,28 +214,5 @@ public class FermenterEntity extends BlockEntity implements NamedScreenHandlerFa
         Inventories.readNbt(nbt, inventory);
         super.readNbt(nbt);
         progress = nbt.getInt(NBT_KEY_PROGRESS);
-    }
-
-    /**
-     * Checks if the Block's output inventory slot is empty or contains an item that matches
-     * the recipe's output item.
-     *
-     * @param inventory the block's inventory
-     * @param output the item which the recipe will output
-     * @return true or false
-     */
-    private static boolean canInsertItemIntoOutputSlot(SimpleInventory inventory, ItemStack output) {
-        return inventory.getStack(InventorySlots.OUTPUT_SLOT.toInt()).getItem() == output.getItem() || inventory.getStack(InventorySlots.OUTPUT_SLOT.toInt()).isEmpty();
-    }
-
-    /**
-     * Checks if the Block's output inventory slot has enough space for another item to be added
-     * to the stack
-     *
-     * @param inventory the block's inventory
-     * @return true or false
-     */
-    private static boolean canInsertAmountIntoOutputSlot(SimpleInventory inventory) {
-        return inventory.getStack(InventorySlots.OUTPUT_SLOT.toInt()).getMaxCount() > inventory.getStack(InventorySlots.OUTPUT_SLOT.toInt()).getCount();
     }
 }
