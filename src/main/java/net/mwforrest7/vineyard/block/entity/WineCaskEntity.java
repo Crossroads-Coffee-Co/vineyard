@@ -3,21 +3,29 @@ package net.mwforrest7.vineyard.block.entity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.ViewerCountManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.screen.GenericContainerScreenHandler;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.property.Properties;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
+import net.mwforrest7.vineyard.block.custom.WineCaskBlock;
 import net.mwforrest7.vineyard.item.inventory.ImplementedInventory;
 import net.mwforrest7.vineyard.recipe.WineCaskRecipe;
 import net.mwforrest7.vineyard.screen.WineCaskScreenHandler;
@@ -33,6 +41,7 @@ import static net.mwforrest7.vineyard.block.entity.properties.WineCaskProperties
  */
 public class WineCaskEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(INVENTORY_SIZE, ItemStack.EMPTY);
+    private final ViewerCountManager stateManager;
 
     // PropertyDelegate facilitates data updates to the ScreenHandler
     protected final PropertyDelegate propertyDelegate;
@@ -46,7 +55,39 @@ public class WineCaskEntity extends BlockEntity implements NamedScreenHandlerFac
     public WineCaskEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.WINE_CASK, pos, state);
 
-        System.out.println("In WineCaskEntity constructor");
+        this.stateManager = new ViewerCountManager() {
+            // Below functions implement abstract functions in the ViewerCountManager abstract class
+
+            // Invoked by the openContainer() function in the ViewerCountManager abstract class
+            // Order of operations: ScreenHandler.open() --> BlockEntity.onOpen() --> ViewerCountManager.openContainer()
+            // --> ViewCountManager.onContainerOpen() --> BlockEntity.playSound & BlockEntity.setOpen()
+            protected void onContainerOpen(World world, BlockPos pos, BlockState state) {
+                // Plays sound and then updates the blockstate's OPEN value
+                WineCaskEntity.this.playSound(state, SoundEvents.BLOCK_BARREL_OPEN);
+                WineCaskEntity.this.setOpen(state, true);
+            }
+
+            // Invoked by the closeContainer() function in the ViewerCountManager abstract class
+            // Order of operations: ScreenHandler.close() --> BlockEntity.onClose() --> ViewerCountManager.closeContainer()
+            // --> ViewCountManager.onContainerClose() --> BlockEntity.playSound & BlockEntity.setClose()
+            protected void onContainerClose(World world, BlockPos pos, BlockState state) {
+                // Plays sound and then updates the blockstate's OPEN value
+                WineCaskEntity.this.playSound(state, SoundEvents.BLOCK_BARREL_CLOSE);
+                WineCaskEntity.this.setOpen(state, false);
+            }
+
+            protected void onViewerCountUpdate(World world, BlockPos pos, BlockState state, int oldViewerCount, int newViewerCount) {
+            }
+
+            protected boolean isPlayerViewing(PlayerEntity player) {
+                if (player.currentScreenHandler instanceof GenericContainerScreenHandler) {
+                    Inventory inventory = ((GenericContainerScreenHandler)player.currentScreenHandler).getInventory();
+                    return inventory == WineCaskEntity.this;
+                } else {
+                    return false;
+                }
+            }
+        };
 
         // Initialize the PropertyDelegate
         this.propertyDelegate = new PropertyDelegate() {
@@ -214,5 +255,52 @@ public class WineCaskEntity extends BlockEntity implements NamedScreenHandlerFac
         Inventories.readNbt(nbt, inventory);
         super.readNbt(nbt);
         progress = nbt.getInt(NBT_KEY_PROGRESS);
+    }
+
+    /**
+     * Overrides onOpen() in the Inventory interface
+     * Invoked via the WineCaskScreenHandler constructor
+     *
+     * @param player
+     */
+    public void onOpen(PlayerEntity player) {
+        if (!this.removed && !player.isSpectator()) {
+            // Invokes the openContainer function in the ViewerCountManager abstract class
+            this.stateManager.openContainer(player, this.getWorld(), this.getPos(), this.getCachedState());
+        }
+
+    }
+
+    /**
+     * Overrides onClose() in the Inventory interface
+     *
+     * Invoked via the WineCaskScreenHandler close() function
+     *
+     * @param player
+     */
+    public void onClose(PlayerEntity player) {
+        if (!this.removed && !player.isSpectator()) {
+            // Invokes the closeContainer function in the ViewerCountManager abstract class
+            this.stateManager.closeContainer(player, this.getWorld(), this.getPos(), this.getCachedState());
+        }
+
+    }
+
+    /**
+     * Updates the value of the block's OPEN state
+     *
+     * @param state
+     * @param open
+     */
+    void setOpen(BlockState state, boolean open) {
+        this.world.setBlockState(this.getPos(), state.with(WineCaskBlock.OPEN, open), 3);
+    }
+
+    void playSound(BlockState state, SoundEvent soundEvent) {
+        Vec3i vec3i = state.get(WineCaskBlock.FACING).getVector();
+        double d = (double)this.pos.getX() + 0.5D + (double)vec3i.getX() / 2.0D;
+        double e = (double)this.pos.getY() + 0.5D + (double)vec3i.getY() / 2.0D;
+        double f = (double)this.pos.getZ() + 0.5D + (double)vec3i.getZ() / 2.0D;
+        this.world.playSound(null, d, e, f, soundEvent, SoundCategory.BLOCKS, 0.5F, this.world.random.nextFloat() * 0.1F + 0.9F);
     }
 }

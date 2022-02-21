@@ -10,6 +10,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.stat.Stats;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
@@ -109,49 +110,17 @@ public class WineCaskBlock extends BlockWithEntity implements BlockEntityProvide
      */
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        /*
-        if (!world.isClient) {
-            // This is just the WineCaskEntity (BlockEntity) which implements NamedScreenHandlerFactory.
-            // This entity is also where the relationship to the corresponding ScreenHandler is established.
-            NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
-
-            if (screenHandlerFactory != null) {
-                player.openHandledScreen(screenHandlerFactory);
-            }
-        }
-         */
-
-        System.out.println("In onUse of WineCaskBlock");
-
         if (world.isClient) {
             return ActionResult.SUCCESS;
         } else {
             NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
             if (screenHandlerFactory != null) {
                 player.openHandledScreen(screenHandlerFactory);
-                PiglinBrain.onGuardedBlockInteracted(player, true);
-            }
-            System.out.println("Leaving onUse of WineCaskBlock");
-            return ActionResult.CONSUME;
-        }
-
-
-
-        /*
-        if (world.isClient) {
-            return ActionResult.SUCCESS;
-        } else {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof WineCaskEntity) {
-                player.openHandledScreen((WineCaskEntity)blockEntity);
                 //player.incrementStat(Stats.OPEN_BARREL);
                 PiglinBrain.onGuardedBlockInteracted(player, true);
             }
-
             return ActionResult.CONSUME;
         }
-
-         */
     }
 
     public boolean hasComparatorOutput(BlockState state) {
@@ -165,7 +134,6 @@ public class WineCaskBlock extends BlockWithEntity implements BlockEntityProvide
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        System.out.println("Creating WineCaskEntity");
         return new WineCaskEntity(pos, state);
     }
 

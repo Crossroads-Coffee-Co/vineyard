@@ -18,7 +18,6 @@ public class WineCaskRecipe implements Recipe<SimpleInventory> {
     private final DefaultedList<Ingredient> recipeItems;
 
     public WineCaskRecipe(Identifier id, ItemStack output, DefaultedList<Ingredient> recipeItems) {
-        System.out.println("In WineCaskRecipe constructor");
         this.id = id;
         this.output = output;
         this.recipeItems = recipeItems;

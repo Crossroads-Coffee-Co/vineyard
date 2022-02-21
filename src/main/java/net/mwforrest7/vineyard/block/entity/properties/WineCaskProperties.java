@@ -6,7 +6,7 @@ public final class WineCaskProperties {
     public static final int INVENTORY_SIZE = 1;
     public static final int DELEGATE_PROPERTY_SIZE = 2;
     public static final int NUM_OF_INGREDIENT_SLOTS = 1;
-    public static final int MAX_CRAFTING_PROGRESS = 600;
+    public static final int MAX_CRAFTING_PROGRESS = 200;
     public static final int DEFAULT_CRAFTING_PROGRESS = 0;
 
     public enum InventorySlots {

@@ -1,5 +1,7 @@
 package net.mwforrest7.vineyard.screen;
 
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -10,6 +12,7 @@ import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.world.World;
+import net.minecraft.world.event.GameEvent;
 import net.mwforrest7.vineyard.block.entity.properties.WineCaskProperties;
 import net.mwforrest7.vineyard.screen.slot.ModResultSlot;
 
@@ -30,11 +33,6 @@ public class WineCaskScreenHandler extends ScreenHandler {
     // Player inventory
     private final Inventory inventory;
 
-    // Not being used, but have it just in-case
-    private final World world;
-
-    private final PlayerInventory playerInventory;
-
     // Data from WineCaskEntity so that we can update the screen appropriately
     private final PropertyDelegate propertyDelegate;
 
@@ -46,9 +44,10 @@ public class WineCaskScreenHandler extends ScreenHandler {
         super(ModScreenHandlers.WINE_CASK_SCREEN_HANDLER, syncId);
         checkSize(inventory, WineCaskProperties.INVENTORY_SIZE);
         this.inventory = inventory;
-        this.playerInventory = playerInventory;
-        this.world = playerInventory.player.world;
+
+        // Calls the onOpen function in the WineCaskEntity class
         inventory.onOpen(playerInventory.player);
+
         propertyDelegate = delegate;
 
         // Add the Block's inventory slots, (x, y) is where on the screen the slot should be added
@@ -65,7 +64,15 @@ public class WineCaskScreenHandler extends ScreenHandler {
      * @return true or false
      */
     public boolean isCrafting() {
-        return propertyDelegate.get(WineCaskProperties.DelegateProperties.PROGRESS.toInt()) > 0;
+        int progress = propertyDelegate.get(WineCaskProperties.DelegateProperties.PROGRESS.toInt());
+        int maxProgress = propertyDelegate.get(WineCaskProperties.DelegateProperties.MAX_PROGRESS.toInt());
+
+        // Close the GUI when crafting completes
+        if(progress >= maxProgress){
+            MinecraftClient.getInstance().player.closeScreen();
+        }
+
+        return progress > 0;
     }
 
     /**
@@ -76,7 +83,7 @@ public class WineCaskScreenHandler extends ScreenHandler {
     public int getScaledProgress() {
         int progress = this.propertyDelegate.get(WineCaskProperties.DelegateProperties.PROGRESS.toInt());
         int maxProgress = this.propertyDelegate.get(WineCaskProperties.DelegateProperties.MAX_PROGRESS.toInt());
-        int progressArrowSize = 65; // This is the width in pixels of the arrow
+        int progressArrowSize = 49; // This is the height in pixels of the cask animation
 
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }
@@ -116,6 +123,14 @@ public class WineCaskScreenHandler extends ScreenHandler {
         }
 
         return newStack;
+    }
+
+    // Called when the screen is closed - overrides close() in ScreenHandler class
+    public void close(PlayerEntity player) {
+        super.close(player);
+
+        // Calls the onClose() function in the WineCaskEntity class
+        this.inventory.onClose(player);
     }
 
     /**
