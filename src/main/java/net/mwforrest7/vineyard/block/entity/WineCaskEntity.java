@@ -21,10 +21,12 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.property.Properties;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
+import net.mwforrest7.vineyard.block.ModBlocks;
 import net.mwforrest7.vineyard.block.custom.WineCaskBlock;
 import net.mwforrest7.vineyard.item.inventory.ImplementedInventory;
 import net.mwforrest7.vineyard.recipe.WineCaskRecipe;
@@ -202,11 +204,15 @@ public class WineCaskEntity extends BlockEntity implements NamedScreenHandlerFac
             // Removes 1 from each ingredient slot
             entity.removeStack(InventorySlots.INGREDIENT_SLOT_1.toInt(),1);
 
-            // Replace block with aged cask
+            // Replace block with aged wine
             BlockPos pos = entity.getPos();
             world.removeBlock(pos, false);
             world.removeBlockEntity(pos);
-            world.setBlockState(pos, Blocks.BARREL.getDefaultState().with(Properties.FACING, entity.getCachedState().get(Properties.FACING)));
+
+            // TODO: refactor this to be more elegant
+            if(match.get().getOutput().getItem().getName().getString().equals("Aged Red Wine Cask")){
+                world.setBlockState(pos, ModBlocks.AGED_RED_WINE_CASK.getDefaultState().with(Properties.FACING, entity.getCachedState().get(Properties.FACING)));
+            }
         }
     }
 

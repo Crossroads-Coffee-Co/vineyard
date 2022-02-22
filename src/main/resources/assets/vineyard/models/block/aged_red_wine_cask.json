@@ -1,0 +1,8 @@
+{
+	"parent": "minecraft:block/cube_bottom_top",
+	"textures": {
+		"top": "vineyard:block/wine_cask_aged_top",
+		"bottom": "vineyard:block/wine_cask_aged_bottom",
+		"side": "vineyard:block/wine_cask_aged_side"
+	}
+}
