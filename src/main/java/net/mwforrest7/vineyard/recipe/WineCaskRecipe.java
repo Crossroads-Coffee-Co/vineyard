@@ -10,14 +10,14 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
-import net.mwforrest7.vineyard.block.entity.properties.FruitPressProperties;
+import net.mwforrest7.vineyard.block.entity.properties.WineCaskProperties;
 
-public class FruitPressRecipe implements Recipe<SimpleInventory> {
+public class WineCaskRecipe implements Recipe<SimpleInventory> {
     private final Identifier id;
     private final ItemStack output;
     private final DefaultedList<Ingredient> recipeItems;
 
-    public FruitPressRecipe(Identifier id, ItemStack output, DefaultedList<Ingredient> recipeItems) {
+    public WineCaskRecipe(Identifier id, ItemStack output, DefaultedList<Ingredient> recipeItems) {
         this.id = id;
         this.output = output;
         this.recipeItems = recipeItems;
@@ -33,10 +33,9 @@ public class FruitPressRecipe implements Recipe<SimpleInventory> {
      */
     @Override
     public boolean matches(SimpleInventory inventory, World world) {
-        if(recipeItems.get(0).test(inventory.getStack(FruitPressProperties.InventorySlots.GLASS_BOTTLE_INGREDIENT_SLOT.toInt()))) {
-            return recipeItems.get(1).test(inventory.getStack(FruitPressProperties.InventorySlots.FRUIT_INGREDIENT_SLOT.toInt()));
-        }
-        return false;
+        // TLDR: If recipe ingredient 1 matches slot 1 and recipe ingredient 2 matches slot 2
+        // or vice-versa, then we have a match.
+        return recipeItems.get(0).test(inventory.getStack(WineCaskProperties.InventorySlots.INGREDIENT_SLOT_1.toInt()));
     }
 
     @Override
@@ -69,28 +68,28 @@ public class FruitPressRecipe implements Recipe<SimpleInventory> {
         return Type.INSTANCE;
     }
 
-    public static class Type implements RecipeType<FruitPressRecipe> {
+    public static class Type implements RecipeType<WineCaskRecipe> {
         private Type() { }
         public static final Type INSTANCE = new Type();
-        public static final String ID = "fruit_press";
+        public static final String ID = "wine_cask";
     }
 
     /**
      * Deserializes the JSON recipes
      */
-    public static class Serializer implements RecipeSerializer<FruitPressRecipe> {
+    public static class Serializer implements RecipeSerializer<WineCaskRecipe> {
         public static final Serializer INSTANCE = new Serializer();
-        public static final String ID = "fruit_press";
+        public static final String ID = "wine_cask";
 
         /**
-         * Reads the JSON and converts to a GrapePressRecipe
+         * Reads the JSON and converts to a WineCaskRecipe
          *
          * @param id id
          * @param json the recipe data from the recipe json file
-         * @return the FruitPressRecipe java object representation of the json
+         * @return the WineCaskRecipe java object representation of the json
          */
         @Override
-        public FruitPressRecipe read(Identifier id, JsonObject json) {
+        public WineCaskRecipe read(Identifier id, JsonObject json) {
             // Get the output item from the JSON recipe
             ItemStack output = ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "output"));
 
@@ -98,27 +97,27 @@ public class FruitPressRecipe implements Recipe<SimpleInventory> {
             JsonArray ingredients = JsonHelper.getArray(json, "ingredients");
 
             // Build a list of ingredients, populated from the JsonArray of ingredients
-            DefaultedList<Ingredient> inputs = DefaultedList.ofSize(FruitPressProperties.NUM_OF_INGREDIENT_SLOTS, Ingredient.EMPTY);
+            DefaultedList<Ingredient> inputs = DefaultedList.ofSize(WineCaskProperties.NUM_OF_INGREDIENT_SLOTS, Ingredient.EMPTY);
             for (int i = 0; i < inputs.size(); i++) {
                 inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
             }
 
             // Return the deserialized recipe
-            return new FruitPressRecipe(id, output, inputs);
+            return new WineCaskRecipe(id, output, inputs);
         }
 
         /**
          * Note: not sure when this gets used vs the above read method
          *
          * Reads recipe data off a PacketByteBuf (sounds networking related)
-         * and builds a GrapePressRecipe object from it
+         * and builds a WineCaskRecipe object from it
          *
          * @param id id
          * @param buf buffered byte recipe data
-         * @return the FruitPressRecipe representation of the recipe
+         * @return the WineCaskRecipe representation of the recipe
          */
         @Override
-        public FruitPressRecipe read(Identifier id, PacketByteBuf buf) {
+        public WineCaskRecipe read(Identifier id, PacketByteBuf buf) {
             // Get the ingredients/inputs for the recipe from the buffer
             DefaultedList<Ingredient> inputs = DefaultedList.ofSize(buf.readInt(), Ingredient.EMPTY);
             for (int i = 0; i < inputs.size(); i++) {
@@ -129,19 +128,19 @@ public class FruitPressRecipe implements Recipe<SimpleInventory> {
             ItemStack output = buf.readItemStack();
 
             // Return recipe
-            return new FruitPressRecipe(id, output, inputs);
+            return new WineCaskRecipe(id, output, inputs);
         }
 
         /**
          * Note: not sure when or where this is used
          *
-         * Serializes a GrapePressRecipe object into buffered packet data
+         * Serializes a WineCaskRecipe object into buffered packet data
          *
          * @param buf a data buffer
-         * @param recipe the FruitPressRecipe representation of the recipe
+         * @param recipe the WineCaskRecipe representation of the recipe
          */
         @Override
-        public void write(PacketByteBuf buf, FruitPressRecipe recipe) {
+        public void write(PacketByteBuf buf, WineCaskRecipe recipe) {
             // Sets the buffer size
             buf.writeInt(recipe.getIngredients().size());
 

@@ -1,6 +1,8 @@
 package net.mwforrest7.vineyard.item;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -39,11 +41,24 @@ public class ModItems {
             new Item(new FabricItemSettings()
                     .group(ModItemGroups.VINEYARD)));
 
+    public static final Item WINE_BOTTLE = registerItem("wine_bottle",
+            new Item(new FabricItemSettings()
+                    .group(ModItemGroups.VINEYARD)));
+
     public static final Item YOUNG_RED_WINE = registerItem("young_red_wine",
             new GrapeJuiceBottleItem((new FabricItemSettings())
                     .food(new FoodComponent.Builder()
                             .hunger(ModConfigs.RED_GRAPE_JUICE_BOTTLE_HUNGER)
                             .saturationModifier(ModConfigs.RED_GRAPE_JUICE_BOTTLE_SATURATION)
+                            .build())
+                    .group(ModItemGroups.VINEYARD)));
+
+    public static final Item RED_WINE = registerItem("red_wine",
+            new RedWineBottleItem((new FabricItemSettings())
+                    .food(new FoodComponent.Builder()
+                            .hunger(ModConfigs.RED_WINE_BOTTLE_HUNGER)
+                            .saturationModifier(ModConfigs.RED_WINE_BOTTLE_SATURATION)
+                            .statusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 100, 1, true, true, true), 1.0F)
                             .build())
                     .group(ModItemGroups.VINEYARD)));
 

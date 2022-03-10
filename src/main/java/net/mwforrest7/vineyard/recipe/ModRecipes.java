@@ -16,5 +16,9 @@ public class ModRecipes {
         // Fermenter
         Registry.register(Registry.RECIPE_SERIALIZER, new Identifier(VineyardMod.MOD_ID, FermenterRecipe.Serializer.ID), FermenterRecipe.Serializer.INSTANCE);
         Registry.register(Registry.RECIPE_TYPE, new Identifier(VineyardMod.MOD_ID, FermenterRecipe.Type.ID), FermenterRecipe.Type.INSTANCE);
+
+        // Wine cask
+        Registry.register(Registry.RECIPE_SERIALIZER, new Identifier(VineyardMod.MOD_ID, WineCaskRecipe.Serializer.ID), WineCaskRecipe.Serializer.INSTANCE);
+        Registry.register(Registry.RECIPE_TYPE, new Identifier(VineyardMod.MOD_ID, WineCaskRecipe.Type.ID), WineCaskRecipe.Type.INSTANCE);
     }
 }

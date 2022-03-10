@@ -19,6 +19,8 @@ public class ModConfigs {
     public static float RED_GRAPE_BUNCH_SATURATION;
     public static int RED_GRAPE_JUICE_BOTTLE_HUNGER;
     public static float RED_GRAPE_JUICE_BOTTLE_SATURATION;
+    public static int RED_WINE_BOTTLE_HUNGER;
+    public static float RED_WINE_BOTTLE_SATURATION;
 
     public static void registerConfigs() {
         configs = new ModConfigProvider();
@@ -42,6 +44,8 @@ public class ModConfigs {
         configs.addKeyValuePair(new Pair<>("red_grape_bunch.saturation", 0.2f), "float");
         configs.addKeyValuePair(new Pair<>("red_grape_juice_bottle.hunger", 3), "int");
         configs.addKeyValuePair(new Pair<>("red_grape_juice_bottle.saturation", 0.3f), "float");
+        configs.addKeyValuePair(new Pair<>("red_wine_bottle.hunger", 4), "int");
+        configs.addKeyValuePair(new Pair<>("red_wine_bottle.saturation", 0.5f), "float");
     }
 
     // Reads config file. Takes default value if missing value in the config.
@@ -57,6 +61,8 @@ public class ModConfigs {
         RED_GRAPE_BUNCH_SATURATION = (float) CONFIG.getOrDefault("red_grape_bunch.saturation", 0.2f);
         RED_GRAPE_JUICE_BOTTLE_HUNGER = CONFIG.getOrDefault("red_grape_juice_bottle.hunger", 3);
         RED_GRAPE_JUICE_BOTTLE_SATURATION = (float) CONFIG.getOrDefault("red_grape_juice_bottle.saturation", 0.3f);
+        RED_WINE_BOTTLE_HUNGER = CONFIG.getOrDefault("red_wine_bottle.hunger", 4);
+        RED_WINE_BOTTLE_SATURATION = (float) CONFIG.getOrDefault("red_wine_bottle.saturation", 0.5f);
 
         System.out.println("All " + configs.getConfigsList().size() + " have been set properly");
     }
