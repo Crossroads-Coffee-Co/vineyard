@@ -3,7 +3,8 @@ package net.mwforrest7.vineyard.item;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -11,12 +12,17 @@ import net.minecraft.stat.Stats;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 
-public class GrapeJuiceBottleItem extends Item {
-    // Time it takes to consume the juice
-    private static final int MAX_USE_TIME = 40;
+public class WineBottleItem extends Item {
+    // Time it takes to consume the wine
+    private static int MAX_USE_TIME = 40;
 
-    public GrapeJuiceBottleItem(Settings settings) {
+    public WineBottleItem(Settings settings) {
         super(settings);
+    }
+
+    public WineBottleItem(Settings settings, int maxUseTime) {
+        super(settings);
+        MAX_USE_TIME = maxUseTime;
     }
 
     /**
@@ -34,14 +40,14 @@ public class GrapeJuiceBottleItem extends Item {
             serverPlayerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
         }
 
-        // If the item stack in hand is empty, put an empty glass bottle there
+        // If the item stack in hand is empty, put an empty bottle there
         if (stack.isEmpty()) {
-            return new ItemStack(Items.GLASS_BOTTLE);
+            return new ItemStack(ModItems.WINE_BOTTLE);
         }
         // Else, if player is not in creative mode
         else {
             if (user instanceof PlayerEntity && !((PlayerEntity)user).getAbilities().creativeMode) {
-                ItemStack serverPlayerEntity = new ItemStack(Items.GLASS_BOTTLE);
+                ItemStack serverPlayerEntity = new ItemStack(ModItems.WINE_BOTTLE);
                 PlayerEntity playerEntity = (PlayerEntity)user;
 
                 // If there is no space to insert the bottles into player inventory, drop on ground

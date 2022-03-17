@@ -3,9 +3,7 @@ package net.mwforrest7.vineyard.item;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.item.*;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -13,11 +11,11 @@ import net.minecraft.stat.Stats;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 
-public class RedWineBottleItem extends Item {
+public class JuiceBottleItem extends Item {
     // Time it takes to consume the juice
     private static final int MAX_USE_TIME = 40;
 
-    public RedWineBottleItem(Settings settings) {
+    public JuiceBottleItem(Settings settings) {
         super(settings);
     }
 
@@ -36,14 +34,14 @@ public class RedWineBottleItem extends Item {
             serverPlayerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
         }
 
-        // If the item stack in hand is empty, put an empty bottle there
+        // If the item stack in hand is empty, put an empty glass bottle there
         if (stack.isEmpty()) {
-            return new ItemStack(ModItems.WINE_BOTTLE);
+            return new ItemStack(Items.GLASS_BOTTLE);
         }
         // Else, if player is not in creative mode
         else {
             if (user instanceof PlayerEntity && !((PlayerEntity)user).getAbilities().creativeMode) {
-                ItemStack serverPlayerEntity = new ItemStack(ModItems.WINE_BOTTLE);
+                ItemStack serverPlayerEntity = new ItemStack(Items.GLASS_BOTTLE);
                 PlayerEntity playerEntity = (PlayerEntity)user;
 
                 // If there is no space to insert the bottles into player inventory, drop on ground
