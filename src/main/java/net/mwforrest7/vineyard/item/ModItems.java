@@ -10,8 +10,6 @@ import net.mwforrest7.vineyard.VineyardMod;
 import net.mwforrest7.vineyard.block.ModBlocks;
 import net.mwforrest7.vineyard.config.ModConfigs;
 
-import static net.minecraft.item.Items.GLASS_BOTTLE;
-
 public class ModItems {
 
     // Initialization of items
@@ -23,14 +21,6 @@ public class ModItems {
     public static final Item RED_GRAPE_BUNCH = registerItem("red_grape_bunch",
             new Item(new FabricItemSettings()
                     .food(new FoodComponent.Builder().hunger(ModConfigs.RED_GRAPE_BUNCH_HUNGER).saturationModifier(ModConfigs.RED_GRAPE_BUNCH_SATURATION).build())
-                    .group(ModItemGroups.VINEYARD)));
-
-    public static final Item RED_GRAPE_JUICE_BOTTLE = registerItem("red_grape_juice_bottle",
-            new GrapeJuiceBottleItem((new FabricItemSettings())
-                    .food(new FoodComponent.Builder()
-                            .hunger(ModConfigs.RED_GRAPE_JUICE_BOTTLE_HUNGER)
-                            .saturationModifier(ModConfigs.RED_GRAPE_JUICE_BOTTLE_SATURATION)
-                            .build())
                     .group(ModItemGroups.VINEYARD)));
 
     public static final Item RED_GRAPE_SEEDS = registerItem("red_grape_seeds",
@@ -45,22 +35,30 @@ public class ModItems {
             new Item(new FabricItemSettings()
                     .group(ModItemGroups.VINEYARD)));
 
-    public static final Item YOUNG_RED_WINE = registerItem("young_red_wine",
-            new GrapeJuiceBottleItem((new FabricItemSettings())
+    public static final Item RED_GRAPE_JUICE = registerItem("red_grape_juice",
+            new JuiceBottleItem((new FabricItemSettings())
                     .food(new FoodComponent.Builder()
-                            .hunger(ModConfigs.RED_GRAPE_JUICE_BOTTLE_HUNGER)
-                            .saturationModifier(ModConfigs.RED_GRAPE_JUICE_BOTTLE_SATURATION)
+                            .hunger(ModConfigs.RED_GRAPE_JUICE_HUNGER)
+                            .saturationModifier(ModConfigs.RED_GRAPE_JUICE_SATURATION)
+                            .build())
+                    .group(ModItemGroups.VINEYARD)));
+
+    public static final Item FERMENTED_RED_GRAPE_JUICE = registerItem("fermented_red_grape_juice",
+            new JuiceBottleItem((new FabricItemSettings())
+                    .food(new FoodComponent.Builder()
+                            .hunger(ModConfigs.FERMENTED_RED_GRAPE_JUICE_HUNGER)
+                            .saturationModifier(ModConfigs.FERMENTED_RED_GRAPE_JUICE_SATURATION)
                             .build())
                     .group(ModItemGroups.VINEYARD)));
 
     public static final Item RED_WINE = registerItem("red_wine",
-            new RedWineBottleItem((new FabricItemSettings())
+            new WineBottleItem((new FabricItemSettings())
                     .food(new FoodComponent.Builder()
-                            .hunger(ModConfigs.RED_WINE_BOTTLE_HUNGER)
-                            .saturationModifier(ModConfigs.RED_WINE_BOTTLE_SATURATION)
+                            .hunger(ModConfigs.RED_WINE_HUNGER)
+                            .saturationModifier(ModConfigs.RED_WINE_SATURATION)
                             .statusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 100, 1, true, true, true), 1.0F)
                             .build())
-                    .group(ModItemGroups.VINEYARD)));
+                    .group(ModItemGroups.VINEYARD), 20));
 
     // Registers items
     private static Item registerItem(String name, Item item){
