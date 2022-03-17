@@ -2,7 +2,6 @@ package net.mwforrest7.vineyard.block.vine;
 
 import net.minecraft.block.*;
 import net.minecraft.tag.BlockTags;
-import net.minecraft.tag.TagGroup;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
