@@ -58,7 +58,7 @@ public class ModItems {
                             .saturationModifier(ModConfigs.RED_WINE_SATURATION)
                             .statusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 100, 1, true, true, true), 1.0F)
                             .build())
-                    .group(ModItemGroups.VINEYARD), 20));
+                    .group(ModItemGroups.VINEYARD)));
 
     // Registers items
     private static Item registerItem(String name, Item item){

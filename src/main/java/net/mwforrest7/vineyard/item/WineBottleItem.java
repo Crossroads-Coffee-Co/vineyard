@@ -14,15 +14,10 @@ import net.minecraft.world.World;
 
 public class WineBottleItem extends Item {
     // Time it takes to consume the wine
-    private static int MAX_USE_TIME = 40;
+    private static final int MAX_USE_TIME = 40;
 
     public WineBottleItem(Settings settings) {
         super(settings);
-    }
-
-    public WineBottleItem(Settings settings, int maxUseTime) {
-        super(settings);
-        MAX_USE_TIME = maxUseTime;
     }
 
     /**
