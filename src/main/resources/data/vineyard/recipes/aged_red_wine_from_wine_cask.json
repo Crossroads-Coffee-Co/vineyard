@@ -2,7 +2,7 @@
   "type": "vineyard:wine_cask",
   "ingredients": [
     {
-      "item": "vineyard:young_red_wine"
+      "item": "vineyard:fermented_red_grape_juice"
     }
   ],
   "output": {
