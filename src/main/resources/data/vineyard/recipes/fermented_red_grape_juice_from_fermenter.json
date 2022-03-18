@@ -1,0 +1,14 @@
+{
+  "type": "vineyard:fermenter",
+  "ingredients": [
+    {
+      "item": "vineyard:red_grape_juice"
+    },
+    {
+      "item": "vineyard:red_grape_juice"
+    }
+  ],
+  "output": {
+    "item": "vineyard:fermented_red_grape_juice"
+  }
+}

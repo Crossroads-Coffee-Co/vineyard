@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "minecraft:item/wine_bottle"
+    "layer0": "vineyard:item/wine_bottle"
   }
 }
