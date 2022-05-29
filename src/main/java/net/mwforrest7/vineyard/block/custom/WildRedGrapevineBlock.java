@@ -56,8 +56,9 @@ public class WildRedGrapevineBlock extends PlantBlock implements Fertilizable {
      * @param pos the block position
      * @param random random number generator
      */
+
     @Override
-    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, net.minecraft.util.math.random.Random random) {
         // If age is less than max, and other conditions are correct: age up
         int i = state.get(AGE);
         if (i < MAX_AGE && random.nextInt(5) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
@@ -112,13 +113,13 @@ public class WildRedGrapevineBlock extends PlantBlock implements Fertilizable {
     }
 
     @Override
-    public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
+    public boolean canGrow(World world, net.minecraft.util.math.random.Random random, BlockPos pos, BlockState state) {
         return true;
     }
 
     // This is an implementation of the Fertilizable interface - I believe this is called when applying bone meal
     @Override
-    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
+    public void grow(ServerWorld world, net.minecraft.util.math.random.Random random, BlockPos pos, BlockState state) {
         int i = Math.min(MAX_AGE, state.get(AGE) + 1);
         world.setBlockState(pos, state.with(AGE, i), Block.NOTIFY_LISTENERS);
     }

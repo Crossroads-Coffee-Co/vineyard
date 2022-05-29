@@ -11,7 +11,6 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
@@ -23,6 +22,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
+import static net.mwforrest7.vineyard.block.entity.properties.FermenterProperties.DISPLAY_NAME;
 import static net.mwforrest7.vineyard.block.entity.properties.FruitPressProperties.*;
 
 /**
@@ -82,9 +82,7 @@ public class FruitPressEntity extends BlockEntity implements NamedScreenHandlerF
      * @return the title as Text
      */
     @Override
-    public Text getDisplayName() {
-        return new LiteralText(DISPLAY_NAME);
-    }
+    public Text getDisplayName() {return Text.literal(DISPLAY_NAME);}
 
     /**
      * Creates the ScreenHandler

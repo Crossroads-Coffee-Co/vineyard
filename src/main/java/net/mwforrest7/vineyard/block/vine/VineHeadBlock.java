@@ -36,7 +36,7 @@ public class VineHeadBlock extends CropBlock {
     }
 
     @Override
-    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, net.minecraft.util.math.random.Random random) {
         // If light is insufficient, do nothing
         if (world.getBaseLightLevel(pos, 0) < 9) {
             return;
