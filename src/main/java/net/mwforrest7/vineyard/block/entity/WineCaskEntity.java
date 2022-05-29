@@ -1,7 +1,6 @@
 package net.mwforrest7.vineyard.block.entity;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.ViewerCountManager;
 import net.minecraft.entity.player.PlayerEntity;
@@ -19,9 +18,7 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.property.Properties;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
@@ -35,6 +32,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
+import static net.mwforrest7.vineyard.block.entity.properties.FermenterProperties.DISPLAY_NAME;
 import static net.mwforrest7.vineyard.block.entity.properties.WineCaskProperties.*;
 
 /**
@@ -121,7 +119,7 @@ public class WineCaskEntity extends BlockEntity implements NamedScreenHandlerFac
      */
     @Override
     public Text getDisplayName() {
-        return new LiteralText(DISPLAY_NAME);
+        return Text.literal(DISPLAY_NAME);
     }
 
     /**
