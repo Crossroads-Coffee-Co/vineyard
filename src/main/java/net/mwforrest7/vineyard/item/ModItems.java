@@ -15,12 +15,18 @@ public class ModItems {
     // Initialization of items
     public static final Item RED_GRAPE = registerItem("red_grape",
             new Item(new FabricItemSettings()
-                    .food(new FoodComponent.Builder().hunger(ModConfigs.RED_GRAPE_HUNGER).saturationModifier(ModConfigs.RED_GRAPE_SATURATION).build())
+                    .food(new FoodComponent.Builder()
+                            .hunger(ModConfigs.RED_GRAPE_HUNGER)
+                            .saturationModifier(ModConfigs.RED_GRAPE_SATURATION)
+                            .build())
                     .group(ModItemGroups.VINEYARD)));
 
     public static final Item RED_GRAPE_BUNCH = registerItem("red_grape_bunch",
             new Item(new FabricItemSettings()
-                    .food(new FoodComponent.Builder().hunger(ModConfigs.RED_GRAPE_BUNCH_HUNGER).saturationModifier(ModConfigs.RED_GRAPE_BUNCH_SATURATION).build())
+                    .food(new FoodComponent.Builder()
+                            .hunger(ModConfigs.RED_GRAPE_BUNCH_HUNGER)
+                            .saturationModifier(ModConfigs.RED_GRAPE_BUNCH_SATURATION)
+                            .build())
                     .group(ModItemGroups.VINEYARD)));
 
     public static final Item RED_GRAPE_SEEDS = registerItem("red_grape_seeds",
@@ -43,20 +49,22 @@ public class ModItems {
                             .build())
                     .group(ModItemGroups.VINEYARD)));
 
-    public static final Item FERMENTED_RED_GRAPE_JUICE = registerItem("fermented_red_grape_juice",
+    public static final Item FERMENTED_FRUITY_RED_GRAPE_JUICE = registerItem("fermented_fruity_red_grape_juice",
             new JuiceBottleItem((new FabricItemSettings())
                     .food(new FoodComponent.Builder()
-                            .hunger(ModConfigs.FERMENTED_RED_GRAPE_JUICE_HUNGER)
-                            .saturationModifier(ModConfigs.FERMENTED_RED_GRAPE_JUICE_SATURATION)
+                            .statusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 500, 1, true, true, true), 1.0F)
                             .build())
                     .group(ModItemGroups.VINEYARD)));
 
-    public static final Item RED_WINE = registerItem("red_wine",
+    // Red wine effects: Nausea, slowness, big health bonus
+    public static final Item FRUITY_RED_WINE = registerItem("fruity_red_wine",
             new WineBottleItem((new FabricItemSettings())
                     .food(new FoodComponent.Builder()
-                            .hunger(ModConfigs.RED_WINE_HUNGER)
-                            .saturationModifier(ModConfigs.RED_WINE_SATURATION)
-                            .statusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 100, 1, true, true, true), 1.0F)
+                            .alwaysEdible()
+                            .statusEffect(new StatusEffectInstance(StatusEffects.HEALTH_BOOST, 1000, 3, true, true, true), 1.0F)
+                            .statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 1000, 3, true, true, true), 1.0F)
+                            .statusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS,1000, 1, true, true, true), 1.0F)
+                            .statusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS,1000, 1, true, true, true), 1.0F)
                             .build())
                     .group(ModItemGroups.VINEYARD)));
 

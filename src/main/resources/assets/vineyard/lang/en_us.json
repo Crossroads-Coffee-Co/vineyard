@@ -4,9 +4,9 @@
   "item.vineyard.red_grape_bunch": "Red Grape Bunch",
   "item.vineyard.copper_spring": "Copper Spring",
   "item.vineyard.red_grape_juice": "Red Grape Juice",
-  "item.vineyard.fermented_red_grape_juice": "Fermented Red Grape Juice",
+  "item.vineyard.fermented_fruity_red_grape_juice": "Fermented Fruity Red Grape Juice",
   "item.vineyard.wine_bottle": "Wine Bottle",
-  "item.vineyard.red_wine": "Red Wine",
+  "item.vineyard.fruity_red_wine": "Fruity Red Wine",
 
   "block.vineyard.red_grapevine_trunk": "Red Grapevine Trunk",
   "block.vineyard.attached_red_grapevine_trunk": "Attached Red Grapevine Trunk",
@@ -17,7 +17,7 @@
   "block.vineyard.fruit_press": "Fruit Press",
   "block.vineyard.fermenter": "Fermenter",
   "block.vineyard.wine_cask": "Wine Cask",
-  "block.vineyard.aged_red_wine_cask": "Aged Red Wine Cask",
+  "block.vineyard.aged_fruity_red_wine_cask": "Aged Fruity Red Wine Cask",
 
   "itemGroup.vineyard.vineyard": "Vineyard Mod"
 }

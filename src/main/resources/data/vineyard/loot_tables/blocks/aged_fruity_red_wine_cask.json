@@ -10,7 +10,7 @@
           "children": [
             {
               "type": "minecraft:item",
-              "name": "vineyard:aged_red_wine_cask"
+              "name": "vineyard:aged_fruity_red_wine_cask"
             }
           ]
         }
