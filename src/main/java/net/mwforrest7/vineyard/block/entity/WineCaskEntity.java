@@ -32,7 +32,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-import static net.mwforrest7.vineyard.block.entity.properties.FermenterProperties.DISPLAY_NAME;
+import static net.mwforrest7.vineyard.block.entity.properties.WineCaskProperties.DISPLAY_NAME;
 import static net.mwforrest7.vineyard.block.entity.properties.WineCaskProperties.*;
 
 /**
@@ -208,8 +208,8 @@ public class WineCaskEntity extends BlockEntity implements NamedScreenHandlerFac
             world.removeBlockEntity(pos);
 
             // TODO: refactor this to be more elegant
-            if(match.get().getOutput().getItem().getName().getString().equals("Aged Red Wine Cask")){
-                world.setBlockState(pos, ModBlocks.AGED_RED_WINE_CASK.getDefaultState().with(Properties.FACING, entity.getCachedState().get(Properties.FACING)));
+            if(match.get().getOutput().getItem().getName().getString().equals("Aged Fruity Red Wine Cask")){
+                world.setBlockState(pos, ModBlocks.AGED_FRUITY_RED_WINE_CASK.getDefaultState().with(Properties.FACING, entity.getCachedState().get(Properties.FACING)));
             }
         }
     }

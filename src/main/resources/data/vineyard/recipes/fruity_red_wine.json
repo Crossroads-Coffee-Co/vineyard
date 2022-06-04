@@ -6,13 +6,13 @@
   ],
   "key": {
     "X": {
-      "item": "vineyard:aged_red_wine_cask"
+      "item": "vineyard:aged_fruity_red_wine_cask"
     },
     "#": {
       "item": "vineyard:wine_bottle"
     }
   },
   "result": {
-    "item": "vineyard:red_wine"
+    "item": "vineyard:fruity_red_wine"
   }
 }

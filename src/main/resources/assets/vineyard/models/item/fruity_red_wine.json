@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "vineyard:item/red_wine"
+    "layer0": "vineyard:item/fruity_red_wine"
   }
 }

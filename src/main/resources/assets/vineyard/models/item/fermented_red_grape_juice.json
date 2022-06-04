@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "vineyard:item/fermented_red_grape_juice"
-  }
-}

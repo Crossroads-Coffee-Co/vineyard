@@ -22,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-import static net.mwforrest7.vineyard.block.entity.properties.FermenterProperties.DISPLAY_NAME;
+import static net.mwforrest7.vineyard.block.entity.properties.FruitPressProperties.DISPLAY_NAME;
 import static net.mwforrest7.vineyard.block.entity.properties.FruitPressProperties.*;
 
 /**
