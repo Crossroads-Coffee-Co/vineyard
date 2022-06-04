@@ -61,10 +61,10 @@ public class ModItems {
             new WineBottleItem((new FabricItemSettings())
                     .food(new FoodComponent.Builder()
                             .alwaysEdible()
-                            .statusEffect(new StatusEffectInstance(StatusEffects.HEALTH_BOOST, 1000, 3, true, true, true), 1.0F)
-                            .statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 1000, 3, true, true, true), 1.0F)
-                            .statusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS,1000, 1, true, true, true), 1.0F)
-                            .statusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS,1000, 1, true, true, true), 1.0F)
+                            .statusEffect(new StatusEffectInstance(StatusEffects.HEALTH_BOOST, 6000, 3, true, true, true), 1.0F)
+                            .statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 6000, 3, true, true, true), 1.0F)
+                            .statusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS,6000, 1, true, true, true), 1.0F)
+                            .statusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS,6000, 1, true, true, true), 1.0F)
                             .build())
                     .group(ModItemGroups.VINEYARD)));
 
