@@ -23,6 +23,7 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
+import net.mwforrest7.vineyard.block.BlockNames;
 import net.mwforrest7.vineyard.block.ModBlocks;
 import net.mwforrest7.vineyard.block.custom.WineCaskBlock;
 import net.mwforrest7.vineyard.item.inventory.ImplementedInventory;
@@ -208,7 +209,7 @@ public class WineCaskEntity extends BlockEntity implements NamedScreenHandlerFac
             world.removeBlockEntity(pos);
 
             // TODO: refactor this to be more elegant
-            if(match.get().getOutput().getItem().getName().getString().equals("Aged Fruity Red Wine Cask")){
+            if(match.get().getOutput().getItem().getName().getString().equals(BlockNames.AGED_FRUITY_RED_WINE_CASK_NAME)){
                 world.setBlockState(pos, ModBlocks.AGED_FRUITY_RED_WINE_CASK.getDefaultState().with(Properties.FACING, entity.getCachedState().get(Properties.FACING)));
             }
         }
