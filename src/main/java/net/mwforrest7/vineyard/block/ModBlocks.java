@@ -16,16 +16,16 @@ import net.mwforrest7.vineyard.item.ModItemGroups;
 public class ModBlocks {
 
     // Initialization of blocks
-    public static final Block ATTACHED_RED_GRAPEVINE_TRUNK = registerBlockWithoutBlockItem("attached_red_grapevine_trunk", new AttachedVineTrunkBlock(VineType.RED_GRAPE.toString(), FabricBlockSettings.of(Material.PLANT).strength(1.0f).nonOpaque().sounds(BlockSoundGroup.WOOD)));
-    public static final Block RED_GRAPEVINE_TRUNK = registerBlockWithoutBlockItem("red_grapevine_trunk", new VineTrunkBlock(VineType.RED_GRAPE.toString(), FabricBlockSettings.of(Material.PLANT).strength(1.0f).nonOpaque().sounds(BlockSoundGroup.WOOD)));
-    public static final Block RED_GRAPE_CANOPY = registerBlockWithoutBlockItem("red_grape_canopy", new RedGrapeBlock(FabricBlockSettings.of(Material.PLANT).strength(1.0f).nonOpaque().sounds(BlockSoundGroup.SWEET_BERRY_BUSH)));
-    public static final Block ATTACHED_RED_GRAPE_HEAD = registerBlockWithoutBlockItem("attached_red_grape_head", new AttachedVineHeadBlock((VineCanopyBlock)RED_GRAPE_CANOPY, FabricBlockSettings.of(Material.PLANT).strength(1.0f).nonOpaque().sounds(BlockSoundGroup.SWEET_BERRY_BUSH)));
-    public static final Block RED_GRAPE_HEAD = registerBlockWithoutBlockItem("red_grape_head", new VineHeadBlock((VineCanopyBlock)RED_GRAPE_CANOPY, (AttachedVineTrunkBlock) ATTACHED_RED_GRAPEVINE_TRUNK, FabricBlockSettings.of(Material.PLANT).strength(1.0f).nonOpaque().sounds(BlockSoundGroup.SWEET_BERRY_BUSH)));
-    public static final Block WILD_RED_GRAPEVINE = registerBlockWithoutBlockItem("wild_red_grapevine", new WildRedGrapevineBlock(FabricBlockSettings.of(Material.PLANT).ticksRandomly().sounds(BlockSoundGroup.SWEET_BERRY_BUSH).strength(1.0f).nonOpaque()));
-    public static final Block FRUIT_PRESS = registerBlock("fruit_press", new FruitPressBlock(FabricBlockSettings.of(Material.METAL).nonOpaque().strength(2.5f).sounds(BlockSoundGroup.METAL)));
-    public static final Block FERMENTER = registerBlock("fermenter", new FermenterBlock(FabricBlockSettings.of(Material.METAL).nonOpaque().strength(2.5f).sounds(BlockSoundGroup.METAL)));
-    public static final Block WINE_CASK = registerBlock("wine_cask", new WineCaskBlock(FabricBlockSettings.of(Material.WOOD).nonOpaque().strength(2.5f).sounds(BlockSoundGroup.WOOD)));
-    public static final Block AGED_FRUITY_RED_WINE_CASK = registerBlock("aged_fruity_red_wine_cask", new AgedRedWineBlock(FabricBlockSettings.of(Material.WOOD).nonOpaque().strength(2.5f).sounds(BlockSoundGroup.WOOD)));
+    public static final Block ATTACHED_RED_GRAPEVINE_TRUNK = registerBlockWithoutBlockItem(BlockNames.ATTACHED_RED_GRAPEVINE_TRUNK_KEY, new AttachedVineTrunkBlock(VineType.RED_GRAPE.toString(), FabricBlockSettings.of(Material.PLANT).strength(1.0f).nonOpaque().sounds(BlockSoundGroup.WOOD)));
+    public static final Block RED_GRAPEVINE_TRUNK = registerBlockWithoutBlockItem(BlockNames.RED_GRAPEVINE_TRUNK_KEY, new VineTrunkBlock(VineType.RED_GRAPE.toString(), FabricBlockSettings.of(Material.PLANT).strength(1.0f).nonOpaque().sounds(BlockSoundGroup.WOOD)));
+    public static final Block RED_GRAPE_CANOPY = registerBlockWithoutBlockItem(BlockNames.RED_GRAPE_CANOPY_KEY, new RedGrapeBlock(FabricBlockSettings.of(Material.PLANT).strength(1.0f).nonOpaque().sounds(BlockSoundGroup.SWEET_BERRY_BUSH)));
+    public static final Block ATTACHED_RED_GRAPE_HEAD = registerBlockWithoutBlockItem(BlockNames.ATTACHED_RED_GRAPE_HEAD_KEY, new AttachedVineHeadBlock((VineCanopyBlock)RED_GRAPE_CANOPY, FabricBlockSettings.of(Material.PLANT).strength(1.0f).nonOpaque().sounds(BlockSoundGroup.SWEET_BERRY_BUSH)));
+    public static final Block RED_GRAPE_HEAD = registerBlockWithoutBlockItem(BlockNames.RED_GRAPE_HEAD_KEY, new VineHeadBlock((VineCanopyBlock)RED_GRAPE_CANOPY, (AttachedVineTrunkBlock) ATTACHED_RED_GRAPEVINE_TRUNK, FabricBlockSettings.of(Material.PLANT).strength(1.0f).nonOpaque().sounds(BlockSoundGroup.SWEET_BERRY_BUSH)));
+    public static final Block WILD_RED_GRAPEVINE = registerBlockWithoutBlockItem(BlockNames.WILD_RED_GRAPEVINE_KEY, new WildRedGrapevineBlock(FabricBlockSettings.of(Material.PLANT).ticksRandomly().sounds(BlockSoundGroup.SWEET_BERRY_BUSH).strength(1.0f).nonOpaque()));
+    public static final Block FRUIT_PRESS = registerBlock(BlockNames.FRUIT_PRESS_KEY, new FruitPressBlock(FabricBlockSettings.of(Material.METAL).nonOpaque().strength(2.5f).sounds(BlockSoundGroup.METAL)));
+    public static final Block FERMENTER = registerBlock(BlockNames.FERMENTER_KEY, new FermenterBlock(FabricBlockSettings.of(Material.METAL).nonOpaque().strength(2.5f).sounds(BlockSoundGroup.METAL)));
+    public static final Block WINE_CASK = registerBlock(BlockNames.WINE_CASK_KEY, new WineCaskBlock(FabricBlockSettings.of(Material.WOOD).nonOpaque().strength(2.5f).sounds(BlockSoundGroup.WOOD)));
+    public static final Block AGED_FRUITY_RED_WINE_CASK = registerBlock(BlockNames.AGED_FRUITY_RED_WINE_CASK_KEY, new AgedRedWineBlock(FabricBlockSettings.of(Material.WOOD).nonOpaque().strength(2.5f).sounds(BlockSoundGroup.WOOD)));
 
     // Registers a block but not an item (useful for blocks that shouldn't be craftable but may spawn in the world)
     private static Block registerBlockWithoutBlockItem(String name, Block block){
