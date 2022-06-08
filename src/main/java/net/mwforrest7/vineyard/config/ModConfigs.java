@@ -7,11 +7,7 @@ public class ModConfigs {
     private static ModConfigProvider configs;
 
     // The values loaded from the config - to be used anywhere in the mod
-    public static int WILD_RED_GRAPE_PATCH_SIZE;
-    //public static String WILD_RED_GRAPE_COMMON_BIOME_CATEGORIES;
-    public static int WILD_RED_GRAPE_COMMON_SPAWN_CHANCE;
-    //public static String WILD_RED_GRAPE_RARE_BIOME_CATEGORIES;
-    public static int WILD_RED_GRAPE_RARE_SPAWN_CHANCE;
+    public static int WILD_RED_GRAPE_SPAWN_CHANCE;
     public static int RED_GRAPE_HUNGER;
     public static float RED_GRAPE_SATURATION;
     public static int RED_GRAPE_BUNCH_HUNGER;
@@ -30,26 +26,18 @@ public class ModConfigs {
 
     // Creates config file if it doesn't already exist
     private static void createConfigs() {
-        configs.addKeyValuePair(new Pair<>("wild_red_grape.patch_size", 20), "Int - larger value results in larger patches of vines");
-        configs.addKeyValuePair(new Pair<>("wild_red_grape.common.spawn_chance", 48), "Int - smaller value results in more frequent patches of vines");
-        configs.addKeyValuePair(new Pair<>("wild_red_grape.rare.spawn_chance", 384), "Int - smaller value results in more frequent patches of vines");
+        configs.addKeyValuePair(new Pair<>("wild_red_grape.spawn_chance", 5), "Int - smaller value results in more frequent patches of vines");
         configs.addKeyValuePair(new Pair<>("red_grape.hunger", 1), "int");
         configs.addKeyValuePair(new Pair<>("red_grape.saturation", 0.1f), "float");
         configs.addKeyValuePair(new Pair<>("red_grape_bunch.hunger", 2), "int");
         configs.addKeyValuePair(new Pair<>("red_grape_bunch.saturation", 0.2f), "float");
         configs.addKeyValuePair(new Pair<>("red_grape_juice.hunger", 3), "int");
         configs.addKeyValuePair(new Pair<>("red_grape_juice.saturation", 0.3f), "float");
-        configs.addKeyValuePair(new Pair<>("fermented_red_grape_juice.hunger", 3), "int");
-        configs.addKeyValuePair(new Pair<>("fermented_red_grape_juice.saturation", 0.3f), "float");
-        configs.addKeyValuePair(new Pair<>("red_wine.hunger", 4), "int");
-        configs.addKeyValuePair(new Pair<>("red_wine.saturation", 0.5f), "float");
     }
 
     // Reads config file. Takes default value if missing value in the config.
     private static void assignConfigs() {
-        WILD_RED_GRAPE_PATCH_SIZE = CONFIG.getOrDefault("wild_red_grape.patch_size", 20);
-        WILD_RED_GRAPE_COMMON_SPAWN_CHANCE = CONFIG.getOrDefault("wild_red_grape.common.spawn_chance", 48);
-        WILD_RED_GRAPE_RARE_SPAWN_CHANCE = CONFIG.getOrDefault("wild_red_grape.rare.spawn_chance", 384);
+        WILD_RED_GRAPE_SPAWN_CHANCE = CONFIG.getOrDefault("wild_red_grape.spawn_chance", 5);
         RED_GRAPE_HUNGER = CONFIG.getOrDefault("red_grape.hunger", 1);
         RED_GRAPE_SATURATION = (float) CONFIG.getOrDefault("red_grape.saturation", 0.1f);
         RED_GRAPE_BUNCH_HUNGER = CONFIG.getOrDefault("red_grape_bunch.hunger", 2);

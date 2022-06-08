@@ -4,9 +4,9 @@
   "package": "net.mwforrest7.vineyard.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "TreeDecoratorTypeMixin"
   ],
   "client": [
-    "ExampleMixin"
   ],
   "injectors": {
     "defaultRequire": 1
