@@ -7,7 +7,7 @@ public class ModConfigs {
     private static ModConfigProvider configs;
 
     // The values loaded from the config - to be used anywhere in the mod
-    public static int WILD_RED_GRAPE_SPAWN_CHANCE;
+    public static int WILD_GRAPE_SPAWN_CHANCE;
     public static int RED_GRAPE_HUNGER;
     public static float RED_GRAPE_SATURATION;
     public static int RED_GRAPE_BUNCH_HUNGER;
@@ -26,7 +26,7 @@ public class ModConfigs {
 
     // Creates config file if it doesn't already exist
     private static void createConfigs() {
-        configs.addKeyValuePair(new Pair<>("wild_red_grape.spawn_chance", 5), "Int - smaller value results in more frequent patches of vines");
+        configs.addKeyValuePair(new Pair<>("wild_grape.spawn_chance", 5), "Int - smaller value results in more frequent patches of vines");
         configs.addKeyValuePair(new Pair<>("red_grape.hunger", 1), "int");
         configs.addKeyValuePair(new Pair<>("red_grape.saturation", 0.1f), "float");
         configs.addKeyValuePair(new Pair<>("red_grape_bunch.hunger", 2), "int");
@@ -37,7 +37,7 @@ public class ModConfigs {
 
     // Reads config file. Takes default value if missing value in the config.
     private static void assignConfigs() {
-        WILD_RED_GRAPE_SPAWN_CHANCE = CONFIG.getOrDefault("wild_red_grape.spawn_chance", 5);
+        WILD_GRAPE_SPAWN_CHANCE = CONFIG.getOrDefault("wild_grape.spawn_chance", 5);
         RED_GRAPE_HUNGER = CONFIG.getOrDefault("red_grape.hunger", 1);
         RED_GRAPE_SATURATION = (float) CONFIG.getOrDefault("red_grape.saturation", 0.1f);
         RED_GRAPE_BUNCH_HUNGER = CONFIG.getOrDefault("red_grape_bunch.hunger", 2);

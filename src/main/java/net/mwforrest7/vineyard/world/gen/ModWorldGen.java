@@ -21,13 +21,20 @@ public class ModWorldGen {
     public static final TreeDecoratorType<TrunkRedGrapevineTreeDecorator> TRUNK_RED_GRAPEVINE_TREE_DECORATOR = TreeDecoratorTypeMixin
             .callRegister("trunk_red_grapevine_tree_decorator", TrunkRedGrapevineTreeDecorator.CODEC);
 
-    private static final ArrayList<RegistryKey<Biome>> RED_GRAPE_COMMON_BIOME_KEYS = new ArrayList<>(
-            List.of(BiomeKeys.OLD_GROWTH_BIRCH_FOREST, BiomeKeys.BIRCH_FOREST, BiomeKeys.DARK_FOREST,
-                    BiomeKeys.FLOWER_FOREST, BiomeKeys.FOREST));
+    private static final ArrayList<RegistryKey<Biome>> RED_GRAPE_OAK_COMMON_BIOME_KEYS = new ArrayList<>(
+            List.of(BiomeKeys.FLOWER_FOREST, BiomeKeys.FOREST, BiomeKeys.DARK_FOREST));
 
+    private static final ArrayList<RegistryKey<Biome>> RED_GRAPE_BIRCH_COMMON_BIOME_KEYS = new ArrayList<>(
+            List.of(BiomeKeys.OLD_GROWTH_BIRCH_FOREST, BiomeKeys.BIRCH_FOREST, BiomeKeys.FOREST, BiomeKeys.DARK_FOREST, BiomeKeys.FLOWER_FOREST));
+
+    private static final ArrayList<RegistryKey<Biome>> RED_GRAPE_DARK_OAK_COMMON_BIOME_KEYS = new ArrayList<>(
+            List.of(BiomeKeys.DARK_FOREST));
+
+    /*
     private static final ArrayList<RegistryKey<Biome>> RED_GRAPE_RARE_BIOME_KEYS = new ArrayList<>(
             List.of(BiomeKeys.OLD_GROWTH_PINE_TAIGA, BiomeKeys.OLD_GROWTH_SPRUCE_TAIGA,
                     BiomeKeys.TAIGA, BiomeKeys.WINDSWEPT_FOREST));
+     */
 
     public static void generateModWorldGen() {
         System.out.println("Generating mod world features");
@@ -35,7 +42,9 @@ public class ModWorldGen {
     }
 
     private static void generateVegetationPlacedFeatures() {
-        BiomeModifications.addFeature(BiomeSelectors.includeByKey(RED_GRAPE_COMMON_BIOME_KEYS), GenerationStep.Feature.VEGETAL_DECORATION, ModVegetationPlacedFeatures.TREE_OAK_RED_GRAPEVINE_KEY);
+        BiomeModifications.addFeature(BiomeSelectors.includeByKey(RED_GRAPE_OAK_COMMON_BIOME_KEYS), GenerationStep.Feature.VEGETAL_DECORATION, ModVegetationPlacedFeatures.TREE_OAK_GRAPEVINE_KEY);
+        BiomeModifications.addFeature(BiomeSelectors.includeByKey(RED_GRAPE_BIRCH_COMMON_BIOME_KEYS), GenerationStep.Feature.VEGETAL_DECORATION, ModVegetationPlacedFeatures.TREE_BIRCH_GRAPEVINE_KEY);
+        BiomeModifications.addFeature(BiomeSelectors.includeByKey(RED_GRAPE_DARK_OAK_COMMON_BIOME_KEYS), GenerationStep.Feature.VEGETAL_DECORATION, ModVegetationPlacedFeatures.TREE_DARK_OAK_GRAPEVINE_KEY);
     }
 
 }
