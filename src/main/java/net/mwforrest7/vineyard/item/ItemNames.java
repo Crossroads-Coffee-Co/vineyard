@@ -2,6 +2,12 @@ package net.mwforrest7.vineyard.item;
 
 public class ItemNames {
 
+    public static final String GREEN_GRAPE_KEY = "green_grape";
+    public static final String GREEN_GRAPE_NAME = "Green Grape";
+    public static final String GREEN_GRAPE_BUNCH_KEY = "green_grape_bunch";
+    public static final String GREEN_GRAPE_BUNCH_NAME = "Green Grape Bunch";
+    public static final String GREEN_GRAPE_SEEDS_KEY = "green_grape_seeds";
+    public static final String GREEN_GRAPE_SEEDS_NAME = "Green Grape Seeds";
     public static final String RED_GRAPE_KEY = "red_grape";
     public static final String RED_GRAPE_NAME = "Red Grape";
     public static final String RED_GRAPE_BUNCH_KEY = "red_grape_bunch";

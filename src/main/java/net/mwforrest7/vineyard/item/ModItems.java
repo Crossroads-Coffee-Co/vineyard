@@ -14,6 +14,28 @@ import net.mwforrest7.vineyard.config.ModConfigs;
 public class ModItems {
 
     // Initialization of items
+    public static final Item GREEN_GRAPE = registerItem(ItemNames.GREEN_GRAPE_KEY,
+            new Item(new FabricItemSettings()
+                    .food(new FoodComponent.Builder()
+                            .hunger(ModConfigs.RED_GRAPE_HUNGER)
+                            .saturationModifier(ModConfigs.RED_GRAPE_SATURATION)
+                            .build())
+                    .group(ModItemGroups.VINEYARD)));
+
+    public static final Item GREEN_GRAPE_BUNCH = registerItem(ItemNames.GREEN_GRAPE_BUNCH_KEY,
+            new Item(new FabricItemSettings()
+                    .food(new FoodComponent.Builder()
+                            .hunger(ModConfigs.RED_GRAPE_BUNCH_HUNGER)
+                            .saturationModifier(ModConfigs.RED_GRAPE_BUNCH_SATURATION)
+                            .build())
+                    .group(ModItemGroups.VINEYARD)));
+
+
+    public static final Item GREEN_GRAPE_SEEDS = registerItem(ItemNames.GREEN_GRAPE_SEEDS_KEY,
+            new AliasedBlockItem(ModBlocks.WILD_GREEN_GRAPEVINE,
+                    new FabricItemSettings().group(ModItemGroups.VINEYARD)));
+
+
     public static final Item RED_GRAPE = registerItem(ItemNames.RED_GRAPE_KEY,
             new Item(new FabricItemSettings()
                     .food(new FoodComponent.Builder()

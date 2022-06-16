@@ -16,6 +16,7 @@ import net.mwforrest7.vineyard.item.ModItemGroups;
 public class ModBlocks {
 
     // Initialization of blocks
+    public static final Block WILD_GREEN_GRAPEVINE = registerBlock(BlockNames.WILD_GREEN_GRAPEVINE_KEY, new WildGreenGrapevineBlock(AbstractBlock.Settings.of(Material.REPLACEABLE_PLANT).noCollision().ticksRandomly().strength(0.2F).sounds(BlockSoundGroup.VINE)));
     public static final Block WILD_RED_GRAPEVINE = registerBlock(BlockNames.WILD_RED_GRAPEVINE_KEY, new WildRedGrapevineBlock(AbstractBlock.Settings.of(Material.REPLACEABLE_PLANT).noCollision().ticksRandomly().strength(0.2F).sounds(BlockSoundGroup.VINE)));
     public static final Block ATTACHED_RED_GRAPEVINE_TRUNK = registerBlockWithoutBlockItem(BlockNames.ATTACHED_RED_GRAPEVINE_TRUNK_KEY, new AttachedVineTrunkBlock(VineType.RED_GRAPE.toString(), FabricBlockSettings.of(Material.PLANT).strength(1.0f).nonOpaque().sounds(BlockSoundGroup.WOOD)));
     public static final Block RED_GRAPEVINE_TRUNK = registerBlockWithoutBlockItem(BlockNames.RED_GRAPEVINE_TRUNK_KEY, new VineTrunkBlock(VineType.RED_GRAPE.toString(), FabricBlockSettings.of(Material.PLANT).strength(1.0f).nonOpaque().sounds(BlockSoundGroup.WOOD)));

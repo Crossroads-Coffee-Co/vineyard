@@ -11,6 +11,9 @@ public class BlockNames {
     public static final String ATTACHED_RED_GRAPE_HEAD_NAME = "Attached Red Grape Head";
     public static final String RED_GRAPE_HEAD_KEY = "red_grape_head";
     public static final String RED_GRAPE_HEAD_NAME = "Red Grape Head";
+
+    public static final String WILD_GREEN_GRAPEVINE_KEY = "wild_green_grapevine";
+    public static final String WILD_GREEN_GRAPEVINE_NAME = "Wild Green Grapevine";
     public static final String WILD_RED_GRAPEVINE_KEY = "wild_red_grapevine";
     public static final String WILD_RED_GRAPEVINE_NAME = "Wild Red Grapevine";
     public static final String FRUIT_PRESS_KEY = "fruit_press";

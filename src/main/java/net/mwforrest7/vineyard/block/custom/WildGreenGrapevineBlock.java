@@ -1,9 +1,10 @@
 package net.mwforrest7.vineyard.block.custom;
 
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.VineBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -18,13 +19,13 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.mwforrest7.vineyard.item.ModItems;
 
-public class WildRedGrapevineBlock extends VineBlock {
+public class WildGreenGrapevineBlock extends VineBlock {
 
     public static final int MAX_AGE = 2;
     public static final IntProperty AGE = Properties.AGE_2;
 
     // Constructor
-    public WildRedGrapevineBlock(AbstractBlock.Settings settings) {
+    public WildGreenGrapevineBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(UP, false).with(NORTH, false).with(EAST, false).with(SOUTH, false).with(WEST, false).with(AGE, 0));
     }
@@ -59,7 +60,7 @@ public class WildRedGrapevineBlock extends VineBlock {
         // If the block is max age, drop 1-3 grapes and set the age to 0
         if (isMaxAge) {
             int j = world.random.nextInt(2);
-            WildRedGrapevineBlock.dropStack(world, pos, new ItemStack(ModItems.RED_GRAPE, j + 1));
+            WildGreenGrapevineBlock.dropStack(world, pos, new ItemStack(ModItems.GREEN_GRAPE, j + 1));
             world.playSound(null, pos, SoundEvents.BLOCK_CAVE_VINES_PICK_BERRIES, SoundCategory.BLOCKS, 1.0f, 0.8f + world.random.nextFloat() * 0.4f);
             world.setBlockState(pos, state.with(AGE, 0), Block.NOTIFY_LISTENERS);
             return ActionResult.success(world.isClient);

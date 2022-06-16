@@ -9,6 +9,7 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
 import net.mwforrest7.vineyard.mixin.TreeDecoratorTypeMixin;
 import net.mwforrest7.vineyard.world.gen.feature.ModVegetationPlacedFeatures;
+import net.mwforrest7.vineyard.world.gen.treedecorator.TrunkGreenGrapevineTreeDecorator;
 import net.mwforrest7.vineyard.world.gen.treedecorator.TrunkRedGrapevineTreeDecorator;
 
 import java.util.ArrayList;
@@ -20,6 +21,9 @@ import java.util.List;
 public class ModWorldGen {
     public static final TreeDecoratorType<TrunkRedGrapevineTreeDecorator> TRUNK_RED_GRAPEVINE_TREE_DECORATOR = TreeDecoratorTypeMixin
             .callRegister("trunk_red_grapevine_tree_decorator", TrunkRedGrapevineTreeDecorator.CODEC);
+
+    public static final TreeDecoratorType<TrunkGreenGrapevineTreeDecorator> TRUNK_GREEN_GRAPEVINE_TREE_DECORATOR = TreeDecoratorTypeMixin
+            .callRegister("trunk_green_grapevine_tree_decorator", TrunkGreenGrapevineTreeDecorator.CODEC);
 
     private static final ArrayList<RegistryKey<Biome>> RED_GRAPE_OAK_COMMON_BIOME_KEYS = new ArrayList<>(
             List.of(BiomeKeys.FLOWER_FOREST, BiomeKeys.FOREST, BiomeKeys.DARK_FOREST));
