@@ -18,6 +18,7 @@ import net.minecraft.world.gen.trunk.BendingTrunkPlacer;
 import net.minecraft.world.gen.trunk.DarkOakTrunkPlacer;
 import net.minecraft.world.gen.trunk.LargeOakTrunkPlacer;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
+import net.mwforrest7.vineyard.world.gen.treedecorator.TrunkGreenGrapevineTreeDecorator;
 import net.mwforrest7.vineyard.world.gen.treedecorator.TrunkRedGrapevineTreeDecorator;
 
 import java.util.List;
@@ -72,5 +73,41 @@ public class ModTreeConfiguredFeatures {
                             new DarkOakFoliagePlacer(ConstantIntProvider.create(0), ConstantIntProvider.create(0)),
                             new ThreeLayersFeatureSize(1, 1, 0, 1, 2, OptionalInt.empty())))
                             .decorators(List.of(TrunkRedGrapevineTreeDecorator.INSTANCE)).build());
+
+    public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> OAK_GREEN_GRAPEVINE_TREE =
+            ConfiguredFeatures.register("oak_green_grapevine_tree", Feature.TREE, (new TreeFeatureConfig.Builder(
+                    BlockStateProvider.of(Blocks.OAK_LOG),
+                    new BendingTrunkPlacer(4, 2, 0, 3, UniformIntProvider.create(1, 2)),
+                    BlockStateProvider.of(Blocks.OAK_LEAVES),
+                    new RandomSpreadFoliagePlacer(ConstantIntProvider.create(3), ConstantIntProvider.create(0), ConstantIntProvider.create(2), 50),
+                    new TwoLayersFeatureSize(1, 0, 1)))
+                    .decorators(ImmutableList.of(TrunkGreenGrapevineTreeDecorator.INSTANCE)).build());
+
+    public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> FANCY_OAK_GREEN_GRAPEVINE_TREE =
+            ConfiguredFeatures.register("fancy_oak_green_grapevine_tree", Feature.TREE, (new TreeFeatureConfig.Builder(
+                    BlockStateProvider.of(Blocks.OAK_LOG),
+                    new LargeOakTrunkPlacer(3, 11, 0),
+                    BlockStateProvider.of(Blocks.OAK_LEAVES),
+                    new LargeOakFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(4), 4),
+                    new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4))))
+                    .decorators(ImmutableList.of(TrunkGreenGrapevineTreeDecorator.INSTANCE)).build());
+
+    public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> BIRCH_GREEN_GRAPEVINE_TREE =
+            ConfiguredFeatures.register("birch_green_grapevine_tree",
+                    Feature.TREE,
+                    birch().decorators(List.of(TrunkGreenGrapevineTreeDecorator.INSTANCE)).build());
+
+    public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> SUPER_BIRCH_GREEN_GRAPEVINE_TREE =
+            ConfiguredFeatures.register("super_birch_green_grapevine_tree",
+                    Feature.TREE,
+                    superBirch().decorators(List.of(TrunkGreenGrapevineTreeDecorator.INSTANCE)).build());
+
+    public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> DARK_OAK_GREEN_GRAPEVINE_TREE =
+            ConfiguredFeatures.register("dark_oak_green_grapevine_tree", Feature.TREE,
+                    (new TreeFeatureConfig.Builder(BlockStateProvider.of(Blocks.DARK_OAK_LOG),
+                            new DarkOakTrunkPlacer(6, 2, 1), BlockStateProvider.of(Blocks.DARK_OAK_LEAVES),
+                            new DarkOakFoliagePlacer(ConstantIntProvider.create(0), ConstantIntProvider.create(0)),
+                            new ThreeLayersFeatureSize(1, 1, 0, 1, 2, OptionalInt.empty())))
+                            .decorators(List.of(TrunkGreenGrapevineTreeDecorator.INSTANCE)).build());
 
 }

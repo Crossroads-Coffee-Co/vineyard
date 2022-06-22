@@ -42,10 +42,8 @@ public class WildRedGrapevineBlock extends VineBlock {
         // If age is less than max, and other conditions are correct: age up
         super.randomTick(state, world, pos, random);
         int i = state.get(AGE);
-        System.out.println("Age is " + i);
         if (i < MAX_AGE && random.nextInt(5) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
             world.setBlockState(pos, state.with(AGE, i + 1), Block.NOTIFY_LISTENERS);
-            System.out.println("Aged up!");
         }
     }
 

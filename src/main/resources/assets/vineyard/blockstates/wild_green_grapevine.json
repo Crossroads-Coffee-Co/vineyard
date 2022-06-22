@@ -1,0 +1,544 @@
+{
+  "multipart": [
+    {
+      "apply": [
+        {"model": "vineyard:block/wild_green_grapevine_unripe"}
+      ],
+      "when": {
+        "north": "true",
+        "age": 0
+      }
+    },
+    {
+      "apply": [
+        {"model": "vineyard:block/wild_green_grapevine_unripe"}
+      ],
+      "when": {
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false",
+        "age": 0
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "vineyard:block/wild_green_grapevine_unripe",
+          "uvlock": true,
+          "y": 90}
+      ],
+      "when": {
+        "east": "true",
+        "age": 0
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "vineyard:block/wild_green_grapevine_unripe",
+          "uvlock": true,
+          "y": 90}
+      ],
+      "when": {
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false",
+        "age": 0
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "vineyard:block/wild_green_grapevine_unripe",
+          "uvlock": true,
+          "y": 180}
+      ],
+      "when": {
+        "south": "true",
+        "age": 0
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "vineyard:block/wild_green_grapevine_unripe",
+          "uvlock": true,
+          "y": 180}
+      ],
+      "when": {
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false",
+        "age": 0
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "vineyard:block/wild_green_grapevine_unripe",
+          "uvlock": true,
+          "y": 270}
+      ],
+      "when": {
+        "west": "true",
+        "age": 0
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "vineyard:block/wild_green_grapevine_unripe",
+          "uvlock": true,
+          "y": 270}
+      ],
+      "when": {
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false",
+        "age": 0
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "vineyard:block/wild_green_grapevine_unripe",
+          "uvlock": true,
+          "y": 270}
+      ],
+      "when": {
+        "up": "true",
+        "age": 0
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "vineyard:block/wild_green_grapevine_unripe",
+          "uvlock": true,
+          "y": 270}
+      ],
+      "when": {
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false",
+        "age": 0
+      }
+    },
+
+    {
+      "apply": [
+        {"model": "vineyard:block/wild_green_grapevine_flower_1"},
+        {"model": "vineyard:block/wild_green_grapevine_flower_2"},
+        {"model": "vineyard:block/wild_green_grapevine_flower_3"}
+      ],
+      "when": {
+        "north": "true",
+        "age": 1
+      }
+    },
+    {
+      "apply": [
+        {"model": "vineyard:block/wild_green_grapevine_flower_1"},
+        {"model": "vineyard:block/wild_green_grapevine_flower_2"},
+        {"model": "vineyard:block/wild_green_grapevine_flower_3"}
+      ],
+      "when": {
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false",
+        "age": 1
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "vineyard:block/wild_green_grapevine_flower_1",
+          "uvlock": true,
+          "y": 90},
+        {
+          "model": "vineyard:block/wild_green_grapevine_flower_2",
+          "uvlock": true,
+          "y": 90},
+        {
+          "model": "vineyard:block/wild_green_grapevine_flower_3",
+          "uvlock": true,
+          "y": 90}
+      ],
+      "when": {
+        "east": "true",
+        "age": 1
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "vineyard:block/wild_green_grapevine_flower_1",
+          "uvlock": true,
+          "y": 90},
+        {
+          "model": "vineyard:block/wild_green_grapevine_flower_2",
+          "uvlock": true,
+          "y": 90},
+        {
+          "model": "vineyard:block/wild_green_grapevine_flower_3",
+          "uvlock": true,
+          "y": 90}
+      ],
+      "when": {
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false",
+        "age": 1
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "vineyard:block/wild_green_grapevine_flower_1",
+          "uvlock": true,
+          "y": 180},
+        {
+          "model": "vineyard:block/wild_green_grapevine_flower_2",
+          "uvlock": true,
+          "y": 180},
+        {
+          "model": "vineyard:block/wild_green_grapevine_flower_3",
+          "uvlock": true,
+          "y": 180}
+      ],
+      "when": {
+        "south": "true",
+        "age": 1
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "vineyard:block/wild_green_grapevine_flower_1",
+          "uvlock": true,
+          "y": 180},
+        {
+          "model": "vineyard:block/wild_green_grapevine_flower_2",
+          "uvlock": true,
+          "y": 180},
+        {
+          "model": "vineyard:block/wild_green_grapevine_flower_3",
+          "uvlock": true,
+          "y": 180}
+      ],
+      "when": {
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false",
+        "age": 1
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "vineyard:block/wild_green_grapevine_flower_1",
+          "uvlock": true,
+          "y": 270},
+        {
+          "model": "vineyard:block/wild_green_grapevine_flower_2",
+          "uvlock": true,
+          "y": 270},
+        {
+          "model": "vineyard:block/wild_green_grapevine_flower_3",
+          "uvlock": true,
+          "y": 270}
+      ],
+      "when": {
+        "west": "true",
+        "age": 1
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "vineyard:block/wild_green_grapevine_flower_1",
+          "uvlock": true,
+          "y": 270},
+        {
+          "model": "vineyard:block/wild_green_grapevine_flower_2",
+          "uvlock": true,
+          "y": 270},
+        {
+          "model": "vineyard:block/wild_green_grapevine_flower_3",
+          "uvlock": true,
+          "y": 270}
+      ],
+      "when": {
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false",
+        "age": 1
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "vineyard:block/wild_green_grapevine_flower_1",
+          "uvlock": true,
+          "y": 270},
+        {
+          "model": "vineyard:block/wild_green_grapevine_flower_2",
+          "uvlock": true,
+          "y": 270},
+        {
+          "model": "vineyard:block/wild_green_grapevine_flower_3",
+          "uvlock": true,
+          "y": 270}
+      ],
+      "when": {
+        "up": "true",
+        "age": 1
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "vineyard:block/wild_green_grapevine_flower_1",
+          "uvlock": true,
+          "y": 270},
+        {
+          "model": "vineyard:block/wild_green_grapevine_flower_2",
+          "uvlock": true,
+          "y": 270},
+        {
+          "model": "vineyard:block/wild_green_grapevine_flower_3",
+          "uvlock": true,
+          "y": 270}
+      ],
+      "when": {
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false",
+        "age": 1
+      }
+    },
+
+    {
+      "apply": [
+        {"model": "vineyard:block/wild_green_grapevine_1"},
+        {"model": "vineyard:block/wild_green_grapevine_2"},
+        {"model": "vineyard:block/wild_green_grapevine_3"}
+      ],
+      "when": {
+        "north": "true",
+        "age": 2
+      }
+    },
+    {
+      "apply": [
+        {"model": "vineyard:block/wild_green_grapevine_1"},
+        {"model": "vineyard:block/wild_green_grapevine_2"},
+        {"model": "vineyard:block/wild_green_grapevine_3"}
+      ],
+      "when": {
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false",
+        "age": 2
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "vineyard:block/wild_green_grapevine_1",
+          "uvlock": true,
+          "y": 90},
+        {
+          "model": "vineyard:block/wild_green_grapevine_2",
+          "uvlock": true,
+          "y": 90},
+        {
+          "model": "vineyard:block/wild_green_grapevine_3",
+          "uvlock": true,
+          "y": 90}
+      ],
+      "when": {
+        "east": "true",
+        "age": 2
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "vineyard:block/wild_green_grapevine_1",
+          "uvlock": true,
+          "y": 90},
+        {
+          "model": "vineyard:block/wild_green_grapevine_2",
+          "uvlock": true,
+          "y": 90},
+        {
+          "model": "vineyard:block/wild_green_grapevine_3",
+          "uvlock": true,
+          "y": 90}
+      ],
+      "when": {
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false",
+        "age": 2
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "vineyard:block/wild_green_grapevine_1",
+          "uvlock": true,
+          "y": 180},
+        {
+          "model": "vineyard:block/wild_green_grapevine_2",
+          "uvlock": true,
+          "y": 180},
+        {
+          "model": "vineyard:block/wild_green_grapevine_3",
+          "uvlock": true,
+          "y": 180}
+      ],
+      "when": {
+        "south": "true",
+        "age": 2
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "vineyard:block/wild_green_grapevine_1",
+          "uvlock": true,
+          "y": 180},
+        {
+          "model": "vineyard:block/wild_green_grapevine_2",
+          "uvlock": true,
+          "y": 180},
+        {
+          "model": "vineyard:block/wild_green_grapevine_3",
+          "uvlock": true,
+          "y": 180}
+      ],
+      "when": {
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false",
+        "age": 2
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "vineyard:block/wild_green_grapevine_1",
+          "uvlock": true,
+          "y": 270},
+        {
+          "model": "vineyard:block/wild_green_grapevine_2",
+          "uvlock": true,
+          "y": 270},
+        {
+          "model": "vineyard:block/wild_green_grapevine_3",
+          "uvlock": true,
+          "y": 270}
+      ],
+      "when": {
+        "west": "true",
+        "age": 2
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "vineyard:block/wild_green_grapevine_1",
+          "uvlock": true,
+          "y": 270},
+        {
+          "model": "vineyard:block/wild_green_grapevine_2",
+          "uvlock": true,
+          "y": 270},
+        {
+          "model": "vineyard:block/wild_green_grapevine_3",
+          "uvlock": true,
+          "y": 270}
+      ],
+      "when": {
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false",
+        "age": 2
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "vineyard:block/wild_green_grapevine_1",
+          "uvlock": true,
+          "y": 270},
+        {
+          "model": "vineyard:block/wild_green_grapevine_2",
+          "uvlock": true,
+          "y": 270},
+        {
+          "model": "vineyard:block/wild_green_grapevine_3",
+          "uvlock": true,
+          "y": 270}
+      ],
+      "when": {
+        "up": "true",
+        "age": 2
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "vineyard:block/wild_green_grapevine_1",
+          "uvlock": true,
+          "y": 270},
+        {
+          "model": "vineyard:block/wild_green_grapevine_2",
+          "uvlock": true,
+          "y": 270},
+        {
+          "model": "vineyard:block/wild_green_grapevine_3",
+          "uvlock": true,
+          "y": 270}
+      ],
+      "when": {
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false",
+        "age": 2
+      }
+    }
+  ]
+}

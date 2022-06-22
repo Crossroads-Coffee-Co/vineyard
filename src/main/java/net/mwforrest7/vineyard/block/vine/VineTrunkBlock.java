@@ -62,6 +62,9 @@ public class VineTrunkBlock extends CropBlock {
                     if (this.vineType.equals(VineType.RED_GRAPE.toString())) {
                         world.setBlockState(blockAbovePos, ModBlocks.RED_GRAPE_HEAD.getDefaultState());
                         world.setBlockState(pos, ModBlocks.ATTACHED_RED_GRAPEVINE_TRUNK.getDefaultState().with(Properties.FACING, direction));
+                    }else if (this.vineType.equals(VineType.GREEN_GRAPE.toString())) {
+                        world.setBlockState(blockAbovePos, ModBlocks.GREEN_GRAPE_HEAD.getDefaultState());
+                        world.setBlockState(pos, ModBlocks.ATTACHED_GREEN_GRAPEVINE_TRUNK.getDefaultState().with(Properties.FACING, direction));
                     }
                 }
             }

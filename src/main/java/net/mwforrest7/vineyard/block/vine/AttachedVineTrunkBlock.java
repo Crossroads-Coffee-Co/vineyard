@@ -54,6 +54,11 @@ public class AttachedVineTrunkBlock extends PlantBlock {
             if (!(neighborState.isOf(ModBlocks.RED_GRAPE_HEAD) || neighborState.isOf(ModBlocks.ATTACHED_RED_GRAPE_HEAD)) && direction == state.get(FACING)) {
                 return ModBlocks.RED_GRAPEVINE_TRUNK.getDefaultState().with(VineTrunkBlock.AGE, 7);
             }
+        }else if(this.vineType.equals(VineType.GREEN_GRAPE.toString())){
+            // If the block above is no longer a red_grape_head then the attached trunk should revert to a non-attached trunk form
+            if (!(neighborState.isOf(ModBlocks.GREEN_GRAPE_HEAD) || neighborState.isOf(ModBlocks.ATTACHED_GREEN_GRAPE_HEAD)) && direction == state.get(FACING)) {
+                return ModBlocks.GREEN_GRAPEVINE_TRUNK.getDefaultState().with(VineTrunkBlock.AGE, 7);
+            }
         }
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }

@@ -1,0 +1,60 @@
+{
+  "variants": {
+    "age=0,facing=north": {
+      "model": "vineyard:block/green_grape_canopy_stage0",
+      "y": 90
+    },
+    "age=0,facing=south": {
+      "model": "vineyard:block/green_grape_canopy_stage0",
+      "y": 90
+    },
+    "age=0,facing=east": {
+      "model": "vineyard:block/green_grape_canopy_stage0"
+    },
+    "age=0,facing=west": {
+      "model": "vineyard:block/green_grape_canopy_stage0"
+    },
+    "age=1,facing=north": {
+      "model": "vineyard:block/green_grape_canopy_stage1",
+      "y": 90
+    },
+    "age=1,facing=south": {
+      "model": "vineyard:block/green_grape_canopy_stage1",
+      "y": 90
+    },
+    "age=1,facing=east": {
+      "model": "vineyard:block/green_grape_canopy_stage1"
+    },
+    "age=1,facing=west": {
+      "model": "vineyard:block/green_grape_canopy_stage1"
+    },
+    "age=2,facing=north": {
+      "model": "vineyard:block/green_grape_canopy_stage2",
+      "y": 90
+    },
+    "age=2,facing=south": {
+      "model": "vineyard:block/green_grape_canopy_stage2",
+      "y": 90
+    },
+    "age=2,facing=east": {
+      "model": "vineyard:block/green_grape_canopy_stage2"
+    },
+    "age=2,facing=west": {
+      "model": "vineyard:block/green_grape_canopy_stage2"
+    },
+    "age=3,facing=north": {
+      "model": "vineyard:block/green_grape_canopy_stage3",
+      "y": 90
+    },
+    "age=3,facing=south": {
+      "model": "vineyard:block/green_grape_canopy_stage3",
+      "y": 90
+    },
+    "age=3,facing=east": {
+      "model": "vineyard:block/green_grape_canopy_stage3"
+    },
+    "age=3,facing=west": {
+      "model": "vineyard:block/green_grape_canopy_stage3"
+    }
+  }
+}
