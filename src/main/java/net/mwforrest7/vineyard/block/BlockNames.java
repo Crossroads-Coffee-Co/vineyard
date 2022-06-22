@@ -12,6 +12,17 @@ public class BlockNames {
     public static final String RED_GRAPE_HEAD_KEY = "red_grape_head";
     public static final String RED_GRAPE_HEAD_NAME = "Red Grape Head";
 
+    public static final String ATTACHED_GREEN_GRAPEVINE_TRUNK_KEY = "attached_green_grapevine_trunk";
+    public static final String ATTACHED_GREEN_GRAPEVINE_TRUNK_NAME = "Attached Green Grapevine Trunk";
+    public static final String GREEN_GRAPEVINE_TRUNK_KEY = "green_grapevine_trunk";
+    public static final String GREEN_GRAPEVINE_TRUNK_NAME = "Gren Grapevine Trunk";
+    public static final String GREEN_GRAPE_CANOPY_KEY = "green_grape_canopy";
+    public static final String GREEN_GRAPE_CANOPY_NAME = "Green Grape Canopy";
+    public static final String ATTACHED_GREEN_GRAPE_HEAD_KEY = "attached_green_grape_head";
+    public static final String ATTACHED_GREEN_GRAPE_HEAD_NAME = "Attached Green Grape Head";
+    public static final String GREEN_GRAPE_HEAD_KEY = "green_grape_head";
+    public static final String GREEN_GRAPE_HEAD_NAME = "Green Grape Head";
+
     public static final String WILD_GREEN_GRAPEVINE_KEY = "wild_green_grapevine";
     public static final String WILD_GREEN_GRAPEVINE_NAME = "Wild Green Grapevine";
     public static final String WILD_RED_GRAPEVINE_KEY = "wild_red_grapevine";

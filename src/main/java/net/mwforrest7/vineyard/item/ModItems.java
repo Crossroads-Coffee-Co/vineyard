@@ -32,7 +32,7 @@ public class ModItems {
 
 
     public static final Item GREEN_GRAPE_SEEDS = registerItem(ItemNames.GREEN_GRAPE_SEEDS_KEY,
-            new AliasedBlockItem(ModBlocks.WILD_GREEN_GRAPEVINE,
+            new AliasedBlockItem(ModBlocks.GREEN_GRAPEVINE_TRUNK,
                     new FabricItemSettings().group(ModItemGroups.VINEYARD)));
 
 

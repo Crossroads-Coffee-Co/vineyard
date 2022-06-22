@@ -77,7 +77,7 @@ public class AttachedVineHeadBlock extends PlantBlock {
     // The block below this block must be an attached grapevine trunk
     @Override
     protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
-        return floor.isOf(ModBlocks.ATTACHED_RED_GRAPEVINE_TRUNK);
+        return floor.isOf(ModBlocks.ATTACHED_RED_GRAPEVINE_TRUNK) || floor.isOf(ModBlocks.ATTACHED_GREEN_GRAPEVINE_TRUNK);
     }
 
     // This block must have proper lighting, must be along a fence, and must be on top

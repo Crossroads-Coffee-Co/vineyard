@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "vineyard:block/green_grape_head"
+    },
+    "age=1": {
+      "model": "vineyard:block/green_grape_head"
+    }
+  }
+}
