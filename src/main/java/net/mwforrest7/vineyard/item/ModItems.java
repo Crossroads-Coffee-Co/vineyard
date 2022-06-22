@@ -17,16 +17,16 @@ public class ModItems {
     public static final Item GREEN_GRAPE = registerItem(ItemNames.GREEN_GRAPE_KEY,
             new Item(new FabricItemSettings()
                     .food(new FoodComponent.Builder()
-                            .hunger(ModConfigs.RED_GRAPE_HUNGER)
-                            .saturationModifier(ModConfigs.RED_GRAPE_SATURATION)
+                            .hunger(ModConfigs.GREEN_GRAPE_HUNGER)
+                            .saturationModifier(ModConfigs.GREEN_GRAPE_SATURATION)
                             .build())
                     .group(ModItemGroups.VINEYARD)));
 
     public static final Item GREEN_GRAPE_BUNCH = registerItem(ItemNames.GREEN_GRAPE_BUNCH_KEY,
             new Item(new FabricItemSettings()
                     .food(new FoodComponent.Builder()
-                            .hunger(ModConfigs.RED_GRAPE_BUNCH_HUNGER)
-                            .saturationModifier(ModConfigs.RED_GRAPE_BUNCH_SATURATION)
+                            .hunger(ModConfigs.GREEN_GRAPE_BUNCH_HUNGER)
+                            .saturationModifier(ModConfigs.GREEN_GRAPE_BUNCH_SATURATION)
                             .build())
                     .group(ModItemGroups.VINEYARD)));
 
@@ -72,6 +72,14 @@ public class ModItems {
                             .build())
                     .group(ModItemGroups.VINEYARD)));
 
+    public static final Item GREEN_GRAPE_JUICE = registerItem(ItemNames.GREEN_GRAPE_JUICE_KEY,
+            new JuiceBottleItem((new FabricItemSettings())
+                    .food(new FoodComponent.Builder()
+                            .hunger(ModConfigs.GREEN_GRAPE_JUICE_HUNGER)
+                            .saturationModifier(ModConfigs.GREEN_GRAPE_JUICE_SATURATION)
+                            .build())
+                    .group(ModItemGroups.VINEYARD)));
+
     public static final Item FRUITY_RED_WINE = registerItem(ItemNames.FRUITY_RED_WINE_KEY,
             new WineBottleItem((new FabricItemSettings())
                     .food(new FoodComponent.Builder()
@@ -83,7 +91,6 @@ public class ModItems {
                             .build())
                     .group(ModItemGroups.VINEYARD)));
 
-    // Red wine effects: Nausea, slowness, big health bonus
     public static final Item AGED_FRUITY_RED_WINE = registerItem(ItemNames.AGED_FRUITY_RED_WINE_KEY,
             new WineBottleItem((new FabricItemSettings())
                     .food(new FoodComponent.Builder()
@@ -92,6 +99,26 @@ public class ModItems {
                             .statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 6000, 2, true, true, true), 1.0F)
                             .statusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS,6000, 1, true, true, true), 1.0F)
                             .statusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS,6000, 1, true, true, true), 1.0F)
+                            .build())
+                    .group(ModItemGroups.VINEYARD)));
+
+    public static final Item STRONG_WHITE_WINE = registerItem(ItemNames.STRONG_WHITE_WINE_KEY,
+            new WineBottleItem((new FabricItemSettings())
+                    .food(new FoodComponent.Builder()
+                            .alwaysEdible()
+                            .statusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, 3000, 1, true, true, true), 1.0F)
+                            .statusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 3000, 1, true, true, true), 1.0F)
+                            .statusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS,3000, 1, true, true, true), 1.0F)
+                            .build())
+                    .group(ModItemGroups.VINEYARD)));
+
+    public static final Item AGED_STRONG_WHITE_WINE = registerItem(ItemNames.AGED_STRONG_WHITE_WINE_KEY,
+            new WineBottleItem((new FabricItemSettings())
+                    .food(new FoodComponent.Builder()
+                            .alwaysEdible()
+                            .statusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, 6000, 2, true, true, true), 1.0F)
+                            .statusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 6000, 2, true, true, true), 1.0F)
+                            .statusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS,6000, 1, true, true, true), 1.0F)
                             .build())
                     .group(ModItemGroups.VINEYARD)));
 

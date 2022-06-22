@@ -33,7 +33,8 @@ public class ModBlocks {
     public static final Block FRUIT_PRESS = registerBlock(BlockNames.FRUIT_PRESS_KEY, new FruitPressBlock(FabricBlockSettings.of(Material.METAL).nonOpaque().strength(2.5f).sounds(BlockSoundGroup.METAL)));
     public static final Block FERMENTER = registerBlock(BlockNames.FERMENTER_KEY, new FermenterBlock(FabricBlockSettings.of(Material.METAL).nonOpaque().strength(2.5f).sounds(BlockSoundGroup.METAL)));
     public static final Block WINE_CASK = registerBlock(BlockNames.WINE_CASK_KEY, new WineCaskBlock(FabricBlockSettings.of(Material.WOOD).nonOpaque().strength(2.5f).sounds(BlockSoundGroup.WOOD)));
-    public static final Block AGED_FRUITY_RED_WINE_CASK = registerBlock(BlockNames.AGED_FRUITY_RED_WINE_CASK_KEY, new AgedRedWineBlock(FabricBlockSettings.of(Material.WOOD).nonOpaque().strength(2.5f).sounds(BlockSoundGroup.WOOD)));
+    public static final Block AGED_FRUITY_RED_WINE_CASK = registerBlock(BlockNames.AGED_FRUITY_RED_WINE_CASK_KEY, new AgedWineBlock(FabricBlockSettings.of(Material.WOOD).nonOpaque().strength(2.5f).sounds(BlockSoundGroup.WOOD)));
+    public static final Block AGED_STRONG_WHITE_WINE_CASK = registerBlock(BlockNames.AGED_STRONG_WHITE_WINE_CASK_KEY, new AgedWineBlock(FabricBlockSettings.of(Material.WOOD).nonOpaque().strength(2.5f).sounds(BlockSoundGroup.WOOD)));
 
     // Registers a block but not an item (useful for blocks that shouldn't be craftable but may spawn in the world)
     private static Block registerBlockWithoutBlockItem(String name, Block block){

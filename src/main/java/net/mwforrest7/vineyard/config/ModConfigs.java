@@ -14,6 +14,12 @@ public class ModConfigs {
     public static float RED_GRAPE_BUNCH_SATURATION;
     public static int RED_GRAPE_JUICE_HUNGER;
     public static float RED_GRAPE_JUICE_SATURATION;
+    public static int GREEN_GRAPE_HUNGER;
+    public static float GREEN_GRAPE_SATURATION;
+    public static int GREEN_GRAPE_BUNCH_HUNGER;
+    public static float GREEN_GRAPE_BUNCH_SATURATION;
+    public static int GREEN_GRAPE_JUICE_HUNGER;
+    public static float GREEN_GRAPE_JUICE_SATURATION;
 
     public static void registerConfigs() {
         configs = new ModConfigProvider();
@@ -33,6 +39,12 @@ public class ModConfigs {
         configs.addKeyValuePair(new Pair<>("red_grape_bunch.saturation", 0.2f), "float");
         configs.addKeyValuePair(new Pair<>("red_grape_juice.hunger", 3), "int");
         configs.addKeyValuePair(new Pair<>("red_grape_juice.saturation", 0.3f), "float");
+        configs.addKeyValuePair(new Pair<>("green_grape.hunger", 1), "int");
+        configs.addKeyValuePair(new Pair<>("green_grape.saturation", 0.1f), "float");
+        configs.addKeyValuePair(new Pair<>("green_grape_bunch.hunger", 2), "int");
+        configs.addKeyValuePair(new Pair<>("green_grape_bunch.saturation", 0.2f), "float");
+        configs.addKeyValuePair(new Pair<>("green_grape_juice.hunger", 3), "int");
+        configs.addKeyValuePair(new Pair<>("green_grape_juice.saturation", 0.3f), "float");
     }
 
     // Reads config file. Takes default value if missing value in the config.
@@ -44,6 +56,12 @@ public class ModConfigs {
         RED_GRAPE_BUNCH_SATURATION = (float) CONFIG.getOrDefault("red_grape_bunch.saturation", 0.2f);
         RED_GRAPE_JUICE_HUNGER = CONFIG.getOrDefault("red_grape_juice.hunger", 3);
         RED_GRAPE_JUICE_SATURATION = (float) CONFIG.getOrDefault("red_grape_juice.saturation", 0.3f);
+        GREEN_GRAPE_HUNGER = CONFIG.getOrDefault("green_grape.hunger", 1);
+        GREEN_GRAPE_SATURATION = (float) CONFIG.getOrDefault("green_grape.saturation", 0.1f);
+        GREEN_GRAPE_BUNCH_HUNGER = CONFIG.getOrDefault("green_grape_bunch.hunger", 2);
+        GREEN_GRAPE_BUNCH_SATURATION = (float) CONFIG.getOrDefault("green_grape_bunch.saturation", 0.2f);
+        GREEN_GRAPE_JUICE_HUNGER = CONFIG.getOrDefault("green_grape_juice.hunger", 3);
+        GREEN_GRAPE_JUICE_SATURATION = (float) CONFIG.getOrDefault("green_grape_juice.saturation", 0.3f);
 
         System.out.println("All " + configs.getConfigsList().size() + " have been set properly");
     }

@@ -1,0 +1,14 @@
+{
+  "type": "vineyard:fermenter",
+  "ingredients": [
+    {
+      "item": "vineyard:green_grape_juice"
+    },
+    {
+      "item": "minecraft:blaze_powder"
+    }
+  ],
+  "output": {
+    "item": "vineyard:strong_white_wine"
+  }
+}

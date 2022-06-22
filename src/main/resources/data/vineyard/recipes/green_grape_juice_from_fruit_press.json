@@ -1,0 +1,14 @@
+{
+  "type": "vineyard:fruit_press",
+  "ingredients": [
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "item": "vineyard:green_grape_bunch"
+    }
+  ],
+  "output": {
+    "item": "vineyard:green_grape_juice"
+  }
+}
