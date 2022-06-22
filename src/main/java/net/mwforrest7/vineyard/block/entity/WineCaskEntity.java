@@ -211,6 +211,8 @@ public class WineCaskEntity extends BlockEntity implements NamedScreenHandlerFac
             // TODO: refactor this to be more elegant
             if(match.get().getOutput().getItem().getName().getString().equals(BlockNames.AGED_FRUITY_RED_WINE_CASK_NAME)){
                 world.setBlockState(pos, ModBlocks.AGED_FRUITY_RED_WINE_CASK.getDefaultState().with(Properties.FACING, entity.getCachedState().get(Properties.FACING)));
+            }else if(match.get().getOutput().getItem().getName().getString().equals(BlockNames.AGED_STRONG_WHITE_WINE_CASK_NAME)){
+                world.setBlockState(pos, ModBlocks.AGED_STRONG_WHITE_WINE_CASK.getDefaultState().with(Properties.FACING, entity.getCachedState().get(Properties.FACING)));
             }
         }
     }

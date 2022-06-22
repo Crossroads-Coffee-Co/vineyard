@@ -11,9 +11,9 @@ import org.jetbrains.annotations.Nullable;
  * This block is the visual representation of a Wine Cask and facilitates interaction
  * with the WineCaskEntity and WineCaskScreenHandler
  */
-public class AgedRedWineBlock extends FacingBlock {
+public class AgedWineBlock extends FacingBlock {
 
-    public AgedRedWineBlock(Settings settings) {
+    public AgedWineBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.NORTH));
     }

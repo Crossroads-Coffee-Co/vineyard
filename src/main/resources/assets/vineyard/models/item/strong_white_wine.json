@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "vineyard:item/strong_white_wine"
+  }
+}

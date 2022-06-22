@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " X ",
+    " # ",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "vineyard:wine_bottle"
+    },
+    "X": {
+      "item": "vineyard:aged_strong_white_wine_cask"
+    }
+  },
+  "result": {
+    "item": "vineyard:aged_strong_white_wine",
+    "count": 2
+  }
+}

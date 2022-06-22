@@ -35,4 +35,7 @@ public class BlockNames {
     public static final String WINE_CASK_NAME = "Wine Cask";
     public static final String AGED_FRUITY_RED_WINE_CASK_KEY = "aged_fruity_red_wine_cask";
     public static final String AGED_FRUITY_RED_WINE_CASK_NAME = "Aged Fruity Red Wine Cask";
+
+    public static final String AGED_STRONG_WHITE_WINE_CASK_KEY = "aged_strong_white_wine_cask";
+    public static final String AGED_STRONG_WHITE_WINE_CASK_NAME = "Aged Strong White Wine Cask";
 }
